@@ -16,6 +16,8 @@ namespace COMP2351_Game_Engine
         public static int ScreenWidth;
         public static int ScreenHeight;
         IEntityManager entityManager;
+        ISceneManager sceneManager;
+        ISceneGraph sceneGraph;
         IEntity player;
         Texture2D playerTex;
         IList<IEntity> entityList;
@@ -40,6 +42,8 @@ namespace COMP2351_Game_Engine
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
             entityManager = new EntityManager();
+            sceneManager = new SceneManager();
+            sceneGraph = new SceneGraph();
             entityList = new List<IEntity>();
             base.Initialize();
         }
@@ -94,6 +98,8 @@ namespace COMP2351_Game_Engine
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+            // Scene graph should include all entities on the screen
+            // For every entity in scene graph, draw to scene
             spriteBatch.End();
 
             base.Draw(gameTime);

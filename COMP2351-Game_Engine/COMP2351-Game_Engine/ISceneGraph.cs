@@ -7,13 +7,8 @@ using Microsoft.Xna.Framework;
 
 namespace COMP2351_Game_Engine
 {
-    class SceneManager : ISceneManager
+    interface ISceneGraph
     {
-        public SceneManager()
-        {
-        }
-        public void Spawn(IEntity pEntity, Vector2 pLocation)
-        {
-        }
+        void Spawn(IEntity pEntity, Vector2 pLocation);
     }
 }
