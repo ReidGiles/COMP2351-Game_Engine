@@ -24,5 +24,9 @@ namespace COMP2351_Game_Engine
         {
 
         }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, location, Color.AntiqueWhite);
+        }
     }
 }

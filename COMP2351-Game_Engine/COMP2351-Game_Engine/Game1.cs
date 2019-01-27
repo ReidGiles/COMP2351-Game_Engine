@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace COMP2351_Game_Engine
 {
@@ -13,6 +15,10 @@ namespace COMP2351_Game_Engine
         SpriteBatch spriteBatch;
         public static int ScreenWidth;
         public static int ScreenHeight;
+        IEntityManager entityManager;
+        IEntity player;
+        Texture2D playerTex;
+        IList<IEntity> entityList;
 
         public Game1()
         {
@@ -33,6 +39,8 @@ namespace COMP2351_Game_Engine
             // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
+            entityManager = new EntityManager();
+            entityList = new List<IEntity>();
             base.Initialize();
         }
 
@@ -46,6 +54,10 @@ namespace COMP2351_Game_Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            playerTex = Content.Load<Texture2D>("square");
+
+            player = entityManager.GetEntity("player", playerTex);
+            entityList.Add(player);
         }
 
         /// <summary>
@@ -81,6 +93,8 @@ namespace COMP2351_Game_Engine
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
