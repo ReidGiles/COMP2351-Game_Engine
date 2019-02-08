@@ -14,6 +14,7 @@ namespace COMP2351_Game_Engine
         }
         public void Spawn(IEntity pEntity, Vector2 pLocation)
         {
+            // Initial translation
         }
     }
 }
