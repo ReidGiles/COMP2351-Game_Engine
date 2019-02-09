@@ -10,12 +10,14 @@ namespace COMP2351_Game_Engine
     class Player : RelicHunterEntity, IPlayer
     {
         IInput _input;
+        float gravity;
         public Player()
         {
         }
         public void SetTexture (Texture2D pTexture)
         {
             texture = pTexture;
+            gravity = 4;
         }
         public void setLocation(float pX, float pY)
         {
@@ -27,7 +29,7 @@ namespace COMP2351_Game_Engine
         {       
             if (location.Y <= 900 - texture.Height)
             {
-                location.Y += 8;
+                location.Y += gravity;
             }
             location += _input.GetKeyboardInputDirection();
         }

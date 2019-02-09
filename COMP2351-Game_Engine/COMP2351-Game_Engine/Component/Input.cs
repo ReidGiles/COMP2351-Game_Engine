@@ -22,6 +22,10 @@ namespace COMP2351_Game_Engine
             {
                 _direction.X = 0;
             }
+            if (keyboardState.IsKeyUp(Keys.Up))
+            {
+                _direction.Y = 0;
+            }
             if (keyboardState.IsKeyDown(Keys.Right))
             {
                 _direction.X = 5;
@@ -32,11 +36,11 @@ namespace COMP2351_Game_Engine
             }           
             if (keyboardState.IsKeyDown(Keys.Down))
             {
-                //_direction.Y += 0.5f;
+                //_direction.Y = 5;
             }
             if (keyboardState.IsKeyDown(Keys.Up))
             {
-                //_direction.Y -= 0.5f;
+                _direction.Y = -30;
             }
             return _direction;
         }
