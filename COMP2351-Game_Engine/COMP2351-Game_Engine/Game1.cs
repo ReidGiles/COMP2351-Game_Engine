@@ -62,7 +62,7 @@ namespace COMP2351_Game_Engine
             // Request entity from entity manager
             player = entityManager.GetEntity("player", playerTex);
             // Scene manager places entity on the scene
-            sceneManager.Spawn(player, 10, 10);
+            sceneManager.Spawn(player, 100, 100);
             // Add entities retrieved from entity manager to a list, used for drawing onto the scene
             entityList.Add(player);
         }

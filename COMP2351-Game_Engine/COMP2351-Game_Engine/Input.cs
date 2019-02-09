@@ -11,22 +11,34 @@ namespace COMP2351_Game_Engine
 {
     class Input : IInput
     {
-        static Vector2 direction;
+        Vector2 _direction;
         public Input()
         {
         }
         public Vector2 GetKeyboardInputDirection()
         {
             KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyUp(Keys.Right) || keyboardState.IsKeyUp(Keys.Left))
+            {
+                _direction.X = 0;
+            }
             if (keyboardState.IsKeyDown(Keys.Right))
             {
-                direction.X += 5;
-            }
+                _direction.X = 5;
+            }            
             if (keyboardState.IsKeyDown(Keys.Left))
             {
-                direction.X -= 5;
+                _direction.X = -5;
+            }           
+            if (keyboardState.IsKeyDown(Keys.Down))
+            {
+                //_direction.Y += 0.5f;
             }
-            return direction;
+            if (keyboardState.IsKeyDown(Keys.Up))
+            {
+                //_direction.Y -= 0.5f;
+            }
+            return _direction;
         }
     }
 }
