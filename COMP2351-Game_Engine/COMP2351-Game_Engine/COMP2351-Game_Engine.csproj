@@ -46,6 +46,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityManager.cs" />
+    <Compile Include="IInput.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IRelicHunterEntity.cs" />
     <Compile Include="ISceneGraph.cs" />

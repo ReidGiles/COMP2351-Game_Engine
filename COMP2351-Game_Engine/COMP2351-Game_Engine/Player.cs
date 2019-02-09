@@ -9,8 +9,10 @@ namespace COMP2351_Game_Engine
 {
     class Player : RelicHunterEntity, IPlayer
     {
+        IInput _input;
         public Player()
         {
+            _input = new Input();
         }
         public void SetTexture (Texture2D pTexture)
         {
@@ -23,7 +25,16 @@ namespace COMP2351_Game_Engine
         }
         public override void Update()
         {
-            location.X += 5;
+            /*if (location.X <= 1600 - texture.Width)
+            {
+                location.X += 5;
+            }            
+            if (location.Y <= 900 - texture.Height)
+            {
+                location.Y += 8;
+                Console.WriteLine(location.Y);
+            }*/
+            location = _input.GetKeyboardInputDirection();
         }
     }
 }
