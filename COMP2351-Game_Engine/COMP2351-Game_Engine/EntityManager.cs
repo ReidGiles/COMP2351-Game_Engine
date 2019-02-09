@@ -9,18 +9,17 @@ namespace COMP2351_Game_Engine
 {
     class EntityManager : IEntityManager
     {
-        IEntity _entity;
+        IRelicHunterEntity _entity;
         public EntityManager()
         {
         }
-        public IEntity GetEntity(string pEntity, Texture2D pTexture)
+        public IRelicHunterEntity GetEntity(string pEntity, Texture2D pTexture)
         {
             if (pEntity == "player")
             {
                 IPlayer player = new Player();
                 player.SetTexture(pTexture);
-                player.setLocation(5,5);
-                _entity = (IEntity)player;
+                _entity = (IRelicHunterEntity)player;
             }
             return _entity;
         }

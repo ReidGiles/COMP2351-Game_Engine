@@ -9,6 +9,6 @@ namespace COMP2351_Game_Engine
 {
     interface IEntityManager
     {
-        IEntity GetEntity(string pEntity, Texture2D pTexture);
+        IRelicHunterEntity GetEntity(string pEntity, Texture2D pTexture);
     }
 }

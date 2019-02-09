@@ -8,9 +8,8 @@ namespace COMP2351_Game_Engine
 {
     class Entity : IEntity
     {
-        public virtual void update()
+        public virtual void Update()
         {
-
         }
     }
 }

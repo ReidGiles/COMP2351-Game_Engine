@@ -17,9 +17,9 @@ namespace COMP2351_Game_Engine
         public static int ScreenHeight;
         IEntityManager entityManager;
         ISceneManager sceneManager;
-        IEntity player;
+        IRelicHunterEntity player;
         Texture2D playerTex;
-        IList<IEntity> entityList;
+        IList<IRelicHunterEntity> entityList;
 
         public Game1()
         {
@@ -42,7 +42,7 @@ namespace COMP2351_Game_Engine
             ScreenWidth = GraphicsDevice.Viewport.Width;
             entityManager = new EntityManager();
             sceneManager = new SceneManager();
-            entityList = new List<IEntity>();
+            entityList = new List<IRelicHunterEntity>();
             base.Initialize();
         }
 
@@ -56,9 +56,14 @@ namespace COMP2351_Game_Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            playerTex = Content.Load<Texture2D>("square");
 
+            // Load entity texture
+            playerTex = Content.Load<Texture2D>("square");
+            // Request entity from entity manager
             player = entityManager.GetEntity("player", playerTex);
+            // Scene manager places entity on the scene
+            sceneManager.Spawn(player, 10, 10);
+            // Add entities retrieved from entity manager to a list, used for drawing onto the scene
             entityList.Add(player);
         }
 
@@ -82,6 +87,7 @@ namespace COMP2351_Game_Engine
                 Exit();
 
             // TODO: Add your update logic here
+            sceneManager.Update();
 
             base.Update(gameTime);
         }
@@ -96,7 +102,11 @@ namespace COMP2351_Game_Engine
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+            // Draw all entities from list
+            foreach (IRelicHunterEntity e in entityList)
+            {
+                e.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    abstract class RelicHunterEntity: Entity
+    abstract class RelicHunterEntity: Entity, IRelicHunterEntity
     {
         public Texture2D texture;
         public Vector2 location;

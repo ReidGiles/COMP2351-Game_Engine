@@ -21,5 +21,9 @@ namespace COMP2351_Game_Engine
             location.X = pX;
             location.Y = pY;
         }
+        public override void Update()
+        {
+            location.X += 5;
+        }
     }
 }
