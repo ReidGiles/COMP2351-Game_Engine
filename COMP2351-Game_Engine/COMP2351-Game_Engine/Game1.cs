@@ -17,9 +17,9 @@ namespace COMP2351_Game_Engine
         public static int ScreenHeight;
         IEntityManager entityManager;
         ISceneManager sceneManager;
-        IRelicHunterEntity entity;
+        IEntity entity;
         Texture2D texture;
-        IList<IRelicHunterEntity> entityList;
+        IList<IEntity> entityList;
 
         public Game1()
         {
@@ -42,7 +42,7 @@ namespace COMP2351_Game_Engine
             ScreenWidth = GraphicsDevice.Viewport.Width;
             entityManager = new EntityManager();
             sceneManager = new SceneManager();
-            entityList = new List<IRelicHunterEntity>();
+            entityList = new List<IEntity>();
             base.Initialize();
         }
 

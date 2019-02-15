@@ -17,10 +17,10 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// This is called when a new entity needs to be spawned.
         /// </summary>
-        public void Spawn(IRelicHunterEntity pEntity, float pX, float pY)
+        public void Spawn(IEntity pEntity, float pX, float pY)
         {
             // Spawn entity
-            _sceneGraph.Spawn( (IEntity)pEntity, pX, pY);
+            _sceneGraph.Spawn(pEntity, pX, pY);
             // Set entity location
             ( (IPlayer)pEntity ).setLocation(pX, pY);
         }

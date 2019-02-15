@@ -17,9 +17,9 @@ namespace COMP2351_Game_Engine
         /// Returns an instance of requested entity.
         /// Needs to be refactored from IRelicHunterEntity to IEntity.
         /// </summary>
-        public IRelicHunterEntity RequestInstance<T>(Texture2D pTexture) where T : IRelicHunterEntity, new()
+        public IEntity RequestInstance<T>(Texture2D pTexture) where T : IEntity, new()
         {
-            IRelicHunterEntity _entity = new T();
+            IEntity _entity = new T();
             _entity.SetTexture(pTexture);
             
             

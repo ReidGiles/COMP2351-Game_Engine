@@ -9,7 +9,7 @@ namespace COMP2351_Game_Engine
 {
     interface ISceneManager
     {
-        void Spawn(IRelicHunterEntity pEntity, float pX, float pY);
+        void Spawn(IEntity pEntity, float pX, float pY);
         void Spawn(string UID, string UName);
         void Remove(string UID, string UName);
         void Update();
