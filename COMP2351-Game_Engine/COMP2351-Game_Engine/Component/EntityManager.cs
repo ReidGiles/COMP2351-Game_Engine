@@ -13,6 +13,10 @@ namespace COMP2351_Game_Engine
         public EntityManager()
         {
         }
+        /// <summary>
+        /// Returns an instance of requested entity.
+        /// Needs to be refactored from IRelicHunterEntity to IEntity.
+        /// </summary>
         public IRelicHunterEntity RequestInstance<T>(Texture2D pTexture) where T : IRelicHunterEntity, new()
         {
             IRelicHunterEntity _entity = new T();
