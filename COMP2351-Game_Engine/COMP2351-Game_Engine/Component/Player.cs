@@ -14,7 +14,7 @@ namespace COMP2351_Game_Engine
         public Player()
         {
         }
-        public void SetTexture (Texture2D pTexture)
+        public override void SetTexture (Texture2D pTexture)
         {
             texture = pTexture;
             gravity = 4;

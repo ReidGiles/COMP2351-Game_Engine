@@ -17,8 +17,8 @@ namespace COMP2351_Game_Engine
         public static int ScreenHeight;
         IEntityManager entityManager;
         ISceneManager sceneManager;
-        IRelicHunterEntity player;
-        Texture2D playerTex;
+        IRelicHunterEntity entity;
+        Texture2D texture;
         IList<IRelicHunterEntity> entityList;
 
         public Game1()
@@ -58,13 +58,13 @@ namespace COMP2351_Game_Engine
             // TODO: use this.Content to load your game content here
 
             // Load entity texture
-            playerTex = Content.Load<Texture2D>("square");
+            texture = Content.Load<Texture2D>("square");
             // Request entity from entity manager
-            player = entityManager.GetEntity("player", playerTex);
+            entity = entityManager.RequestInstance<Player>(texture);
             // Scene manager places entity on the scene
-            sceneManager.Spawn(player, 100, 600);
+            sceneManager.Spawn(entity, 100, 600);
             // Add entities retrieved from entity manager to a list, used for drawing onto the scene
-            entityList.Add(player);
+            entityList.Add(entity);
         }
 
         /// <summary>

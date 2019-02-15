@@ -10,6 +10,7 @@ namespace COMP2351_Game_Engine
 {
     interface IRelicHunterEntity
     {
+        void SetTexture(Texture2D pTexture);
         void Draw(SpriteBatch spriteBatch);
     }
 }
