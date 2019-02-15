@@ -14,6 +14,9 @@ namespace COMP2351_Game_Engine
         {
             _sceneGraph = new SceneGraph();
         }
+        /// <summary>
+        /// This is called when a new entity needs to be spawned.
+        /// </summary>
         public void Spawn(IRelicHunterEntity pEntity, float pX, float pY)
         {
             // Spawn entity
@@ -21,6 +24,21 @@ namespace COMP2351_Game_Engine
             // Set entity location
             ( (IPlayer)pEntity ).setLocation(pX, pY);
         }
+        /// <summary>
+        /// This is called when an existing entity needs to be spawned.
+        /// </summary>
+        public void Spawn(string UID, string UName)
+        {
+        }
+        /// <summary>
+        /// This is called when an entity needs to be removed.
+        /// </summary>
+        public void Remove(string UID, string UName)
+        {
+        }
+        /// <summary>
+        /// Updated all entities inside the scene graph.
+        /// </summary>
         public void Update()
         {
             // Update all entities inside the scene graph
