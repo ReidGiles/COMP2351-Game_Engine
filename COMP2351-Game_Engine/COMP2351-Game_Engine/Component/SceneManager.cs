@@ -33,8 +33,10 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// This is called when an entity needs to be removed.
         /// </summary>
-        public void Remove(string UID, string UName)
+        public void Remove(IEntity pEntity)
         {
+            _sceneGraph.Remove(pEntity);
+            pEntity.SetLocation(-50,-50);
         }
         /// <summary>
         /// Updated all entities inside the scene graph.

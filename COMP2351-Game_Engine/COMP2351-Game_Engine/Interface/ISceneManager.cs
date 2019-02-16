@@ -11,7 +11,7 @@ namespace COMP2351_Game_Engine
     {
         void Spawn(IEntity pEntity, float pX, float pY);
         void Spawn(string UID, string UName);
-        void Remove(string UID, string UName);
+        void Remove(IEntity pEntity);
         void Update();
     }
 }

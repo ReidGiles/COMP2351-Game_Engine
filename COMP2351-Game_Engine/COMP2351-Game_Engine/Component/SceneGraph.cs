@@ -23,6 +23,10 @@ namespace COMP2351_Game_Engine
             // Record entity has been spawned
             _entityList.Add(pEntity);
         }
+        public void Remove(IEntity pEntity)
+        {
+            _entityList.Remove(pEntity);
+        }
         /// <summary>
         /// Returns a list of entities on the scene.
         /// </summary>
