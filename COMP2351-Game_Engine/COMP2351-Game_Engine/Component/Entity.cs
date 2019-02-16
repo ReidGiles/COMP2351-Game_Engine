@@ -12,6 +12,8 @@ namespace COMP2351_Game_Engine
     {
         public Texture2D texture;
         public Vector2 location;
+        public int UID;
+        public string UName;
         /// <summary>
         /// Called by scene manager, updates entities on the scene.
         /// </summary>
@@ -28,10 +30,18 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Sets entity location
         /// </summary>
-        public virtual void setLocation(float pX, float pY)
+        public virtual void SetLocation(float pX, float pY)
         {
             location.X = pX;
             location.Y = pY;
+        }
+        /// <summary>
+        /// Sets the unique identification number and unique name of the entity.
+        /// </summary>
+        public virtual void Setup(int pUID, string pUName)
+        {
+            UID = pUID;
+            UName = pUName;
         }
         /// <summary>
         /// Draws entity on the scene.

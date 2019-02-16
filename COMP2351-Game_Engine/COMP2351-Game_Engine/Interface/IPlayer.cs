@@ -10,7 +10,7 @@ namespace COMP2351_Game_Engine
     interface IPlayer
     {
         void SetTexture(Texture2D pTexture);
-        void setLocation(float pX, float pY);
+        void SetLocation(float pX, float pY);
         void Draw(SpriteBatch spriteBatch);
     }
 }

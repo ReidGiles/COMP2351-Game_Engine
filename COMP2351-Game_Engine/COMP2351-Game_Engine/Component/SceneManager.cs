@@ -22,7 +22,7 @@ namespace COMP2351_Game_Engine
             // Spawn entity
             _sceneGraph.Spawn(pEntity, pX, pY);
             // Set entity location
-            ( (IPlayer)pEntity ).setLocation(pX, pY);
+            ( (IPlayer)pEntity ).SetLocation(pX, pY);
         }
         /// <summary>
         /// This is called when an existing entity needs to be spawned.
