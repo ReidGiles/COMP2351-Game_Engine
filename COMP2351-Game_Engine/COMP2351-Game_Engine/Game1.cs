@@ -17,6 +17,7 @@ namespace COMP2351_Game_Engine
         public static int ScreenHeight;
         IEntityManager entityManager;
         ISceneManager sceneManager;
+        ICollisionManager collisionManager;
         IEntity entity;
         Texture2D texture;
         IList<IEntity> entityList;
@@ -42,6 +43,7 @@ namespace COMP2351_Game_Engine
             ScreenWidth = GraphicsDevice.Viewport.Width;
             entityManager = new EntityManager();
             sceneManager = new SceneManager();
+            collisionManager = new CollisionManager();
             entityList = new List<IEntity>();
             base.Initialize();
         }
