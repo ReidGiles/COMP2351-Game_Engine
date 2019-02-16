@@ -9,9 +9,10 @@ namespace COMP2351_Game_Engine
 {
     class EntityManager : IEntityManager
     {
-        
+        Random rndGen;
         public EntityManager()
         {
+            rndGen = new Random();
         }
         /// <summary>
         /// Returns an instance of requested entity.
@@ -23,6 +24,15 @@ namespace COMP2351_Game_Engine
             
             
             return _entity;
+        }
+        public int RequestUID()
+        {
+            int UID = rndGen.Next(1, 10000);
+            return UID;
+        }
+        public string RequestUName(IEntity pEntity)
+        {
+            return "";
         }
     }
 }
