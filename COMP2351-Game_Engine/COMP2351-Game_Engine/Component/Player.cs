@@ -13,18 +13,12 @@ namespace COMP2351_Game_Engine
         float gravity;
         public Player()
         {
-        }
-        public override void SetTexture (Texture2D pTexture)
-        {
-            texture = pTexture;
-            gravity = 4;
-        }
-        public void setLocation(float pX, float pY)
-        {
-            location.X = pX;
-            location.Y = pY;
             _input = new Input();
+            gravity = 8;
         }
+        /// <summary>
+        /// Overides Update() with unique entity behaviour.
+        /// </summary>
         public override void Update()
         {       
             if (location.Y <= 900 - texture.Height)

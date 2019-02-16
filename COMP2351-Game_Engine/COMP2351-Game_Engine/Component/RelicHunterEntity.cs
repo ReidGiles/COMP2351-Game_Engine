@@ -10,6 +10,10 @@ namespace COMP2351_Game_Engine
 {
     abstract class RelicHunterEntity: Entity, IRelicHunterEntity
     {
+        /// <summary>
+        /// Basic collision behaviour using rectangle.
+        /// Needs updating.
+        /// </summary>
         public Rectangle HitBox
         {
             get
