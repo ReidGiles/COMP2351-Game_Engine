@@ -13,6 +13,8 @@ namespace COMP2351_Game_Engine
         void Update();
         void SetTexture(Texture2D pTexture);
         void SetLocation(float pX, float pY);
+        void SetUp(int pUID);
+        int GetUID();
         void Draw(SpriteBatch spriteBatch);
     }
 }

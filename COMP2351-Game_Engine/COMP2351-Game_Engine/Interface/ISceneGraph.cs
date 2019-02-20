@@ -10,7 +10,8 @@ namespace COMP2351_Game_Engine
     interface ISceneGraph
     {
         void Spawn(IEntity pEntity, float pX, float pY);
-        void Remove(IEntity pEntity);
+        void Spawn(int pUID, int pX, int pY);
+        void Remove(int pUID);
         IList<IEntity> GetEntity();
     }
 }

@@ -22,21 +22,35 @@ namespace COMP2351_Game_Engine
             // Spawn entity
             _sceneGraph.Spawn(pEntity, pX, pY);
             // Set entity location
-            ( (IPlayer)pEntity ).SetLocation(pX, pY);
+            pEntity.SetLocation(pX, pY);
         }
         /// <summary>
         /// This is called when an existing entity needs to be spawned.
         /// </summary>
-        public void Spawn(string UID, string UName)
+        public void Spawn(int pUID, int pX, int pY)
         {
+            _sceneGraph.Spawn(pUID, pX, pY);
         }
         /// <summary>
         /// This is called when an entity needs to be removed.
         /// </summary>
-        public void Remove(IEntity pEntity)
+        public void Remove(int pUID)
         {
-            _sceneGraph.Remove(pEntity);
-            pEntity.SetLocation(-50,-50);
+            _sceneGraph.Remove(pUID);
+        }
+        /// <summary>
+        /// Returns a reference of an entity.
+        /// </summary>
+        public IEntity GetEntity(int pUID)
+        {
+            foreach (IEntity e in _sceneGraph.GetEntity())
+            {
+                if (e.GetUID() == pUID)
+                {
+                    return e;
+                }
+            }
+            return null;
         }
         /// <summary>
         /// Updated all entities inside the scene graph.

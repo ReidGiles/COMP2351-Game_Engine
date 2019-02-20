@@ -10,8 +10,9 @@ namespace COMP2351_Game_Engine
     interface ISceneManager
     {
         void Spawn(IEntity pEntity, float pX, float pY);
-        void Spawn(string UID, string UName);
-        void Remove(IEntity pEntity);
+        void Spawn(int pUID, int pX, int pY);
+        void Remove(int pUID);
+        IEntity GetEntity(int pUID);
         void Update();
     }
 }
