@@ -10,8 +10,10 @@ namespace COMP2351_Game_Engine
     class EntityManager : IEntityManager
     {
         private int _increment;
+        private IList<IEntity> _entityList;
         public EntityManager()
         {
+            _entityList = new List<IEntity>();
         }
         /// <summary>
         /// Returns an instance of requested entity.
@@ -20,8 +22,8 @@ namespace COMP2351_Game_Engine
         {
             IEntity _entity = new T();
             _entity.SetTexture(pTexture);
-
             GenerateUID(_entity);
+            _entityList.Add(_entity);
             
             return _entity;
         }
