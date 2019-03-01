@@ -16,6 +16,13 @@ namespace COMP2351_Game_Engine
             _input = new Input();
             gravity = 8;
         }
+
+        // required for Input management of the keyboard
+        public virtual void OnNewKeyboardInput()
+        {
+            //code in here
+        }
+
         /// <summary>
         /// Overides Update() with unique entity behaviour.
         /// </summary>
