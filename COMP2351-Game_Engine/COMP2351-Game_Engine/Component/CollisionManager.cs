@@ -8,8 +8,10 @@ namespace COMP2351_Game_Engine
 {
     class CollisionManager : ICollisionManager
     {
-        public CollisionManager()
+        ISceneGraph _sceneGraph;
+        public CollisionManager(ISceneGraph pSceneGraph)
         {
+            _sceneGraph = pSceneGraph;
         }
         public void Update()
         {

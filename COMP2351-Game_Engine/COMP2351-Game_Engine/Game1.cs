@@ -19,8 +19,9 @@ namespace COMP2351_Game_Engine
         ISceneManager sceneManager;
         ICollisionManager collisionManager;
         IEntity entity;
+        ISceneGraph sceneGraph;
         Texture2D texture;
-        IList<IEntity> entityList;
+        IList<IEntity> renderList;
 
         public Game1()
         {
@@ -41,10 +42,11 @@ namespace COMP2351_Game_Engine
             // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
+            sceneGraph = new SceneGraph();
             entityManager = new EntityManager();
-            sceneManager = new SceneManager();
-            collisionManager = new CollisionManager();
-            entityList = new List<IEntity>();
+            sceneManager = new SceneManager(sceneGraph);
+            collisionManager = new CollisionManager(sceneGraph);
+            renderList = new List<IEntity>();
             base.Initialize();
         }
 
@@ -66,7 +68,7 @@ namespace COMP2351_Game_Engine
             // Scene manager places entity on the scene
             sceneManager.Spawn(entity, 100, 600);
             // Add entities retrieved from entity manager to a list, used for drawing onto the scene
-            entityList.Add(entity);
+            renderList.Add(entity);
         }
 
         /// <summary>
@@ -105,7 +107,7 @@ namespace COMP2351_Game_Engine
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             // Draw all entities from list
-            foreach (IRelicHunterEntity e in entityList)
+            foreach (IRelicHunterEntity e in renderList)
             {
                 e.Draw(spriteBatch);
             }

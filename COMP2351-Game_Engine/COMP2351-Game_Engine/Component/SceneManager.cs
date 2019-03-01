@@ -10,9 +10,9 @@ namespace COMP2351_Game_Engine
     class SceneManager : ISceneManager
     {
         ISceneGraph _sceneGraph;
-        public SceneManager()
+        public SceneManager(ISceneGraph pSceneGraph)
         {
-            _sceneGraph = new SceneGraph();
+            _sceneGraph = pSceneGraph;
         }
         /// <summary>
         /// This is called when a new entity needs to be spawned.
