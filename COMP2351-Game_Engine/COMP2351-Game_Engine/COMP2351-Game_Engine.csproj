@@ -41,22 +41,27 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Component\AIComponentManager.cs" />
     <Compile Include="Component\CollisionManager.cs" />
     <Compile Include="Component\Entity.cs" />
     <Compile Include="Component\EntityManager.cs" />
     <Compile Include="Component\KeyboardInputManager.cs" />
+    <Compile Include="Component\Mind.cs" />
+    <Compile Include="Component\PlayerMind.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Interface\ICollisionManager.cs" />
+    <Compile Include="Interface\IAIComponentManager.cs" />
     <Compile Include="Interface\IEntity.cs" />
     <Compile Include="Interface\IEntityManager.cs" />
     <Compile Include="Interface\IInput.cs" />
     <Compile Include="Component\Input.cs" />
+    <Compile Include="Interface\IMind.cs" />
     <Compile Include="Interface\IPlayer.cs" />
     <Compile Include="Interface\IRelicHunterEntity.cs" />
     <Compile Include="Interface\ISceneGraph.cs" />
     <Compile Include="Interface\ISceneManager.cs" />
     <Compile Include="Component\Player.cs" />
     <Compile Include="Component\KeyboardInput.cs" />
+    <Compile Include="Interface\IUpdatable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Component\RelicHunterEntity.cs" />

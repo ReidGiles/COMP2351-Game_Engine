@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace COMP2351_Game_Engine
 {
-    class SceneManager : ISceneManager
+    class SceneManager : ISceneManager, IUpdatable
     {
         ISceneGraph _sceneGraph;
         public SceneManager(ISceneGraph pSceneGraph)

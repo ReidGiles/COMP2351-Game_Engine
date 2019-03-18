@@ -13,6 +13,5 @@ namespace COMP2351_Game_Engine
         void Spawn(int pUID, int pX, int pY);
         void Remove(int pUID);
         IEntity GetEntity(int pUID);
-        void Update();
     }
 }

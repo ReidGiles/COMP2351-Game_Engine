@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class CollisionManager : IUpdatable
+    class PlayerMind : Mind
     {
-        ISceneGraph _sceneGraph;
-        public CollisionManager(ISceneGraph pSceneGraph)
+        public PlayerMind()
         {
-            _sceneGraph = pSceneGraph;
         }
+
         public void Update()
         {
         }

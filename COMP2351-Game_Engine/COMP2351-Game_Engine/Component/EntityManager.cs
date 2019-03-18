@@ -20,12 +20,12 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public IEntity RequestInstance<T>(Texture2D pTexture) where T : IEntity, new()
         {
-            IEntity _entity = new T();
-            _entity.SetTexture(pTexture);
-            GenerateUID(_entity);
-            _entityList.Add(_entity);
+            IEntity entity = new T();
+            entity.SetTexture(pTexture);
+            GenerateUID(entity);
+            _entityList.Add(entity);
             
-            return _entity;
+            return entity;
         }
         public void GenerateUID(IEntity pEntity)
         {

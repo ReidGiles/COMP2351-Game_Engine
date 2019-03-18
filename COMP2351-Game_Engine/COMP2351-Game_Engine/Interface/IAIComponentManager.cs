@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace COMP2351_Game_Engine
+namespace COMP2351_Game_Engine.Interface
 {
-    interface ICollisionManager
+    interface IAIComponentManager
     {
-        void Update();
     }
 }

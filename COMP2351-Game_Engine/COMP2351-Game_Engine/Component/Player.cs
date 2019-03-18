@@ -14,7 +14,8 @@ namespace COMP2351_Game_Engine
         public Player()
         {
             _input = new Input();
-            gravity = 8;
+            gravity = 10;
+            _mind = new PlayerMind();
         }
 
         // required for Input management of the keyboard
@@ -30,9 +31,11 @@ namespace COMP2351_Game_Engine
         {       
             if (location.Y <= 900 - texture.Height)
             {
-                location.Y += gravity;
+                Translate(0, gravity);
             }
             location += _input.GetKeyboardInputDirection();
+
+            _mind.UpdateLocation(location);
         }
     }
 }

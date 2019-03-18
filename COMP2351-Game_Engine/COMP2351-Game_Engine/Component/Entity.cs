@@ -10,9 +10,14 @@ namespace COMP2351_Game_Engine
 {
     class Entity : IEntity
     {
+        // Entity texture:
         public Texture2D texture;
+        // Entity location:
         public Vector2 location;
+        // Entity unique identification number:
         public int _uid;
+        // Entity mind:
+        public IMind _mind;
         /// <summary>
         /// Called by scene manager, updates entities on the scene.
         /// </summary>
@@ -35,12 +40,28 @@ namespace COMP2351_Game_Engine
             location.Y = pY;
         }
         /// <summary>
+        /// Sets entity mind
+        /// </summary>
+        public virtual void SetMind(IMind pMind)
+        {
+            _mind = pMind;
+        }
+        /// <summary>
         /// Sets the unique identification number and unique name of the entity.
         /// </summary>
         public virtual void SetUp(int pUID)
         {
             _uid = pUID;
         }
+        /// <summary>
+        /// Updates entity location.
+        /// </summary>
+        public virtual void Translate(float dX, float dY)
+        {
+            location.X += dX;
+            location.Y += dY;
+        }
+
         public int GetUID()
         {
             return _uid;

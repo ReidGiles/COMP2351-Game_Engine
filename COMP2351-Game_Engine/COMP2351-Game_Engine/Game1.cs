@@ -17,7 +17,8 @@ namespace COMP2351_Game_Engine
         public static int ScreenHeight;
         IEntityManager entityManager;
         ISceneManager sceneManager;
-        ICollisionManager collisionManager;
+        IUpdatable collisionManager;
+        IUpdatable aiComponentManager;
         IEntity entity;
         ISceneGraph sceneGraph;
         Texture2D texture;
@@ -45,6 +46,7 @@ namespace COMP2351_Game_Engine
             entityManager = new EntityManager();
             sceneManager = new SceneManager(sceneGraph);
             collisionManager = new CollisionManager(sceneGraph);
+            aiComponentManager = new AIComponentManager();
             base.Initialize();
         }
 
@@ -87,7 +89,8 @@ namespace COMP2351_Game_Engine
                 Exit();
 
             // TODO: Add your update logic here
-            sceneManager.Update();
+            ( (IUpdatable)sceneManager).Update();
+            aiComponentManager.Update();
 
             base.Update(gameTime);
         }
