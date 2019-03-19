@@ -15,13 +15,13 @@ namespace COMP2351_Game_Engine
         SpriteBatch spriteBatch;
         public static int ScreenWidth;
         public static int ScreenHeight;
-        IEntityManager entityManager;
-        ISceneManager sceneManager;
-        IUpdatable collisionManager;
-        IAIComponentManager aiComponentManager;
-        IEntity entity;
-        ISceneGraph sceneGraph;
-        Texture2D texture;
+        private IEntityManager entityManager;
+        private ISceneManager sceneManager;
+        private IUpdatable collisionManager;
+        private IAIComponentManager aiComponentManager;
+        private IEntity entity;
+        private ISceneGraph sceneGraph;
+        private Texture2D texture;
 
         public Game1()
         {

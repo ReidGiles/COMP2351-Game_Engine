@@ -9,10 +9,8 @@ namespace COMP2351_Game_Engine
 {
     class Player : RelicHunterEntity, IPlayer
     {
-        float gravity;
         public Player()
         {
-            gravity = 10;
         }
 
         /// <summary>
