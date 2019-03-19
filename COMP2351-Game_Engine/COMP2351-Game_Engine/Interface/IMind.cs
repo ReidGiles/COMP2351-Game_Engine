@@ -12,5 +12,7 @@ namespace COMP2351_Game_Engine
     {
         void UpdateLocation(Vector2 pLocation);
         void UpdateTexture(Texture2D pTexture);
+        float TranslateX();
+        float TranslateY();
     }
 }

@@ -10,12 +10,25 @@ namespace COMP2351_Game_Engine
 {
     class PlayerMind : Mind
     {
+        IInput _input;
         public PlayerMind()
         {
+            _input = new Input();
+        }
+
+        public override float TranslateX()
+        {
+            return _input.GetKeyboardInputDirection().X;
+        }
+
+        public override float TranslateY()
+        {
+            return _input.GetKeyboardInputDirection().Y;
         }
 
         public override void Update()
         {
+            _location += _input.GetKeyboardInputDirection();
         }
     }
 }

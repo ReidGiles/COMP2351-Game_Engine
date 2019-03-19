@@ -25,6 +25,16 @@ namespace COMP2351_Game_Engine
             _texture = pTexture;
         }
 
+        public virtual float TranslateX()
+        {
+            return 0;
+        }
+
+        public virtual float TranslateY()
+        {
+            return 0;
+        }
+
         public virtual void Update()
         {
         }

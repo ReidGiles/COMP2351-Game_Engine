@@ -28,19 +28,19 @@ namespace COMP2351_Game_Engine
             }
             if (keyboardState.IsKeyDown(Keys.Right))
             {
-                _direction.X = 5;
+                _direction.X = 15;
             }            
             if (keyboardState.IsKeyDown(Keys.Left))
             {
-                _direction.X = -5;
+                _direction.X = -15;
             }           
             if (keyboardState.IsKeyDown(Keys.Down))
             {
-                //_direction.Y = 5;
+                _direction.Y = 15;
             }
             if (keyboardState.IsKeyDown(Keys.Up))
             {
-                _direction.Y = -30;
+                _direction.Y = -15;
             }
             return _direction;
         }

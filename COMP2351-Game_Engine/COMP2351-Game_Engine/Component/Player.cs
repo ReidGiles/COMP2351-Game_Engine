@@ -9,11 +9,9 @@ namespace COMP2351_Game_Engine
 {
     class Player : RelicHunterEntity, IPlayer
     {
-        IInput _input;
         float gravity;
         public Player()
         {
-            _input = new Input();
             gravity = 10;
         }
 
@@ -39,15 +37,16 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public override void Update()
         {       
-            if (location.Y <= 900 - texture.Height)
+            /*if (location.Y <= 900 - texture.Height)
             {
                 Translate(0, gravity);
-            }
-            location += _input.GetKeyboardInputDirection();
+            }*/
 
             if (_mind != null)
             {
                 _mind.UpdateLocation(location);
+                _mind.UpdateTexture(texture);
+                Translate(_mind.TranslateX(), _mind.TranslateY());
             }
             else Console.WriteLine("Error: Mind is null");
         }

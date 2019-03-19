@@ -89,6 +89,7 @@ namespace COMP2351_Game_Engine
                 Exit();
 
             // TODO: Add your update logic here
+            collisionManager.Update();
             ( (IUpdatable)sceneManager).Update();
             ( (IUpdatable)aiComponentManager).Update();
 
