@@ -14,7 +14,7 @@ namespace COMP2351_Game_Engine
         {
         }
 
-        public void Update()
+        public override void Update()
         {
         }
     }

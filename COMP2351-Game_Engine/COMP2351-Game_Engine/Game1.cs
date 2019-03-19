@@ -18,7 +18,7 @@ namespace COMP2351_Game_Engine
         IEntityManager entityManager;
         ISceneManager sceneManager;
         IUpdatable collisionManager;
-        IUpdatable aiComponentManager;
+        IAIComponentManager aiComponentManager;
         IEntity entity;
         ISceneGraph sceneGraph;
         Texture2D texture;
@@ -64,7 +64,7 @@ namespace COMP2351_Game_Engine
             // Load entity texture
             texture = Content.Load<Texture2D>("square");
             // Request entity from entity manager
-            entity = entityManager.RequestInstance<Player>(texture);
+            entity = entityManager.RequestInstance<Player>(texture, aiComponentManager);
             // Scene manager places entity on the scene
             sceneManager.Spawn(entity, 100, 600);
         }
@@ -90,7 +90,7 @@ namespace COMP2351_Game_Engine
 
             // TODO: Add your update logic here
             ( (IUpdatable)sceneManager).Update();
-            aiComponentManager.Update();
+            ( (IUpdatable)aiComponentManager).Update();
 
             base.Update(gameTime);
         }

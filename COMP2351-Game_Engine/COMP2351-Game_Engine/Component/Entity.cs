@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class Entity : IEntity
+    class Entity : IEntity, IUpdatable
     {
         // Entity texture:
         public Texture2D texture;
@@ -16,6 +16,8 @@ namespace COMP2351_Game_Engine
         public Vector2 location;
         // Entity unique identification number:
         public int _uid;
+        // Entity AI Component Manager:
+        public IAIComponentManager _aiComponentManager;
         // Entity mind:
         public IMind _mind;
         /// <summary>
@@ -40,6 +42,13 @@ namespace COMP2351_Game_Engine
             location.Y = pY;
         }
         /// <summary>
+        /// Sets entity AI Component Manager
+        /// </summary>
+        public virtual void SetAIComponentManager(IAIComponentManager pAIComponentManger)
+        {
+            _aiComponentManager = pAIComponentManger;
+        }
+        /// <summary>
         /// Sets entity mind
         /// </summary>
         public virtual void SetMind(IMind pMind)
@@ -52,6 +61,12 @@ namespace COMP2351_Game_Engine
         public virtual void SetUp(int pUID)
         {
             _uid = pUID;
+        }
+        /// <summary>
+        /// Runs on entity creation
+        /// </summary>
+        public virtual void Initialise()
+        {
         }
         /// <summary>
         /// Updates entity location.

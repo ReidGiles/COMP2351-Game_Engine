@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class Mind : IMind
+    class Mind : IMind, IUpdatable
     {
         // Entity texture:
         public Texture2D _texture;
@@ -23,6 +23,10 @@ namespace COMP2351_Game_Engine
         public void UpdateTexture(Texture2D pTexture)
         {
             _texture = pTexture;
+        }
+
+        public virtual void Update()
+        {
         }
     }
 }

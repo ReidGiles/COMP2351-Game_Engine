@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class AIComponentManager : IUpdatable
+    class AIComponentManager : IUpdatable, IAIComponentManager
     {
         private IList<IMind> _mindList;
         public AIComponentManager()
@@ -17,7 +17,7 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Returns an instance of requested entity.
         /// </summary>
-        public IMind RequestMind<T>(Texture2D pTexture) where T : IMind, new()
+        public IMind RequestMind<T>() where T : IMind, new()
         {
             IMind mind = new T();
             _mindList.Add(mind);
@@ -27,9 +27,9 @@ namespace COMP2351_Game_Engine
 
         public void Update()
         {
-            foreach (IMind mind in _mindList)
+            foreach (IMind m in _mindList)
             {
-                ( (IUpdatable)mind).Update();
+                ( (IUpdatable)m).Update();
             }
         }
     }

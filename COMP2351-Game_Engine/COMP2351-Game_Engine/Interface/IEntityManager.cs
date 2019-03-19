@@ -9,6 +9,6 @@ namespace COMP2351_Game_Engine
 {
     interface IEntityManager
     {
-        IEntity RequestInstance<T>(Texture2D pTexture) where T : IEntity, new();
+        IEntity RequestInstance<T>(Texture2D pTexture, IAIComponentManager pAIComponentManager) where T : IEntity, new();
     }
 }

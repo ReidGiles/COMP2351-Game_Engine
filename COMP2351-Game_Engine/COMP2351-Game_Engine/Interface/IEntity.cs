@@ -10,11 +10,12 @@ namespace COMP2351_Game_Engine
 {
     interface IEntity
     {
-        void Update();
         void SetTexture(Texture2D pTexture);
         void SetLocation(float pX, float pY);
+        void SetAIComponentManager(IAIComponentManager pAIComponentManger);
         void SetUp(int pUID);
         int GetUID();
         void Draw(SpriteBatch spriteBatch);
+        void Initialise();
     }
 }

@@ -15,13 +15,23 @@ namespace COMP2351_Game_Engine
         {
             _input = new Input();
             gravity = 10;
-            _mind = new PlayerMind();
         }
 
-        // required for Input management of the keyboard
+        /// <summary>
+        /// Required for Input management of the keyboard
+        /// </summary>
         public virtual void OnNewKeyboardInput()
         {
             //code in here
+        }
+
+        /// <summary>
+        /// Initialisation logic
+        /// </summary>
+        public override void Initialise()
+        {
+            // Set initial entity mind:
+            _mind = _aiComponentManager.RequestMind<PlayerMind>();
         }
 
         /// <summary>
@@ -35,7 +45,11 @@ namespace COMP2351_Game_Engine
             }
             location += _input.GetKeyboardInputDirection();
 
-            _mind.UpdateLocation(location);
+            if (_mind != null)
+            {
+                _mind.UpdateLocation(location);
+            }
+            else Console.WriteLine("Error: Mind is null");
         }
     }
 }

@@ -18,11 +18,13 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Returns an instance of requested entity.
         /// </summary>
-        public IEntity RequestInstance<T>(Texture2D pTexture) where T : IEntity, new()
+        public IEntity RequestInstance<T>(Texture2D pTexture, IAIComponentManager pAIComponentManager) where T : IEntity, new()
         {
             IEntity entity = new T();
+            entity.SetAIComponentManager(pAIComponentManager);
             entity.SetTexture(pTexture);
             GenerateUID(entity);
+            entity.Initialise();
             _entityList.Add(entity);
             
             return entity;
