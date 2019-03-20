@@ -8,27 +8,40 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class PlayerMind : Mind
+    class PlayerMind : Mind, IKeyboardListener
     {
-        IInput _input;
+        KeyboardInput _args;
+        private float _gravity;
         public PlayerMind()
         {
-            _input = new Input();
+            _args = new KeyboardInput();
+            _gravity = 10;
+        }
+
+        /// <summary>
+        /// Required for Input management of the keyboard
+        /// </summary>
+        public void OnNewKeyboardInput(object sender, KeyboardInput args)
+        {
+            _args = args;
         }
 
         public override float TranslateX()
         {
-            return _input.GetKeyboardInputDirection().X;
+            return _args.GetKeyboardInputDirection().X;
         }
 
         public override float TranslateY()
         {
-            return _input.GetKeyboardInputDirection().Y;
+            if (_location.Y <= 900 - _texture.Height)
+            {
+                return _args.GetKeyboardInputDirection().Y + _gravity;
+            }
+            return _args.GetKeyboardInputDirection().Y;
         }
 
         public override void Update()
         {
-            _location += _input.GetKeyboardInputDirection();
         }
     }
 }

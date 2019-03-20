@@ -10,9 +10,11 @@ namespace COMP2351_Game_Engine
     class AIComponentManager : IUpdatable, IAIComponentManager
     {
         private IList<IMind> _mindList;
-        public AIComponentManager()
+        private IInputManager _inputManager;
+        public AIComponentManager(IInputManager pInputManager)
         {
             _mindList = new List<IMind>();
+            _inputManager = pInputManager;
         }
         /// <summary>
         /// Returns an instance of requested entity.
@@ -20,6 +22,10 @@ namespace COMP2351_Game_Engine
         public IMind RequestMind<T>() where T : IMind, new()
         {
             IMind mind = new T();
+            if (mind is IKeyboardListener)
+            {
+                _inputManager.AddListener(((IKeyboardListener)mind).OnNewKeyboardInput);
+            }
             _mindList.Add(mind);
 
             return mind;

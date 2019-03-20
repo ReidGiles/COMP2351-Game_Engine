@@ -47,8 +47,8 @@ namespace COMP2351_Game_Engine
             entityManager = new EntityManager();
             sceneManager = new SceneManager(sceneGraph);
             collisionManager = new CollisionManager(sceneGraph);
-            aiComponentManager = new AIComponentManager();
             inputManager = new KeyboardInputManager();
+            aiComponentManager = new AIComponentManager(inputManager);
             base.Initialize();
         }
 
