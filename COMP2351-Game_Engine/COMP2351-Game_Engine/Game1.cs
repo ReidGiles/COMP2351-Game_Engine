@@ -19,6 +19,7 @@ namespace COMP2351_Game_Engine
         private ISceneManager sceneManager;
         private IUpdatable collisionManager;
         private IAIComponentManager aiComponentManager;
+        private IInputManager inputManager;
         private IEntity entity;
         private ISceneGraph sceneGraph;
         private Texture2D texture;
@@ -47,6 +48,7 @@ namespace COMP2351_Game_Engine
             sceneManager = new SceneManager(sceneGraph);
             collisionManager = new CollisionManager(sceneGraph);
             aiComponentManager = new AIComponentManager();
+            inputManager = new KeyboardInputManager();
             base.Initialize();
         }
 
@@ -92,6 +94,7 @@ namespace COMP2351_Game_Engine
             collisionManager.Update();
             ( (IUpdatable)sceneManager).Update();
             ( (IUpdatable)aiComponentManager).Update();
+            ((IUpdatable)inputManager).Update();
 
             base.Update(gameTime);
         }

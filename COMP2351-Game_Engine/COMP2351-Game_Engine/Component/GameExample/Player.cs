@@ -4,19 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using COMP2351_Game_Engine.Component.Engine;
 
 namespace COMP2351_Game_Engine
 {
-    class Player : RelicHunterEntity, IPlayer
+    class Player : RelicHunterEntity, IPlayer, IKeyboardListener
     {
         public Player()
         {
+            KeyboardInputManager input = new KeyboardInputManager();
+            input.AddListener(OnNewKeyboardInput);
         }
 
         /// <summary>
         /// Required for Input management of the keyboard
         /// </summary>
-        public virtual void OnNewKeyboardInput()
+        public virtual void OnNewKeyboardInput(object sender, KeyboardInput args)
         {
             //code in here
         }

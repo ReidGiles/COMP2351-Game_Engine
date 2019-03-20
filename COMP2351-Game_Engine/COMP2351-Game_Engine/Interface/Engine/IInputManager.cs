@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace COMP2351_Game_Engine
 {
-    class KeyboardInput : EventArgs
+    interface IInputManager
     {
-
-        public KeyboardInput()
-        {
-
-        }
-
-        //add what the keyboardInput event does
+        void AddListener(EventHandler<KeyboardInput> handler);
     }
 }
