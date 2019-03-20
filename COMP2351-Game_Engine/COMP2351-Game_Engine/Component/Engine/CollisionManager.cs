@@ -31,9 +31,6 @@ namespace COMP2351_Game_Engine
         }
         public void Update()
         {
-            /*foreach (IEntity e in _sceneGraph.GetEntity())
-            {
-            }*/
         }
     }
 }

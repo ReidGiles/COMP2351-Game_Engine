@@ -45,6 +45,7 @@
     <Compile Include="Component\Engine\CollisionManager.cs" />
     <Compile Include="Component\Engine\Entity.cs" />
     <Compile Include="Component\Engine\EntityManager.cs" />
+    <Compile Include="Interface\Engine\IKeyboardInput.cs" />
     <Compile Include="Interface\Engine\IKeyboardListener.cs" />
     <Compile Include="Component\Engine\KeyboardInputManager.cs" />
     <Compile Include="Component\Engine\Mind.cs" />
@@ -54,15 +55,13 @@
     <Compile Include="Interface\Engine\IEntity.cs" />
     <Compile Include="Interface\Engine\IEntityManager.cs" />
     <Compile Include="Interface\Engine\IInputManager.cs" />
-    <Compile Include="Interface\GameExample\IInput.cs" />
-    <Compile Include="Component\GameExample\Input.cs" />
     <Compile Include="Interface\Engine\IMind.cs" />
     <Compile Include="Interface\GameExample\IPlayer.cs" />
     <Compile Include="Interface\GameExample\IRelicHunterEntity.cs" />
     <Compile Include="Interface\Engine\ISceneGraph.cs" />
     <Compile Include="Interface\Engine\ISceneManager.cs" />
     <Compile Include="Component\GameExample\Player.cs" />
-    <Compile Include="Component\Engine\KeyboardInput.cs" />
+    <Compile Include="Component\Engine\KeyboardHandler.cs" />
     <Compile Include="Interface\Engine\IUpdatable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

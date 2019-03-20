@@ -8,6 +8,6 @@ namespace COMP2351_Game_Engine
 {
     interface IKeyboardListener
     {
-        void OnNewKeyboardInput(object sender, KeyboardInput args);
+        void OnNewKeyboardInput(object sender, IKeyboardInput args);
     }
 }

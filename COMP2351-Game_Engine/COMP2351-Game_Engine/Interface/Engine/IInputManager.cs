@@ -8,6 +8,6 @@ namespace COMP2351_Game_Engine
 {
     interface IInputManager
     {
-        void AddListener(EventHandler<KeyboardInput> handler);
+        void AddListener(EventHandler<IKeyboardInput> handler);
     }
 }
