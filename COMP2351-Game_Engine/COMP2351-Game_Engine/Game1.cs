@@ -17,7 +17,7 @@ namespace COMP2351_Game_Engine
         public static int ScreenHeight;
         private IEntityManager entityManager;
         private ISceneManager sceneManager;
-        private IUpdatable collisionManager;
+        private ICollisionManager collisionManager;
         private IAIComponentManager aiComponentManager;
         private IInputManager inputManager;
         private IEntity entity;
@@ -44,9 +44,9 @@ namespace COMP2351_Game_Engine
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
             sceneGraph = new SceneGraph();
-            entityManager = new EntityManager();
-            sceneManager = new SceneManager(sceneGraph);
             collisionManager = new CollisionManager(sceneGraph);
+            entityManager = new EntityManager(collisionManager);
+            sceneManager = new SceneManager(sceneGraph);
             inputManager = new KeyboardInputManager();
             aiComponentManager = new AIComponentManager(inputManager);
             base.Initialize();
@@ -91,7 +91,7 @@ namespace COMP2351_Game_Engine
                 Exit();
 
             // TODO: Add your update logic here
-            collisionManager.Update();
+            ((IUpdatable)collisionManager).Update();
             ( (IUpdatable)sceneManager).Update();
             ( (IUpdatable)aiComponentManager).Update();
             ((IUpdatable)inputManager).Update();

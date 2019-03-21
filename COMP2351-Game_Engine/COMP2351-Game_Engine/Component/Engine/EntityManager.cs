@@ -11,9 +11,11 @@ namespace COMP2351_Game_Engine
     {
         private int _increment;
         private IList<IEntity> _entityList;
-        public EntityManager()
+        private ICollisionManager _collisionManager;
+        public EntityManager(ICollisionManager pCollisionManager)
         {
             _entityList = new List<IEntity>();
+            _collisionManager = pCollisionManager;
         }
         /// <summary>
         /// Returns an instance of requested entity.
@@ -21,6 +23,10 @@ namespace COMP2351_Game_Engine
         public IEntity RequestInstance<T>(Texture2D pTexture, IAIComponentManager pAIComponentManager) where T : IEntity, new()
         {
             IEntity entity = new T();
+            if (entity is ICollisionListener)
+            {
+                _collisionManager.AddListener(((ICollisionListener)entity).OnNewCollision);
+            }
             entity.SetAIComponentManager(pAIComponentManager);
             entity.SetTexture(pTexture);
             GenerateUID(entity);
