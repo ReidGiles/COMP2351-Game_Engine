@@ -46,9 +46,12 @@
     <Compile Include="Component\Engine\CollisionManager.cs" />
     <Compile Include="Component\Engine\Entity.cs" />
     <Compile Include="Component\Engine\EntityManager.cs" />
+    <Compile Include="Component\Engine\RectCollider.cs" />
+    <Compile Include="Interface\Engine\ICollider.cs" />
     <Compile Include="Interface\Engine\ICollisionHandler.cs" />
     <Compile Include="Interface\Engine\ICollisionListener.cs" />
     <Compile Include="Interface\Engine\ICollisionManager.cs" />
+    <Compile Include="Interface\Engine\ICreateCollider.cs" />
     <Compile Include="Interface\Engine\IKeyboardInput.cs" />
     <Compile Include="Interface\Engine\IKeyboardListener.cs" />
     <Compile Include="Component\Engine\KeyboardInputManager.cs" />

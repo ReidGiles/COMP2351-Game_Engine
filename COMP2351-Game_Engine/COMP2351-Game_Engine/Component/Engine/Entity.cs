@@ -11,15 +11,18 @@ namespace COMP2351_Game_Engine
     class Entity : IEntity, IUpdatable
     {
         // Entity texture:
-        public Texture2D texture;
+        protected Texture2D texture;
         // Entity location:
-        public Vector2 location;
+        protected Vector2 location;
         // Entity unique identification number:
-        public int _uid;
+        protected int _uid;
         // Entity AI Component Manager:
-        public IAIComponentManager _aiComponentManager;
+        protected IAIComponentManager _aiComponentManager;
+        // Entity collider:
+        protected ICollider _collider;
         // Entity mind:
-        public IMind _mind;
+        protected IMind _mind;
+        protected bool hasCollider = false;
         /// <summary>
         /// Called by scene manager, updates entities on the scene.
         /// </summary>
@@ -33,6 +36,7 @@ namespace COMP2351_Game_Engine
         {
             texture = pTexture;
         }
+
         /// <summary>
         /// Sets entity location
         /// </summary>
@@ -40,6 +44,16 @@ namespace COMP2351_Game_Engine
         {
             location.X = pX;
             location.Y = pY;
+        }
+
+        public virtual Vector2 GetLocation()
+        {
+            return location;
+        }
+
+        public virtual void SetCollider(Vector2 pOrigin, float pWidth, float pHeight)
+        {
+            
         }
         /// <summary>
         /// Sets entity AI Component Manager
@@ -87,6 +101,16 @@ namespace COMP2351_Game_Engine
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, location, Color.AntiqueWhite);
+        }
+
+        public bool CheckCollider()
+        {
+            return hasCollider;
+        }
+
+        public ICreateCollider GetCollider()
+        {
+            return (ICreateCollider)_collider;
         }
     }
 }

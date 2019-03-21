@@ -29,6 +29,7 @@ namespace COMP2351_Game_Engine
             }
             entity.SetAIComponentManager(pAIComponentManager);
             entity.SetTexture(pTexture);
+            entity.SetCollider(entity.GetLocation(), pTexture.Width, pTexture.Height);
             GenerateUID(entity);
             entity.Initialise();
             _entityList.Add(entity);
