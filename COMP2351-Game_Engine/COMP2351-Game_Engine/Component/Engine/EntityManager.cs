@@ -35,6 +35,10 @@ namespace COMP2351_Game_Engine
             
             return entity;
         }
+
+        /// <summary>
+        /// Generates entity unique identification number
+        /// </summary>
         public void GenerateUID(IEntity pEntity)
         {
             _increment++;

@@ -31,6 +31,9 @@ namespace COMP2351_Game_Engine
             return mind;
         }
 
+        /// <summary>
+        /// Updates all minds
+        /// </summary>
         public void Update()
         {
             foreach (IMind m in _mindList)

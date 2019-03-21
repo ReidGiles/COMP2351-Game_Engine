@@ -18,6 +18,9 @@ namespace COMP2351_Game_Engine
             _sceneGraph = pSceneGraph;
         }
 
+        /// <summary>
+        /// Publisher method, contacts all listeners
+        /// </summary>
         protected virtual void OnNewCollision()
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
@@ -25,12 +28,18 @@ namespace COMP2351_Game_Engine
             NewCollisionHandler(this, args);
         }
 
+        /// <summary>
+        /// Subscription method, used to store reference to listeners
+        /// </summary>
         public void AddListener(EventHandler<ICollisionHandler> handler)
         {
             // ADD event handler
             NewCollisionHandler += handler;
         }
 
+        /// <summary>
+        /// Checks for collision, result is stored in a boolean
+        /// </summary>
         public bool CheckCollision()
         {
             collision = false;
@@ -45,6 +54,10 @@ namespace COMP2351_Game_Engine
 
             return collision;
         }
+
+        /// <summary>
+        /// Runs publisher methods when input is detected
+        /// </summary>
         public void Update()
         {
             CheckCollision();

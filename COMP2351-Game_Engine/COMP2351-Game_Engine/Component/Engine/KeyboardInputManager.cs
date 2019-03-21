@@ -15,6 +15,9 @@ namespace COMP2351_Game_Engine
         {
         }
 
+        /// <summary>
+        /// Publisher method, contacts all listeners
+        /// </summary>
         protected virtual void OnNewKeyboardInput()
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
@@ -22,12 +25,18 @@ namespace COMP2351_Game_Engine
             NewKeyboardInput(this, args);
         }
 
+        /// <summary>
+        /// Subscription method, used to store reference to listeners
+        /// </summary>
         public void AddListener(EventHandler<IKeyboardInput> handler)
         {
             // ADD event handler
             NewKeyboardInput += handler;
         }
 
+        /// <summary>
+        /// Runs publisher methods when input is detected
+        /// </summary>
         public void Update()
         {
             // look for changes in the input
@@ -39,21 +48,4 @@ namespace COMP2351_Game_Engine
             }
         }
     }
-
-    /*class Game
-    {
-        public void someMethod()
-        {
-            // Create player.
-            IEntity entity = new Player();
-
-            // Keyboard inp manager.
-            KeyboardInputManager inputManager = new KeyboardInputManager();
-
-            if (entity is IKeyboardListener)
-            {
-                inputManager.AddListener(((IKeyboardListener)entity).OnNewKeyboardInput);
-            }
-        }
-    }*/
 }
