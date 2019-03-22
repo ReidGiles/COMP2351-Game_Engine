@@ -14,14 +14,6 @@ namespace COMP2351_Game_Engine
         /// Basic collision behaviour using rectangle.
         /// Needs updating.
         /// </summary>
-        public Rectangle HitBox
-        {
-            get
-            {
-                Rectangle hitBox = new Rectangle((int)this.location.X, (int)this.location.Y, texture.Width, texture.Height);
-                return hitBox;
-            }
-        }
         public RelicHunterEntity()
         {
         }

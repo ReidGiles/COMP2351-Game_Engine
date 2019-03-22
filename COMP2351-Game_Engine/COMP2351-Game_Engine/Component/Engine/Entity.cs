@@ -16,6 +16,8 @@ namespace COMP2351_Game_Engine
         protected Vector2 location;
         // Entity unique identification number:
         protected int _uid;
+        // Entity unique name:
+        protected String _uName;
         // Entity AI Component Manager:
         protected IAIComponentManager _aiComponentManager;
         // Entity collider:
@@ -72,9 +74,10 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Sets the unique identification number and unique name of the entity.
         /// </summary>
-        public virtual void SetUp(int pUID)
+        public virtual void SetUp(int pUID, String pUName)
         {
             _uid = pUID;
+            _uName = pUName;
         }
         /// <summary>
         /// Runs on entity creation
@@ -90,10 +93,19 @@ namespace COMP2351_Game_Engine
             location.X += dX;
             location.Y += dY;
         }
-
+        /// <summary>
+        /// Returns entity unique identification.
+        /// </summary>
         public int GetUID()
         {
             return _uid;
+        }
+        // <summary>
+        /// Returns entity unique name.
+        /// </summary>
+        public String GetUname()
+        {
+            return _uName;
         }
         /// <summary>
         /// Draws entity on the scene.

@@ -21,19 +21,38 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public void Spawn(IEntity pEntity, float pX, float pY)
         {
+            Boolean found = false;
             // Record entity has been spawned
-            _entityList.Add(pEntity);
+            foreach (IEntity e in _entityList)
+            {
+                if (e == pEntity)
+                {
+                    // Set entity location
+                    pEntity.SetLocation(pX, pY);
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                _entityList.Add(pEntity);
+                pEntity.SetLocation(pX, pY);
+            }
+            //_entityList.Add(pEntity);
+            // Set entity location
+            //pEntity.SetLocation(pX, pY);
         }
         /// <summary>
         /// This is called from scene manager when an existing entity is spawned.
         /// </summary>
         public void Spawn(int pUID, int pX, int pY)
         {
-            // Set position
             foreach (IEntity e in _entityList)
             {
                 if (e.GetUID() == pUID)
                 {
+                    // Record entity has been spawned
+                    _entityList.Add(e);
+                    // Set entity location
                     e.SetLocation(pX, pY);
                 }
             }
@@ -55,8 +74,26 @@ namespace COMP2351_Game_Engine
                 _entityList.Remove(removeEntity);
                 removeEntity.SetLocation(-50, -50);
                 removeEntity = null;
+            }            
+        }
+        /// <summary>
+        /// This is called from scene manager when an entity needs to be removed.
+        /// </summary>
+        public void Remove(String pUName)
+        {
+            foreach (IEntity e in _entityList)
+            {
+                if (e.GetUname() == pUName)
+                {
+                    removeEntity = e;
+                }
             }
-            
+            if (removeEntity != null)
+            {
+                _entityList.Remove(removeEntity);
+                removeEntity.SetLocation(-50, -50);
+                removeEntity = null;
+            }
         }
         /// <summary>
         /// Returns a list of entities on the scene.

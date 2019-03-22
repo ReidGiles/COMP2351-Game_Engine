@@ -15,8 +15,9 @@ namespace COMP2351_Game_Engine
         Vector2 GetLocation();
 
         void SetAIComponentManager(IAIComponentManager pAIComponentManger);
-        void SetUp(int pUID);
+        void SetUp(int pUID, String pUName);
         int GetUID();
+        String GetUname();
         void Draw(SpriteBatch spriteBatch);
         void Initialise();
 

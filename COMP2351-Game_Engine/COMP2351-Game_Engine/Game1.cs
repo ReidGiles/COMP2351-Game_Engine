@@ -45,7 +45,7 @@ namespace COMP2351_Game_Engine
             ScreenWidth = GraphicsDevice.Viewport.Width;
             sceneGraph = new SceneGraph();
             collisionManager = new CollisionManager(sceneGraph);
-            entityManager = new EntityManager(collisionManager);
+            entityManager = new EntityManager(collisionManager, sceneGraph);
             sceneManager = new SceneManager(sceneGraph);
             inputManager = new KeyboardInputManager();
             aiComponentManager = new AIComponentManager(inputManager);
@@ -66,11 +66,11 @@ namespace COMP2351_Game_Engine
             // Load entity texture
             texture = Content.Load<Texture2D>("square");
             // Request entity from entity manager
-            entity = entityManager.RequestInstance<Player>(texture, aiComponentManager);
+            entity = entityManager.RequestInstance<Player>("Player", texture, aiComponentManager);
             // Scene manager places entity on the scene
-            sceneManager.Spawn(entity, 100, 600);
-            entity = entityManager.RequestInstance<Hostile>(texture, aiComponentManager);
-            sceneManager.Spawn(entity, 800, 300);
+            sceneManager.Spawn(entity, 200, 600);
+            entity = entityManager.RequestInstance<Hostile>("Hostile1", texture, aiComponentManager);
+            sceneManager.Spawn(entity, 400, 300);
         }
 
         /// <summary>

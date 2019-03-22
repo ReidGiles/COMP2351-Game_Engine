@@ -26,7 +26,7 @@ namespace COMP2351_Game_Engine
 
         public void OnNewCollision(object sender, ICollisionHandler args)
         {
-            Console.WriteLine("Played collided");
+            Console.WriteLine("Player collided");
         }
 
         public override void SetCollider()

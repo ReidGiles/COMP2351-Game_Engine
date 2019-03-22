@@ -12,15 +12,18 @@ namespace COMP2351_Game_Engine
         private int _increment;
         private IList<IEntity> _entityList;
         private ICollisionManager _collisionManager;
-        public EntityManager(ICollisionManager pCollisionManager)
+        private ISceneGraph _sceneGraph;
+        private IEntity _removeEntity;
+        public EntityManager(ICollisionManager pCollisionManager, ISceneGraph pSceneGraph)
         {
             _entityList = new List<IEntity>();
             _collisionManager = pCollisionManager;
+            _sceneGraph = pSceneGraph;
         }
         /// <summary>
         /// Returns an instance of requested entity.
         /// </summary>
-        public IEntity RequestInstance<T>(Texture2D pTexture, IAIComponentManager pAIComponentManager) where T : IEntity, new()
+        public IEntity RequestInstance<T>(String pUName, Texture2D pTexture, IAIComponentManager pAIComponentManager) where T : IEntity, new()
         {
             IEntity entity = new T();
             if (entity is ICollisionListener)
@@ -30,19 +33,51 @@ namespace COMP2351_Game_Engine
             entity.SetAIComponentManager(pAIComponentManager);
             entity.SetTexture(pTexture);
             entity.Initialise();
-            GenerateUID(entity);
+            GenerateUID(entity, pUName);
             _entityList.Add(entity);
             
             return entity;
         }
 
+        public void Terminate(int pUID)
+        {
+            foreach (IEntity e in _entityList)
+            {
+                if (e.GetUID() == pUID)
+                {
+                    _removeEntity = e;
+                }
+            }
+            if (_removeEntity != null)
+            {
+                _sceneGraph.Remove(_removeEntity.GetUID());
+                _entityList.Remove(_removeEntity);
+            }
+        }
+
+        public void Terminate(String pUName)
+        {
+            foreach (IEntity e in _entityList)
+            {
+                if (e.GetUname() == pUName)
+                {
+                    _removeEntity = e;
+                }
+            }
+            if (_removeEntity != null)
+            {
+                _sceneGraph.Remove(_removeEntity.GetUID());
+                _entityList.Remove(_removeEntity);
+            }
+        }
+
         /// <summary>
         /// Generates entity unique identification number
         /// </summary>
-        public void GenerateUID(IEntity pEntity)
+        private void GenerateUID(IEntity pEntity, String pUName)
         {
             _increment++;
-            pEntity.SetUp(_increment);
+            pEntity.SetUp(_increment, pUName);
         }
     }
 }

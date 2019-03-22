@@ -21,8 +21,6 @@ namespace COMP2351_Game_Engine
         {
             // Spawn entity
             _sceneGraph.Spawn(pEntity, pX, pY);
-            // Set entity location
-            pEntity.SetLocation(pX, pY);
         }
         /// <summary>
         /// This is called when an existing entity needs to be spawned.
@@ -37,6 +35,13 @@ namespace COMP2351_Game_Engine
         public void Remove(int pUID)
         {
             _sceneGraph.Remove(pUID);
+        }
+        /// <summary>
+        /// This is called when an entity needs to be removed.
+        /// </summary>
+        public void Remove(String pUName)
+        {
+            _sceneGraph.Remove(pUName);
         }
         /// <summary>
         /// Returns a reference of an entity.

@@ -12,6 +12,7 @@ namespace COMP2351_Game_Engine
         void Spawn(IEntity pEntity, float pX, float pY);
         void Spawn(int pUID, int pX, int pY);
         void Remove(int pUID);
+        void Remove(String pUName);
         IList<IEntity> GetEntity();
     }
 }
