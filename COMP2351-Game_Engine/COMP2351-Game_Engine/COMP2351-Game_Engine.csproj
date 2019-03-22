@@ -47,6 +47,7 @@
     <Compile Include="Component\Engine\Entity.cs" />
     <Compile Include="Component\Engine\EntityManager.cs" />
     <Compile Include="Component\Engine\RectCollider.cs" />
+    <Compile Include="Component\GameExample\Floor.cs" />
     <Compile Include="Component\GameExample\Hostile.cs" />
     <Compile Include="Component\GameExample\HostileMind.cs" />
     <Compile Include="Interface\Engine\ICollider.cs" />
@@ -86,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Floor.png" />
     <Content Include="Content\square.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

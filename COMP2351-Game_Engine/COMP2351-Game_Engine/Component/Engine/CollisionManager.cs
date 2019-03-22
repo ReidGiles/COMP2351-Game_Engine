@@ -21,7 +21,7 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Publisher method, contacts all listeners
         /// </summary>
-        protected virtual void OnNewCollision()
+        protected virtual void OnNewCollision(String[] pCollided)
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
             ICollisionHandler args = new CollisionHandler();
@@ -91,7 +91,8 @@ namespace COMP2351_Game_Engine
                                 // colliding
                                 // get the collider tag
                                 collision = true;
-                                OnNewCollision();
+                                String[] collided = {colliderI.GetTag(), colliderJ.GetTag()};
+                                OnNewCollision(collided);
 
                                 //post the collision tag ,xPos ,yPos ,width ,height
                                 Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1] + " " + CheckColliderI[2] + " " + CheckColliderI[3]);

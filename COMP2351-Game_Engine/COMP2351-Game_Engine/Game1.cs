@@ -63,6 +63,10 @@ namespace COMP2351_Game_Engine
 
             // TODO: use this.Content to load your game content here
 
+            //texture = Content.Load<Texture2D>("Floor");
+            //entity = entityManager.RequestInstance<Floor>("Floor", texture, aiComponentManager);
+            //sceneManager.Spawn(entity, 0, ScreenHeight - texture.Height);
+
             // Load entity texture
             texture = Content.Load<Texture2D>("square");
             // Request entity from entity manager
