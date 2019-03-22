@@ -48,12 +48,14 @@ namespace COMP2351_Game_Engine
             {
                 for (int j=i+1; j < _sceneGraph.GetEntity().Count; j++)
                 {
-                    if(_sceneGraph.GetEntity()[i] is ICollisionListener && _sceneGraph.GetEntity()[j] is ICollisionListener)
+                    //check entity has a collision listener
+                    if (_sceneGraph.GetEntity()[i] is ICollisionListener && _sceneGraph.GetEntity()[j] is ICollisionListener)
                     {
+                        //check the entity has a collider set up
                         if (_sceneGraph.GetEntity()[i].CheckCollider() && _sceneGraph.GetEntity()[j].CheckCollider())
                         {
                             //get a reference to the entities collider for I and J
-                            ICreateCollider colliderI= _sceneGraph.GetEntity()[i].GetCollider();
+                            ICreateCollider colliderI = _sceneGraph.GetEntity()[i].GetCollider();
                             ICreateCollider colliderJ = _sceneGraph.GetEntity()[j].GetCollider();
 
                             //get the co-odinate points needed to check collision for I and J
@@ -67,11 +69,15 @@ namespace COMP2351_Game_Engine
                             float Dy = CheckColliderI[1] - CheckColliderJ[1];
 
                             //Check collision
-                            if ((Dx < (CheckColliderI[2]+ CheckColliderJ[2])*0.5) && (Dy < (CheckColliderI[3] + CheckColliderJ[3]) * 0.5))
+                            if ((Dx < (CheckColliderI[2] + CheckColliderJ[2]) * 0.5) && (Dy < (CheckColliderI[3] + CheckColliderJ[3]) * 0.5))
                             {
                                 // colliding
                                 // get the collider tag
                                 collision = true;
+                                OnNewCollision();
+
+                                Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1]);
+                                Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1]);
                             }
                         }
                     }
@@ -88,11 +94,11 @@ namespace COMP2351_Game_Engine
         {
             CheckCollision();
 
-            if (collision == true && NewCollisionHandler != null)
+            /*if (collision == true && NewCollisionHandler != null)
             {
                 // update listeners
                 OnNewCollision();
-            }
+            }*/
         }
     }
 }

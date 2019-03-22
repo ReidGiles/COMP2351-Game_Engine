@@ -47,6 +47,8 @@
     <Compile Include="Component\Engine\Entity.cs" />
     <Compile Include="Component\Engine\EntityManager.cs" />
     <Compile Include="Component\Engine\RectCollider.cs" />
+    <Compile Include="Component\GameExample\Hostile.cs" />
+    <Compile Include="Component\GameExample\HostileMind.cs" />
     <Compile Include="Interface\Engine\ICollider.cs" />
     <Compile Include="Interface\Engine\ICollisionHandler.cs" />
     <Compile Include="Interface\Engine\ICollisionListener.cs" />

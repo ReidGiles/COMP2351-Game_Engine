@@ -69,6 +69,8 @@ namespace COMP2351_Game_Engine
             entity = entityManager.RequestInstance<Player>(texture, aiComponentManager);
             // Scene manager places entity on the scene
             sceneManager.Spawn(entity, 100, 600);
+            entity = entityManager.RequestInstance<Hostile>(texture, aiComponentManager);
+            sceneManager.Spawn(entity, 800, 300);
         }
 
         /// <summary>

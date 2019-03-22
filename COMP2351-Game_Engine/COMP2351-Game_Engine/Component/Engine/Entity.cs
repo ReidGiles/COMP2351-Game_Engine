@@ -51,7 +51,7 @@ namespace COMP2351_Game_Engine
             return location;
         }
 
-        public virtual void SetCollider(Vector2 pOrigin, float pWidth, float pHeight)
+        public virtual void SetCollider()
         {
             
         }

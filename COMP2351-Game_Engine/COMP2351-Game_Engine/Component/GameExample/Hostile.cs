@@ -1,32 +1,26 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 
 namespace COMP2351_Game_Engine
 {
-    class Player : RelicHunterEntity, IPlayer, ICollisionListener
+    class Hostile : RelicHunterEntity, ICollisionListener
     {
-        public Player()
+        public Hostile()
         {
-            
         }
-
-        /// <summary>
-        /// Initialisation logic
-        /// </summary>
         public override void Initialise()
         {
             // Set initial entity mind:
-            _mind = _aiComponentManager.RequestMind<PlayerMind>();
+            _mind = _aiComponentManager.RequestMind<HostileMind>();
         }
 
         public void OnNewCollision(object sender, ICollisionHandler args)
         {
-            Console.WriteLine("Played collided");
+            Console.WriteLine("Hostile collided");
         }
 
         public override void SetCollider()
@@ -34,7 +28,7 @@ namespace COMP2351_Game_Engine
             Vector2 ColliderOrigin;
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y - 0.5f * texture.Height;
-            _collider = new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Player");
+            _collider = new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Hostile");
             hasCollider = true;
         }
 
@@ -55,9 +49,8 @@ namespace COMP2351_Game_Engine
                 _mind.UpdateTexture(texture);
                 //updates the position of the player
                 Translate(_mind.TranslateX(), _mind.TranslateY());
-                // updates the position of the collider to match the player
+                // updates the position of the collider to follow the player
                 _collider.Translate(location.X, location.Y);
-
             }
             //else Console.WriteLine("Error: Mind is null");
             /*Console.WriteLine("Top"+((ICreateCollider)_collider).CreateCollider()[0]);
