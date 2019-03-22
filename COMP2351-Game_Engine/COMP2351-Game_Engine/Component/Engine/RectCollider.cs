@@ -40,9 +40,9 @@ namespace COMP2351_Game_Engine
         //Translate the position of the Collider
         public void Translate(float dx, float dy)
         {
-            //move x
+            //Set x
             _origin.X = dx;
-            //move y
+            //set y
             _origin.Y = dy;
         }
 

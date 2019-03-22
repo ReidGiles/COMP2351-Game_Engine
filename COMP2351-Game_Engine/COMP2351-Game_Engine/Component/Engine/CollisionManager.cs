@@ -63,10 +63,27 @@ namespace COMP2351_Game_Engine
                             float[] CheckColliderJ = colliderJ.CreateCollider();
 
                             //Distance between x axis values for I and J
-                            float Dx = CheckColliderI[0] - CheckColliderJ[0];
+                            float Dx;
+                            if (CheckColliderI[0] > CheckColliderJ[0])
+                            {
+                                Dx = CheckColliderI[0] - CheckColliderJ[0];
+                            }
+                            else
+                            {
+                                Dx = CheckColliderJ[0] - CheckColliderI[0];
+                            }
+
 
                             //Distance between y axis values for I and J
-                            float Dy = CheckColliderI[1] - CheckColliderJ[1];
+                            float Dy;
+                            if (CheckColliderI[1] > CheckColliderJ[1])
+                            {
+                                Dy = CheckColliderI[1] - CheckColliderJ[1];
+                            }
+                            else
+                            {
+                                Dy = CheckColliderJ[1] - CheckColliderI[1];
+                            }
 
                             //Check collision
                             if ((Dx < (CheckColliderI[2] + CheckColliderJ[2]) * 0.5) && (Dy < (CheckColliderI[3] + CheckColliderJ[3]) * 0.5))
@@ -76,8 +93,11 @@ namespace COMP2351_Game_Engine
                                 collision = true;
                                 OnNewCollision();
 
-                                Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1]);
-                                Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1]);
+                                //post the collision tag ,xPos ,yPos ,width ,height
+                                Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1] + " " + CheckColliderI[2] + " " + CheckColliderI[3]);
+                                Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1] + " " + CheckColliderJ[2] + " " + CheckColliderJ[3]);
+                                // post the distance between the origin points of the collision in x and y
+                                Console.WriteLine(Dx + " " + Dy);
                             }
                         }
                     }

@@ -9,7 +9,7 @@ namespace COMP2351_Game_Engine
     class KeyboardInputManager : IInputManager, IUpdatable
     {
         // create a variable to store all the subscribers to the event
-        public event EventHandler<IKeyboardInput> NewKeyboardInput;
+        private event EventHandler<IKeyboardInput> NewKeyboardInput;
 
         public KeyboardInputManager()
         {
