@@ -11,5 +11,8 @@ namespace COMP2351_Game_Engine
     {
         //Create the corners of the collider
         float[] CreateCollider();
+        
+        //Get the collider Tag
+        String GetTag();
     }
 }

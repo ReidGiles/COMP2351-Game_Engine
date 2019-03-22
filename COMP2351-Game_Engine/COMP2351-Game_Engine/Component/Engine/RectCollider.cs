@@ -10,55 +10,54 @@ namespace COMP2351_Game_Engine
     class RectCollider : ICollider,ICreateCollider
     {
         //origin point of the rectangle collider
-        private Vector2 origin;
+        private Vector2 _origin;
 
         //width of the collider
-        private float width;
+        private float _width;
 
         //height of the collider
-        private float height;
+        private float _height;
+
+        //Tag used to identigy type of collider
+        private String _colliderTag;
 
 
-        public RectCollider(Vector2 pOrigin, float pWidth, float pHeight)
+        public RectCollider(Vector2 pOrigin, float pWidth, float pHeight, String pColliderTag)
         {
             //set origin
-            origin = pOrigin;
+            _origin = pOrigin;
 
             //set width
-            width = pWidth;
+            _width = pWidth;
 
             //set height
-            height = pHeight;
+            _height = pHeight;
+
+            //set collider tag
+            _colliderTag = pColliderTag;
         }
 
         //Translate the position of the Collider
         public void Translate(float dx, float dy)
         {
             //move x
-            origin.X += dx;
+            _origin.X += dx;
             //move y
-            origin.Y += dy;
+            _origin.Y += dy;
         }
 
 
         //Create the corners of the collider
         public float[] CreateCollider()
         {
-            //Vector for the Top left of the rectangle collider
-            float Top = origin.Y + 0.5f * height;
-
-            //Vector for the Top Right of teh rectangle collider
-            float Btm = origin.Y - 0.5f * height;
-
-            //Vector for the Top Right of teh rectangle collider
-            float Left = origin.X - 0.5f * width;
-
-            //Vector for the Top left of the rectangle collider
-            float Right = origin.X + 0.5f * width;
-
-            float[] retVal = { Top, Btm, Left, Right };
+            float[] retVal = { _origin.X, _origin.Y, _width, _height };
 
             return retVal;
+        }
+
+        public String GetTag()
+        {
+            return _colliderTag;
         }
     }
 }
