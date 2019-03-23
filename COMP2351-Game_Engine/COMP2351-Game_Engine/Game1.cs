@@ -65,18 +65,18 @@ namespace COMP2351_Game_Engine
 
             //texture = Content.Load<Texture2D>("Floor");
             //entity = entityManager.RequestInstance<Floor>("Floor", texture, aiComponentManager);
-            //sceneManager.Spawn(entity, 0, ScreenHeight - texture.Height);
+            //sceneManager.Spawn(entity, 500, ScreenHeight - texture.Height);
 
             // Load entity texture
             texture = Content.Load<Texture2D>("square");
             // Request entity from entity manager
             entity = entityManager.RequestInstance<Player>("Player", texture, aiComponentManager);
             // Scene manager places entity on the scene
-            sceneManager.Spawn(entity, 200, 600);
+            sceneManager.Spawn(entity, 200, 100);
             entity = entityManager.RequestInstance<Hostile>("Hostile1", texture, aiComponentManager);
             sceneManager.Spawn(entity, 400, 300);
             entity = entityManager.RequestInstance<Hostile>("Hostile2", texture, aiComponentManager);
-            sceneManager.Spawn(entity, 800, 300);
+            sceneManager.Spawn(entity, 600, 300);
         }
 
         /// <summary>

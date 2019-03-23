@@ -35,6 +35,7 @@ namespace COMP2351_Game_Engine
             base.OnNewCollision(collided);
             if (_collidedWith == "Hostile")
             {
+                _speed += 1;
             }
         }
 
