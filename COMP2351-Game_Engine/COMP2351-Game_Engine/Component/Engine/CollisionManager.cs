@@ -24,7 +24,6 @@ namespace COMP2351_Game_Engine
         protected virtual void OnNewCollision(String[] pCollided)
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
-            ICollisionHandler args = new CollisionHandler();
             NewCollisionHandler(this, pCollided);
         }
 
@@ -95,10 +94,10 @@ namespace COMP2351_Game_Engine
                                 OnNewCollision(collided);
 
                                 //post the collision tag ,xPos ,yPos ,width ,height
-                                //Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1] + " " + CheckColliderI[2] + " " + CheckColliderI[3]);
-                                //Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1] + " " + CheckColliderJ[2] + " " + CheckColliderJ[3]);
+                                Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1] + " " + CheckColliderI[2] + " " + CheckColliderI[3]);
+                                Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1] + " " + CheckColliderJ[2] + " " + CheckColliderJ[3]);
                                 // post the distance between the origin points of the collision in x and y
-                                //Console.WriteLine(Dx + " " + Dy);
+                                Console.WriteLine(Dx + " " + Dy);
                             }
                         }
                     }

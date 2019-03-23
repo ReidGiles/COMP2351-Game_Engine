@@ -42,19 +42,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\Engine\AIComponentManager.cs" />
-    <Compile Include="Component\Engine\CollisionHandler.cs" />
     <Compile Include="Component\Engine\CollisionManager.cs" />
     <Compile Include="Component\Engine\Entity.cs" />
     <Compile Include="Component\Engine\EntityManager.cs" />
     <Compile Include="Component\Engine\RectCollider.cs" />
     <Compile Include="Component\GameExample\Floor.cs" />
+    <Compile Include="Component\GameExample\FloorMind.cs" />
     <Compile Include="Component\GameExample\Hostile.cs" />
     <Compile Include="Component\GameExample\HostileMind.cs" />
     <Compile Include="Interface\Engine\ICollider.cs" />
-    <Compile Include="Interface\Engine\ICollisionHandler.cs" />
     <Compile Include="Interface\Engine\ICollisionListener.cs" />
     <Compile Include="Interface\Engine\ICollisionManager.cs" />
     <Compile Include="Interface\Engine\ICreateCollider.cs" />
+    <Compile Include="Interface\Engine\IDrawable.cs" />
     <Compile Include="Interface\Engine\IKeyboardInput.cs" />
     <Compile Include="Interface\Engine\IKeyboardListener.cs" />
     <Compile Include="Component\Engine\InputManager.cs" />
@@ -87,7 +87,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Box.png" />
     <Content Include="Content\Floor.png" />
+    <Content Include="Content\paddle.png" />
     <Content Include="Content\square.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

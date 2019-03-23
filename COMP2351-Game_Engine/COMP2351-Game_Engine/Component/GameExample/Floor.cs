@@ -12,6 +12,16 @@ namespace COMP2351_Game_Engine
         public Floor()
         {
         }
+
+        /// <summary>
+        /// Initialisation logic
+        /// </summary>
+        public override void Initialise()
+        {
+            // Set initial entity mind:
+            _mind = _aiComponentManager.RequestMind<FloorMind>();
+        }
+
         public void OnNewCollision(object sender, String[] collided)
         {
         }

@@ -14,12 +14,21 @@ namespace COMP2351_Game_Engine
         IKeyboardInput _args;
         private float _gravity;
         private float _speed;
+        private Vector2 _velocity;
+        private float _facingDirectionX;
+        private float _facingDirectionY;
+        private bool testBool;
         public PlayerMind()
         {
             _args = new KeyboardHandler();
-            _gravity = 10;
-            _speed = 12;
+            _gravity = 5;
+            _speed = 7;
+            _velocity.X = 1;
+            _velocity.Y = 1;
+            _facingDirectionX = 1;
+            _facingDirectionY = 1;
             _mindID = "Player";
+            testBool = false;
         }
 
         /// <summary>
@@ -37,11 +46,13 @@ namespace COMP2351_Game_Engine
             {
                 if (k == Keys.Right)
                 {
-                    return _speed;
+                    _facingDirectionX = 1;
+                    return (_speed * _facingDirectionX) * _velocity.X;
                 }
                 if (k == Keys.Left)
                 {
-                    return -_speed;
+                    _facingDirectionX = -1;
+                    return (_speed * _facingDirectionX) * _velocity.X;
                 }
             }
             return 0;
@@ -54,16 +65,13 @@ namespace COMP2351_Game_Engine
             {
                 if (k == Keys.Up)
                 {
-                    return -_speed + _gravity;
-                }
-                if (k == Keys.Down)
-                {
-                    return _speed;
+                    _facingDirectionY = -1;
+                    return (_speed * _facingDirectionY) * _velocity.Y;
                 }
             }
 
             // Gravity, always active
-            if (_location.Y <= 900 - _texture.Height)
+            if (_location.Y <= 900 - _texture.Height && testBool == false)
             {
                 return _gravity;
             }
@@ -74,16 +82,21 @@ namespace COMP2351_Game_Engine
         public override void OnNewCollision(String[] collided)
         {
             base.OnNewCollision(collided);
-            if (_collidedWith == "Hostile")
+            if (_collidedWith == "Floor")
             {
-                _gravity = 0;
+                testBool = true;
             }
 
             _collidedWith = null;
         }
 
-        public override void Update()
+        public override void Update() 
         {
+            if (_collidedWith == null)
+            {
+                _gravity = 5;
+                testBool = false;
+            }
             // Add switch that prevents Translate methods from running
         }
     }

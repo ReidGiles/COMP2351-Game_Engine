@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace COMP2351_Game_Engine
 {
-    class CollisionHandler : ICollisionHandler
+    class FloorMind : Mind
     {
-        public CollisionHandler()
+        public FloorMind()
         {
+            _mindID = "Floor";
         }
     }
 }
