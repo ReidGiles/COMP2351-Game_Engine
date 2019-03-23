@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace COMP2351_Game_Engine
 {
-    class KeyboardInputManager : IInputManager, IUpdatable
+    class InputManager : IInputManager, IUpdatable
     {
         // create a variable to store all the subscribers to the event
         private event EventHandler<IKeyboardInput> NewKeyboardInput;
 
-        public KeyboardInputManager()
+        public InputManager()
         {
         }
 

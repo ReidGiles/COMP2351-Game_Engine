@@ -57,7 +57,7 @@
     <Compile Include="Interface\Engine\ICreateCollider.cs" />
     <Compile Include="Interface\Engine\IKeyboardInput.cs" />
     <Compile Include="Interface\Engine\IKeyboardListener.cs" />
-    <Compile Include="Component\Engine\KeyboardInputManager.cs" />
+    <Compile Include="Component\Engine\InputManager.cs" />
     <Compile Include="Component\Engine\Mind.cs" />
     <Compile Include="Component\GameExample\PlayerMind.cs" />
     <Compile Include="Game1.cs" />

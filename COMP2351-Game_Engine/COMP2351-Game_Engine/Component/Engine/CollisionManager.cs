@@ -10,7 +10,7 @@ namespace COMP2351_Game_Engine
     class CollisionManager : IUpdatable, ICollisionManager
     {
         // create a variable to store all the subscribers to the event
-        public event EventHandler<ICollisionHandler> NewCollisionHandler;
+        public event EventHandler<String[]> NewCollisionHandler;
         bool collision;
         ISceneGraph _sceneGraph;
         public CollisionManager(ISceneGraph pSceneGraph)
@@ -25,13 +25,13 @@ namespace COMP2351_Game_Engine
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
             ICollisionHandler args = new CollisionHandler();
-            NewCollisionHandler(this, args);
+            NewCollisionHandler(this, pCollided);
         }
 
         /// <summary>
         /// Subscription method, used to store reference to listeners
         /// </summary>
-        public void AddListener(EventHandler<ICollisionHandler> handler)
+        public void AddListener(EventHandler<String[]> handler)
         {
             // ADD event handler
             NewCollisionHandler += handler;
@@ -95,10 +95,10 @@ namespace COMP2351_Game_Engine
                                 OnNewCollision(collided);
 
                                 //post the collision tag ,xPos ,yPos ,width ,height
-                                Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1] + " " + CheckColliderI[2] + " " + CheckColliderI[3]);
-                                Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1] + " " + CheckColliderJ[2] + " " + CheckColliderJ[3]);
+                                //Console.WriteLine(colliderI.GetTag() + " " + CheckColliderI[0] + " " + CheckColliderI[1] + " " + CheckColliderI[2] + " " + CheckColliderI[3]);
+                                //Console.WriteLine(colliderJ.GetTag() + " " + CheckColliderJ[0] + " " + CheckColliderJ[1] + " " + CheckColliderJ[2] + " " + CheckColliderJ[3]);
                                 // post the distance between the origin points of the collision in x and y
-                                Console.WriteLine(Dx + " " + Dy);
+                                //Console.WriteLine(Dx + " " + Dy);
                             }
                         }
                     }

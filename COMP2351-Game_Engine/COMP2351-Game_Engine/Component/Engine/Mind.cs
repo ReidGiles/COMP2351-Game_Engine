@@ -11,9 +11,11 @@ namespace COMP2351_Game_Engine
     abstract class Mind : IMind, IUpdatable
     {
         // Entity texture:
-        public Texture2D _texture;
+        protected Texture2D _texture;
         // Entity location:
-        public Vector2 _location;
+        protected Vector2 _location;
+        protected String _mindID;
+        protected String _collidedWith;
 
         /// <summary>
         /// Updates entity location
@@ -45,6 +47,22 @@ namespace COMP2351_Game_Engine
         public virtual float TranslateY()
         {
             return 0;
+        }
+
+        public virtual void OnNewCollision(String[] collided)
+        {
+            if ((collided[0] == _mindID) && (collided[1] == _mindID))
+            {
+                _collidedWith = collided[0];
+            }
+            else if (collided[0] != collided[1])
+            {
+                if (collided[0] != _mindID)
+                {
+                    _collidedWith = collided[0];
+                }
+                else _collidedWith = collided[1];
+            }
         }
 
         /// <summary>

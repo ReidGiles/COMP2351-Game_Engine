@@ -14,5 +14,6 @@ namespace COMP2351_Game_Engine
         void UpdateTexture(Texture2D pTexture);
         float TranslateX();
         float TranslateY();
+        void OnNewCollision(String[] collided);
     }
 }

@@ -11,7 +11,7 @@ namespace COMP2351_Game_Engine
         public Floor()
         {
         }
-        public void OnNewCollision(object sender, ICollisionHandler args)
+        public void OnNewCollision(object sender, String[] collided)
         {
         }
     }

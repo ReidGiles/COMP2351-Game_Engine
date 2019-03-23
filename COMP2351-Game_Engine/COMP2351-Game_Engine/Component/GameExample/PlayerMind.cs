@@ -19,6 +19,7 @@ namespace COMP2351_Game_Engine
             _args = new KeyboardHandler();
             _gravity = 10;
             _speed = 12;
+            _mindID = "Player";
         }
 
         /// <summary>
@@ -68,6 +69,17 @@ namespace COMP2351_Game_Engine
             }
 
             return 0;
+        }
+
+        public override void OnNewCollision(String[] collided)
+        {
+            base.OnNewCollision(collided);
+            if (_collidedWith == "Hostile")
+            {
+                _speed += 1;
+            }
+
+            _collidedWith = null;
         }
 
         public override void Update()

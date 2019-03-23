@@ -8,6 +8,6 @@ namespace COMP2351_Game_Engine
 {
     interface ICollisionManager
     {
-        void AddListener(EventHandler<ICollisionHandler> handler);
+        void AddListener(EventHandler<String[]> handler);
     }
 }

@@ -8,6 +8,6 @@ namespace COMP2351_Game_Engine
 {
     interface ICollisionListener
     {
-        void OnNewCollision(object sender, ICollisionHandler args);
+        void OnNewCollision(object sender, String[] collided);
     }
 }

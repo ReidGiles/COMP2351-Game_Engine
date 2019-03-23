@@ -47,7 +47,7 @@ namespace COMP2351_Game_Engine
             collisionManager = new CollisionManager(sceneGraph);
             entityManager = new EntityManager(collisionManager, sceneGraph);
             sceneManager = new SceneManager(sceneGraph);
-            inputManager = new KeyboardInputManager();
+            inputManager = new InputManager();
             aiComponentManager = new AIComponentManager(inputManager);
             base.Initialize();
         }
@@ -75,6 +75,8 @@ namespace COMP2351_Game_Engine
             sceneManager.Spawn(entity, 200, 600);
             entity = entityManager.RequestInstance<Hostile>("Hostile1", texture, aiComponentManager);
             sceneManager.Spawn(entity, 400, 300);
+            entity = entityManager.RequestInstance<Hostile>("Hostile2", texture, aiComponentManager);
+            sceneManager.Spawn(entity, 800, 300);
         }
 
         /// <summary>

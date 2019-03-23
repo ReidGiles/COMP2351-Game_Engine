@@ -14,6 +14,7 @@ namespace COMP2351_Game_Engine
         {
             _gravity = 10;
             _speed = 15;
+            _mindID = "Hostile";
         }
 
         public override float TranslateX()
@@ -27,6 +28,14 @@ namespace COMP2351_Game_Engine
                 _speed = -_speed;
             }
             return _speed;
+        }
+
+        public override void OnNewCollision(String[] collided)
+        {
+            base.OnNewCollision(collided);
+            if (_collidedWith == "Hostile")
+            {
+            }
         }
 
         public override float TranslateY()
