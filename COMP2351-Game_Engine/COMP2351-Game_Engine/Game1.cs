@@ -23,6 +23,7 @@ namespace COMP2351_Game_Engine
         private ISceneGraph sceneGraph;
         private Texture2D[] textures;
         private EngineDemo engineDemo;
+        private Vector2 headerLocation;
 
         public Game1()
         {
@@ -53,6 +54,7 @@ namespace COMP2351_Game_Engine
             engineDemo.Initialise(entityManager, sceneManager, collisionManager, aiComponentManager, inputManager, sceneGraph);
             inputManager.AddListener(((IKeyboardListener)engineDemo).OnNewKeyboardInput);
             inputManager.AddListener(((IMouseListener)engineDemo).OnNewMouseInput);
+            headerLocation = new Vector2 (80,0);
             base.Initialize();
         }
 
@@ -67,7 +69,7 @@ namespace COMP2351_Game_Engine
 
             // TODO: use this.Content to load your game content here
             
-            textures = new Texture2D[] { Content.Load<Texture2D>("square"), Content.Load<Texture2D>("paddle"), Content.Load<Texture2D>("Floor") };
+            textures = new Texture2D[] { Content.Load<Texture2D>("square"), Content.Load<Texture2D>("paddle"), Content.Load<Texture2D>("Floor"), Content.Load<Texture2D>("Header") };
             engineDemo.LoadTextures(textures);
 
             /*
@@ -145,6 +147,7 @@ namespace COMP2351_Game_Engine
             {
                 e.Draw(spriteBatch);
             }
+            spriteBatch.Draw(textures[3], headerLocation, Color.AntiqueWhite);
             spriteBatch.End();
 
             base.Draw(gameTime);

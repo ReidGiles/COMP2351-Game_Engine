@@ -93,6 +93,7 @@
   <ItemGroup>
     <Content Include="Content\Box.png" />
     <Content Include="Content\Floor.png" />
+    <Content Include="Content\Header.png" />
     <Content Include="Content\paddle.png" />
     <Content Include="Content\square.png" />
     <Content Include="Icon.ico" />
