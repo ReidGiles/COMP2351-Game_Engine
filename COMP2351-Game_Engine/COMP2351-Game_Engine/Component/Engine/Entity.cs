@@ -21,10 +21,12 @@ namespace COMP2351_Game_Engine
         // Entity AI Component Manager:
         protected IAIComponentManager _aiComponentManager;
         // Entity collider:
-        protected List<ICollider> _collider;
+        protected List<ICollider> _colliders;
         // Entity mind:
         protected IMind _mind;
+        // bool to flag if the enitity has a collider
         protected bool hasCollider = false;
+        // bool to flag for the entity to be terminated
         protected bool _killSelf = false;
         /// <summary>
         /// Called by scene manager, updates entities on the scene.
@@ -123,7 +125,7 @@ namespace COMP2351_Game_Engine
 
         public List<ICreateCollider> GetCollider()
         {
-            List<ICreateCollider> L = _collider.Cast<ICreateCollider>().ToList();
+            List<ICreateCollider> L = _colliders.Cast<ICreateCollider>().ToList();
             return L;
         }
     }

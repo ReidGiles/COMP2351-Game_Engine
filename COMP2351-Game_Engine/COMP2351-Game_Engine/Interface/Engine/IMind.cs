@@ -12,8 +12,9 @@ namespace COMP2351_Game_Engine
     {
         void UpdateLocation(Vector2 pLocation);
         void UpdateTexture(Texture2D pTexture);
+        void SetCollider(List<ICreateCollider> pColliders);
         float TranslateX();
         float TranslateY();
-        void OnNewCollision(String[] collided);
+        bool OnNewCollision(String[] collided);
     }
 }

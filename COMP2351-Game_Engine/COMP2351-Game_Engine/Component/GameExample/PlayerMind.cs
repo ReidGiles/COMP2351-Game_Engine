@@ -17,7 +17,8 @@ namespace COMP2351_Game_Engine
         private Vector2 _velocity;
         private float _facingDirectionX;
         private float _facingDirectionY;
-        private bool _hostileCollide;
+        private bool _floorCollide;
+
         public PlayerMind()
         {
             _args = new KeyboardHandler();
@@ -28,7 +29,7 @@ namespace COMP2351_Game_Engine
             _facingDirectionX = 1;
             _facingDirectionY = 1;
             _mindID = "Player";
-            _hostileCollide = false;
+            _floorCollide = false;
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace COMP2351_Game_Engine
             }
 
             // Gravity, always active
-            if (_location.Y <= 900 - _texture.Height && _hostileCollide == false)
+            if (_location.Y <= 900 - _texture.Height && _floorCollide == false)
             {
                 return _gravity;
             }
@@ -79,19 +80,30 @@ namespace COMP2351_Game_Engine
             return 0;
         }
 
-        public override void OnNewCollision(String[] collided)
+        public override bool OnNewCollision(String[] collided)
         {
-            base.OnNewCollision(collided);
-            if (_collidedWith == "Hostile")
+            bool rtnValue = base.OnNewCollision(collided);
+
+            if (_collidedWith == "Floor" && _collidedThis == "Player")
             {
-                _hostileCollide = true;
+                _floorCollide = true;
             }
+
+
+            if (_collidedWith == "Hostile" && _collidedThis == "Player")
+            {
+                rtnValue = true;
+            }
+
             _collidedWith = null;
+            _collidedThis = null;
+
+            return rtnValue;
         }
 
         public override void Update() 
         {
-            if (_collidedWith == null && !_hostileCollide)
+            if (_collidedWith == null && !_floorCollide)
             {
                 _gravity = 5;
                 
@@ -99,7 +111,7 @@ namespace COMP2351_Game_Engine
             else
             {
                 _gravity = 0;
-                _hostileCollide = false;
+                _floorCollide = false;
             }
             // Add switch that prevents Translate methods from running
         }

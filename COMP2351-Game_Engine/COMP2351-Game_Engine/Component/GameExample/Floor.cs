@@ -24,6 +24,7 @@ namespace COMP2351_Game_Engine
 
         public void OnNewCollision(object sender, String[] collided)
         {
+
         }
 
         public override void SetCollider()
@@ -31,8 +32,9 @@ namespace COMP2351_Game_Engine
             Vector2 ColliderOrigin;
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
-            _collider = new List<ICollider>();
-            _collider.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Floor"));
+            _colliders = new List<ICollider>();
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Floor"));
+            _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());
             hasCollider = true;
         }
 
@@ -56,7 +58,7 @@ namespace COMP2351_Game_Engine
                 float DY = _mind.TranslateY();
                 Translate(DX, DY);
                 // updates the position of the colliders to follow the player
-                foreach (ICollider e in _collider)
+                foreach (ICollider e in _colliders)
                 {
                     e.Translate(DX, DY);
                 }

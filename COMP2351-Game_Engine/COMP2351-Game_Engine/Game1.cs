@@ -85,20 +85,6 @@ namespace COMP2351_Game_Engine
             entity = entityManager.RequestInstance<Hostile>("Hostile1", texture, aiComponentManager);
             // Scene manager places entity on the scene
             sceneManager.Spawn(entity, 400, 600);
-
-            //Add a Floor to jump onto
-            texture = Content.Load<Texture2D>("Floor");
-            entity = entityManager.RequestInstance<Floor>("Floor", texture, aiComponentManager);
-            sceneManager.Spawn(entity, 800, ScreenHeight - texture.Height - 100);
-
-            entity = entityManager.RequestInstance<Floor>("Floor", texture, aiComponentManager);
-            sceneManager.Spawn(entity, 400, 300);
-
-            // Load entity texture
-            texture = Content.Load<Texture2D>("paddle");
-            entity = entityManager.RequestInstance<Hostile>("Hostile2", texture, aiComponentManager);
-            sceneManager.Spawn(entity, 650, 300);
-
             */
         }
 

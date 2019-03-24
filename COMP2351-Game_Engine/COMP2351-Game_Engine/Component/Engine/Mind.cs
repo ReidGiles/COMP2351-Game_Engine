@@ -14,7 +14,13 @@ namespace COMP2351_Game_Engine
         protected Texture2D _texture;
         // Entity location:
         protected Vector2 _location;
+        // reference to the mind ID
         protected String _mindID;
+        // list of the colliders in the mind
+        protected List<ICreateCollider> _colliders;
+        // this entities collider
+        protected String _collidedThis;
+        // enitity that collided with this entities collider
         protected String _collidedWith;
 
         /// <summary>
@@ -34,6 +40,14 @@ namespace COMP2351_Game_Engine
         }
 
         /// <summary>
+        /// Updates entity texture
+        /// </summary>
+        public void SetCollider(List<ICreateCollider> pColliders)
+        {
+            _colliders = pColliders;
+        }
+
+        /// <summary>
         /// Translates x position
         /// </summary>
         public virtual float TranslateX()
@@ -49,20 +63,26 @@ namespace COMP2351_Game_Engine
             return 0;
         }
 
-        public virtual void OnNewCollision(String[] collided)
+        public virtual bool OnNewCollision(String[] collided)
         {
-            if ((collided[0] == _mindID) && (collided[1] == _mindID))
+            if(_colliders != null)
             {
-                _collidedWith = collided[0];
-            }
-            else if (collided[0] != collided[1])
-            {
-                if (collided[0] != _mindID)
+                foreach (ICreateCollider i in _colliders)
                 {
-                    _collidedWith = collided[0];
+                    if (i.GetTag() == collided[0])
+                    {
+                        _collidedThis = collided[0];
+                        _collidedWith = collided[1];
+                    }
+                    else
+                    {
+                        _collidedThis = collided[1];
+                        _collidedWith = collided[0];
+                    }
                 }
-                else _collidedWith = collided[1];
             }
+            //return whether the entity should kill itself
+            return false;
         }
 
         /// <summary>

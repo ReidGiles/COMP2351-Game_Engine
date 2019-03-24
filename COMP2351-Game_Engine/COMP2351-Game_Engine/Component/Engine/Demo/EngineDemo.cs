@@ -73,9 +73,9 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             // Request entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile2", textures[1], aiComponentManager);
+                            IEntity entity = entityManager.RequestInstance<Floor>("Floor", textures[2], aiComponentManager);
                             // Scene manager places entity on the scene
-                            sceneManager.Spawn(entity, 1200, 600);
+                            sceneManager.Spawn(entity, 800, 600);
                         }
                         disableSpawn = true;
                         break;
