@@ -39,6 +39,18 @@ namespace COMP2351_Game_Engine
             return entity;
         }
 
+        public IEntity RequestInstance(String pUName)
+        {
+            foreach (IEntity e in _entityList)
+            {
+                if (e.GetUname() == pUName)
+                {
+                    return e;
+                }
+            }
+            return null;
+        }
+
         public void Terminate(int pUID)
         {
             foreach (IEntity e in _entityList)

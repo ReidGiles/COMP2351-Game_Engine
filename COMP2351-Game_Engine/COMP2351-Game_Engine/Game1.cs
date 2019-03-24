@@ -20,9 +20,7 @@ namespace COMP2351_Game_Engine
         private ICollisionManager collisionManager;
         private IAIComponentManager aiComponentManager;
         private IInputManager inputManager;
-        private IEntity entity;
         private ISceneGraph sceneGraph;
-        private Texture2D texture;
         private Texture2D[] textures;
         private EngineDemo engineDemo;
 

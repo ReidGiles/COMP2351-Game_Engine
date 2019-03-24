@@ -46,31 +46,66 @@ namespace COMP2351_Game_Engine
         {
             foreach (Keys k in args.GetInputKey())
             {
-                if (k == Keys.NumPad1)
+                switch(k)
                 {
-                    if (!disableSpawn)
-                    {
-                        // Request entity from entity manager
-                        IEntity entity = entityManager.RequestInstance<Player>("Player", textures[0], aiComponentManager);
-                        // Scene manager places entity on the scene
-                        sceneManager.Spawn(entity, 0, 0);
-                    }
-                    disableSpawn = true;
-                }
-                if (k == Keys.NumPad2)
-                {
-                    if (!disableSpawn)
-                    {
-                        // Request entity from entity manager
-                        IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[1], aiComponentManager);
-                        // Scene manager places entity on the scene
-                        sceneManager.Spawn(entity, 400, 600);
-                    }
-                    disableSpawn = true;
-                }
-                if (k == Keys.Z)
-                {
-                    disableSpawn = false;
+                    case Keys.NumPad1:
+                        if (!disableSpawn)
+                        {
+                            // Request entity from entity manager
+                            IEntity entity = entityManager.RequestInstance<Player>("Player", textures[0], aiComponentManager);
+                            // Scene manager places entity on the scene
+                            sceneManager.Spawn(entity, 0, 0);
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.NumPad2:
+                        if (!disableSpawn)
+                        {
+                            // Request entity from entity manager
+                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[1], aiComponentManager);
+                            // Scene manager places entity on the scene
+                            sceneManager.Spawn(entity, 200, 600);
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.NumPad3:
+                        if (!disableSpawn)
+                        {
+                            // Request entity from entity manager
+                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile2", textures[1], aiComponentManager);
+                            // Scene manager places entity on the scene
+                            sceneManager.Spawn(entity, 1200, 600);
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.NumPad5:
+                        if (!disableSpawn)
+                        {
+                            sceneManager.Remove("Hostile1");
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.NumPad6:
+                        if (!disableSpawn)
+                        {
+                            sceneManager.Remove("Hostile2");
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.Z:
+                        disableSpawn = false;
+                        break;
+                    case Keys.NumPad9:
+                        if (!disableSpawn)
+                        {
+                            IEntity entity = entityManager.RequestInstance("Player");
+                            if (entity != null)
+                            {
+                                sceneManager.Spawn(entity, 500, 500);
+                            }
+                        }
+                        disableSpawn = true;
+                        break;
                 }
             }
         }

@@ -22,6 +22,7 @@ namespace COMP2351_Game_Engine
         {
             //Console.WriteLine("Hostile collided");
             _mind.OnNewCollision(collided);
+            //Translate(0, -10);
         }
 
         public override void SetCollider()
