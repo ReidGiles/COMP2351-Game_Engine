@@ -18,7 +18,7 @@ namespace COMP2351_Game_Engine
         {
             _gravity = 10;
             _speed = 15;
-            _velocity.X = 1;
+            _velocity.X = 0;
             _velocity.Y = 0;
             _facingDirectionX = 1;
             _facingDirectionY = 1;

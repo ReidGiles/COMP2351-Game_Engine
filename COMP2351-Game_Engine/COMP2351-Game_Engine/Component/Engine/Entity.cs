@@ -21,7 +21,7 @@ namespace COMP2351_Game_Engine
         // Entity AI Component Manager:
         protected IAIComponentManager _aiComponentManager;
         // Entity collider:
-        protected ICollider _collider;
+        protected List<ICollider> _collider;
         // Entity mind:
         protected IMind _mind;
         protected bool hasCollider = false;
@@ -120,9 +120,10 @@ namespace COMP2351_Game_Engine
             return hasCollider;
         }
 
-        public ICreateCollider GetCollider()
+        public List<ICreateCollider> GetCollider()
         {
-            return (ICreateCollider)_collider;
+            List<ICreateCollider> L = _collider.Cast<ICreateCollider>().ToList();
+            return L;
         }
     }
 }

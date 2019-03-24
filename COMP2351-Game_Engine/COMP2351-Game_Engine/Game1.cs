@@ -68,7 +68,7 @@ namespace COMP2351_Game_Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
+            
             textures = new Texture2D[] { Content.Load<Texture2D>("square"), Content.Load<Texture2D>("paddle"), Content.Load<Texture2D>("Floor") };
             engineDemo.LoadTextures(textures);
 

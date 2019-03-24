@@ -46,7 +46,7 @@ namespace COMP2351_Game_Engine
         {
             foreach (Keys k in args.GetInputKey())
             {
-                if (k == Keys.NumPad1)
+                if (k == Keys.D1)
                 {
                     if (!disableSpawn)
                     {
@@ -57,7 +57,7 @@ namespace COMP2351_Game_Engine
                     }
                     disableSpawn = true;
                 }
-                if (k == Keys.NumPad2)
+                if (k == Keys.D2)
                 {
                     if (!disableSpawn)
                     {

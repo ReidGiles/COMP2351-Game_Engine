@@ -19,7 +19,7 @@ namespace COMP2351_Game_Engine
         String GetUname();
         void Initialise();
         bool CheckCollider();
-        ICreateCollider GetCollider();
+        List<ICreateCollider> GetCollider();
 
     }
 }
