@@ -28,7 +28,7 @@ namespace COMP2351_Game_Engine
         {
             //Console.WriteLine("Player collided");
             _mind.OnNewCollision(collided);
-            //Translate(0, -50);
+            Translate(0, -5);
 
             //kill
         }

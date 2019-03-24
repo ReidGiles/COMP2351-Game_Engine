@@ -41,9 +41,9 @@ namespace COMP2351_Game_Engine
         public void Translate(float dx, float dy)
         {
             //Set x
-            _origin.X = dx;
+            _origin.X = dx + _width * 0.5f;
             //set y
-            _origin.Y = dy;
+            _origin.Y = dy + _height * 0.5f;
         }
 
 
