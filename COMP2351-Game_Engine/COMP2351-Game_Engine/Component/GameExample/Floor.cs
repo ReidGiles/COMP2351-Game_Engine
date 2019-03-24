@@ -30,8 +30,9 @@ namespace COMP2351_Game_Engine
         {
             Vector2 ColliderOrigin;
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y - 0.5f * texture.Height;
-            _collider = new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Floor");
+            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
+            _collider = new List<ICollider>();
+            _collider.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Floor"));
             hasCollider = true;
         }
 
@@ -51,9 +52,14 @@ namespace COMP2351_Game_Engine
                 //tell the mind the value fo texture
                 _mind.UpdateTexture(texture);
                 //updates the position of the player
-                Translate(_mind.TranslateX(), _mind.TranslateY());
-                // updates the position of the collider to follow the player
-                _collider.Translate(location.X, location.Y);
+                float DX = _mind.TranslateX();
+                float DY = _mind.TranslateY();
+                Translate(DX, DY);
+                // updates the position of the colliders to follow the player
+                foreach (ICollider e in _collider)
+                {
+                    e.Translate(DX, DY);
+                }
             }
             //else Console.WriteLine("Error: Mind is null");
             /*Console.WriteLine("Top"+((ICreateCollider)_collider).CreateCollider()[0]);

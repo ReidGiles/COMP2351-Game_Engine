@@ -12,14 +12,15 @@ namespace COMP2351_Game_Engine
     {
         void SetTexture(Texture2D pTexture);
         void SetLocation(float pX, float pY);
-        Vector2 GetLocation();
         void SetAIComponentManager(IAIComponentManager pAIComponentManger);
         void SetUp(int pUID, String pUName);
         int GetUID();
         String GetUname();
         void Initialise();
         bool CheckCollider();
-        ICreateCollider GetCollider();
+        bool KillSelf();
+        void SetMind(IMind pMind);
+        List<ICreateCollider> GetCollider();
 
     }
 }

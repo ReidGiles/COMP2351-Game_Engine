@@ -17,6 +17,7 @@ namespace COMP2351_Game_Engine
         private Vector2 _velocity;
         private float _facingDirectionX;
         private float _facingDirectionY;
+        private bool _hostileCollide;
         public PlayerMind()
         {
             _args = new KeyboardHandler();
@@ -27,6 +28,7 @@ namespace COMP2351_Game_Engine
             _facingDirectionX = 1;
             _facingDirectionY = 1;
             _mindID = "Player";
+            _hostileCollide = false;
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace COMP2351_Game_Engine
             }
 
             // Gravity, always active
-            if (_location.Y <= 900 - _texture.Height)
+            if (_location.Y <= 900 - _texture.Height && _hostileCollide == false)
             {
                 return _gravity;
             }
@@ -80,15 +82,25 @@ namespace COMP2351_Game_Engine
         public override void OnNewCollision(String[] collided)
         {
             base.OnNewCollision(collided);
-            if (_collidedWith == "Floor")
+            if (_collidedWith == "Hostile")
             {
+                _hostileCollide = true;
             }
-
             _collidedWith = null;
         }
 
         public override void Update() 
         {
+            if (_collidedWith == null && !_hostileCollide)
+            {
+                _gravity = 5;
+                
+            }
+            else
+            {
+                _gravity = 0;
+                _hostileCollide = false;
+            }
             // Add switch that prevents Translate methods from running
         }
     }

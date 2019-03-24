@@ -12,7 +12,6 @@ namespace COMP2351_Game_Engine
     {
         public Player()
         {
-            
         }
 
         /// <summary>
@@ -28,17 +27,19 @@ namespace COMP2351_Game_Engine
         {
             //Console.WriteLine("Player collided");
             _mind.OnNewCollision(collided);
-            Translate(0, -5);
-
-            //kill
+            if (collided[0] == "Hostile" || collided[1] == "Hostile")
+            {
+                this._killSelf = true;
+            }
         }
 
         public override void SetCollider()
         {
             Vector2 ColliderOrigin;
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y - 0.5f * texture.Height;
-            _collider = new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Player");
+            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
+            _collider = new List<ICollider>();
+            _collider.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Player"));
             hasCollider = true;
         }
 
@@ -58,9 +59,14 @@ namespace COMP2351_Game_Engine
                 //tell the mind the value fo texture
                 _mind.UpdateTexture(texture);
                 //updates the position of the player
-                Translate(_mind.TranslateX(), _mind.TranslateY());
-                // updates the position of the collider to match the player
-                _collider.Translate(location.X, location.Y);
+                float DX = _mind.TranslateX();
+                float DY = _mind.TranslateY();
+                Translate(DX, DY);
+                // updates the position of the colliders to follow the player
+                foreach (ICollider e in _collider)
+                {
+                    e.Translate(DX, DY);
+                }
 
             }
             //else Console.WriteLine("Error: Mind is null");

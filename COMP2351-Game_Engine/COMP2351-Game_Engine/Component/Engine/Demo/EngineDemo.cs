@@ -22,6 +22,7 @@ namespace COMP2351_Game_Engine
         private int[] mouseVal;
 
         bool disableSpawn = false;
+        int f = 0;
 
         public EngineDemo()
         {
@@ -48,7 +49,7 @@ namespace COMP2351_Game_Engine
             {
                 switch(k)
                 {
-                    case Keys.NumPad1:
+                    case Keys.D1:
                         if (!disableSpawn)
                         {
                             // Request entity from entity manager
@@ -58,7 +59,7 @@ namespace COMP2351_Game_Engine
                         }
                         disableSpawn = true;
                         break;
-                    case Keys.NumPad2:
+                    case Keys.D2:
                         if (!disableSpawn)
                         {
                             // Request entity from entity manager
@@ -68,7 +69,7 @@ namespace COMP2351_Game_Engine
                         }
                         disableSpawn = true;
                         break;
-                    case Keys.NumPad3:
+                    case Keys.D3:
                         if (!disableSpawn)
                         {
                             // Request entity from entity manager
@@ -78,14 +79,14 @@ namespace COMP2351_Game_Engine
                         }
                         disableSpawn = true;
                         break;
-                    case Keys.NumPad5:
+                    case Keys.D5:
                         if (!disableSpawn)
                         {
                             sceneManager.Remove("Hostile1");
                         }
                         disableSpawn = true;
                         break;
-                    case Keys.NumPad6:
+                    case Keys.D6:
                         if (!disableSpawn)
                         {
                             sceneManager.Remove("Hostile2");
@@ -95,13 +96,32 @@ namespace COMP2351_Game_Engine
                     case Keys.Z:
                         disableSpawn = false;
                         break;
-                    case Keys.NumPad9:
+                    case Keys.D9:
                         if (!disableSpawn)
                         {
                             IEntity entity = entityManager.RequestInstance("Player");
                             if (entity != null)
                             {
                                 sceneManager.Spawn(entity, 500, 500);
+                            }
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.F:
+                        if (!disableSpawn)
+                        {
+                            f++;
+                            sceneManager.Remove(f);
+                        }
+                        disableSpawn = true;
+                        break;
+                    case Keys.Q:
+                        if (!disableSpawn)
+                        {
+                            IEntity entity = entityManager.RequestInstance("Player");
+                            if (entity != null)
+                            {
+                                entity.SetMind(aiComponentManager.RequestMind<HostileMind>());
                             }
                         }
                         disableSpawn = true;

@@ -21,10 +21,11 @@ namespace COMP2351_Game_Engine
         // Entity AI Component Manager:
         protected IAIComponentManager _aiComponentManager;
         // Entity collider:
-        protected ICollider _collider;
+        protected List<ICollider> _collider;
         // Entity mind:
         protected IMind _mind;
         protected bool hasCollider = false;
+        protected bool _killSelf = false;
         /// <summary>
         /// Called by scene manager, updates entities on the scene.
         /// </summary>
@@ -48,9 +49,9 @@ namespace COMP2351_Game_Engine
             location.Y = pY;
         }
 
-        public virtual Vector2 GetLocation()
+        public virtual bool KillSelf()
         {
-            return location;
+            return _killSelf;
         }
 
         public virtual void SetCollider()
@@ -120,9 +121,10 @@ namespace COMP2351_Game_Engine
             return hasCollider;
         }
 
-        public ICreateCollider GetCollider()
+        public List<ICreateCollider> GetCollider()
         {
-            return (ICreateCollider)_collider;
+            List<ICreateCollider> L = _collider.Cast<ICreateCollider>().ToList();
+            return L;
         }
     }
 }

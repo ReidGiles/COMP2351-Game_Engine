@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class EntityManager : IEntityManager
+    class EntityManager : IEntityManager, IUpdatable
     {
         private int _increment;
         private IList<IEntity> _entityList;
@@ -64,6 +64,7 @@ namespace COMP2351_Game_Engine
             {
                 _sceneGraph.Remove(_removeEntity.GetUID());
                 _entityList.Remove(_removeEntity);
+                _removeEntity = null;
             }
         }
 
@@ -80,6 +81,7 @@ namespace COMP2351_Game_Engine
             {
                 _sceneGraph.Remove(_removeEntity.GetUID());
                 _entityList.Remove(_removeEntity);
+                _removeEntity = null;
             }
         }
 
@@ -89,7 +91,25 @@ namespace COMP2351_Game_Engine
         private void GenerateUID(IEntity pEntity, String pUName)
         {
             _increment++;
+            Console.WriteLine(_increment);
             pEntity.SetUp(_increment, pUName);
+        }
+
+        public void Update()
+        {
+            foreach (IEntity e in _entityList)
+            {
+                if (e.KillSelf())
+                {
+                    _removeEntity = e;
+                }
+            }
+            if (_removeEntity != null)
+            {
+                _sceneGraph.Remove(_removeEntity.GetUID());
+                _entityList.Remove(_removeEntity);
+                _removeEntity = null;
+            }
         }
     }
 }
