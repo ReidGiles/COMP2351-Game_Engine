@@ -22,7 +22,6 @@ namespace COMP2351_Game_Engine
         public void Spawn(IEntity pEntity, float pX, float pY)
         {
             Boolean found = false;
-            // Record entity has been spawned
             foreach (IEntity e in _entityList)
             {
                 if (e == pEntity)
@@ -34,6 +33,7 @@ namespace COMP2351_Game_Engine
             }
             if (!found)
             {
+                // Record entity has been spawned
                 _entityList.Add(pEntity);
                 pEntity.SetLocation(pX, pY);
             }
@@ -50,8 +50,6 @@ namespace COMP2351_Game_Engine
             {
                 if (e.GetUID() == pUID)
                 {
-                    // Record entity has been spawned
-                    _entityList.Add(e);
                     // Set entity location
                     e.SetLocation(pX, pY);
                 }
@@ -72,7 +70,7 @@ namespace COMP2351_Game_Engine
             if (removeEntity != null)
             {
                 _entityList.Remove(removeEntity);
-                removeEntity.SetLocation(-50, -50);
+                //removeEntity.SetLocation(-50, -50);
                 removeEntity = null;
             }            
         }
@@ -91,7 +89,7 @@ namespace COMP2351_Game_Engine
             if (removeEntity != null)
             {
                 _entityList.Remove(removeEntity);
-                removeEntity.SetLocation(-50, -50);
+                //removeEntity.SetLocation(-50, -50);
                 removeEntity = null;
             }
         }

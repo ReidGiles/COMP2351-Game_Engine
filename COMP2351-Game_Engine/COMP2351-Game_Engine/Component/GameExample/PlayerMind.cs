@@ -84,7 +84,7 @@ namespace COMP2351_Game_Engine
             base.OnNewCollision(collided);
             if (_collidedWith == "Floor")
             {
-                testBool = true;
+                //testBool = true;
             }
 
             _collidedWith = null;

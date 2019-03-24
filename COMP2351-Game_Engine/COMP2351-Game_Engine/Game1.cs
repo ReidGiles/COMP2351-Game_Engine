@@ -23,6 +23,8 @@ namespace COMP2351_Game_Engine
         private IEntity entity;
         private ISceneGraph sceneGraph;
         private Texture2D texture;
+        private Texture2D[] textures;
+        private EngineDemo engineDemo;
 
         public Game1()
         {
@@ -49,6 +51,10 @@ namespace COMP2351_Game_Engine
             sceneManager = new SceneManager(sceneGraph);
             inputManager = new InputManager();
             aiComponentManager = new AIComponentManager(inputManager);
+            engineDemo = new EngineDemo();
+            engineDemo.Initialise(entityManager, sceneManager, collisionManager, aiComponentManager, inputManager, sceneGraph);
+            inputManager.AddListener(((IKeyboardListener)engineDemo).OnNewKeyboardInput);
+            inputManager.AddListener(((IMouseListener)engineDemo).OnNewMouseInput);
             base.Initialize();
         }
 
@@ -63,7 +69,10 @@ namespace COMP2351_Game_Engine
 
             // TODO: use this.Content to load your game content here
 
+            textures = new Texture2D[] { Content.Load<Texture2D>("square"), Content.Load<Texture2D>("paddle"), Content.Load<Texture2D>("Floor") };
+            engineDemo.LoadTextures(textures);
 
+            /*
 
             // Load entity texture
             texture = Content.Load<Texture2D>("square");
@@ -89,6 +98,8 @@ namespace COMP2351_Game_Engine
             texture = Content.Load<Texture2D>("paddle");
             entity = entityManager.RequestInstance<Hostile>("Hostile2", texture, aiComponentManager);
             sceneManager.Spawn(entity, 650, 300);
+
+            */
         }
 
         /// <summary>
@@ -115,6 +126,7 @@ namespace COMP2351_Game_Engine
             ( (IUpdatable)sceneManager).Update();
             ( (IUpdatable)aiComponentManager).Update();
             ((IUpdatable)inputManager).Update();
+            engineDemo.Update();
 
             base.Update(gameTime);
         }

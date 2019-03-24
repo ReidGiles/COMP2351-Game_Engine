@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace COMP2351_Game_Engine
 {
-    interface IInputManager
+    interface IMouseListener
     {
-        void AddListener(EventHandler<IKeyboardInput> handler);
-        void AddListener(EventHandler<IMouseInput> handler);
+        void OnNewMouseInput(object sender, IMouseInput args);
     }
 }

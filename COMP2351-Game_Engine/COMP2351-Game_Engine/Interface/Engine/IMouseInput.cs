@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
 
 namespace COMP2351_Game_Engine
 {
-    interface IInputManager
+    interface IMouseInput
     {
-        void AddListener(EventHandler<IKeyboardInput> handler);
-        void AddListener(EventHandler<IMouseInput> handler);
+        int[] GetMouseVal();
     }
 }

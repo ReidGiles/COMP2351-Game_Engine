@@ -10,6 +10,7 @@ namespace COMP2351_Game_Engine
     {
         // create a variable to store all the subscribers to the event
         private event EventHandler<IKeyboardInput> NewKeyboardInput;
+        private event EventHandler<IMouseInput> NewMouseInput;
 
         public InputManager()
         {
@@ -26,12 +27,30 @@ namespace COMP2351_Game_Engine
         }
 
         /// <summary>
+        /// Publisher method, contacts all listeners
+        /// </summary>
+        protected virtual void OnNewMouseInput(IMouseInput args)
+        {
+            // pass the parameters into the new keybaord input then add to NewKeyboardInput
+            NewMouseInput(this, args);
+        }
+
+        /// <summary>
         /// Subscription method, used to store reference to listeners
         /// </summary>
         public void AddListener(EventHandler<IKeyboardInput> handler)
         {
             // ADD event handler
             NewKeyboardInput += handler;
+        }
+
+        /// <summary>
+        /// Subscription method, used to store reference to listeners
+        /// </summary>
+        public void AddListener(EventHandler<IMouseInput> handler)
+        {
+            // ADD event handler
+            NewMouseInput += handler;
         }
 
         /// <summary>
@@ -45,6 +64,16 @@ namespace COMP2351_Game_Engine
             {
                 // update listeners
                 OnNewKeyboardInput();
+            }
+
+            if (NewMouseInput != null)
+            {
+                // update listeners
+                IMouseInput args = new MouseHandler();
+                if (args.GetMouseVal() != null)
+                {
+                    OnNewMouseInput(args);
+                }
             }
         }
     }
