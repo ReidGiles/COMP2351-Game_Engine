@@ -15,6 +15,6 @@ namespace COMP2351_Game_Engine
         void SetCollider(List<ICreateCollider> pColliders);
         float TranslateX();
         float TranslateY();
-        bool OnNewCollision(ICollisionInput args, int pUID);
+        bool OnNewCollision(ICollisionInput args);
     }
 }

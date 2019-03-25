@@ -63,27 +63,24 @@ namespace COMP2351_Game_Engine
             return 0;
         }
 
-        public virtual bool OnNewCollision(ICollisionInput args,int pUID)
+        public virtual bool OnNewCollision(ICollisionInput args)
         {
-            if (pUID == args.GetUID()[0] || pUID == args.GetUID()[1])
+            if (_colliders != null)
             {
-                if (_colliders != null)
+                foreach (ICreateCollider i in _colliders)
                 {
-                    foreach (ICreateCollider i in _colliders)
+                    if (i.GetTag() == args.GetCollided()[0])
                     {
-                        if (i.GetTag() == args.GetCollided()[0])
-                        {
-                            _collidedThis = args.GetCollided()[0];
-                            _collidedWith = args.GetCollided()[1];
-                        }
-                        else
-                        {
-                            _collidedThis = args.GetCollided()[1];
-                            _collidedWith = args.GetCollided()[0];
-                        }
+                        _collidedThis = args.GetCollided()[0];
+                        _collidedWith = args.GetCollided()[1];
                     }
-                } 
-            }
+                    else
+                    {
+                        _collidedThis = args.GetCollided()[1];
+                        _collidedWith = args.GetCollided()[0];
+                    }
+                }
+            } 
             //return whether the entity should kill itself
             return false;
         }

@@ -17,8 +17,8 @@ namespace COMP2351_Game_Engine
         public HostileMind()
         {
             _gravity = 10;
-            _speed = 15;
-            _velocity.X = 0;
+            _speed = 5;
+            _velocity.X = 1;
             _velocity.Y = 0;
             _facingDirectionX = 1;
             _facingDirectionY = 1;
@@ -38,9 +38,9 @@ namespace COMP2351_Game_Engine
             return (_speed * _facingDirectionX) * _velocity.X;
         }
 
-        public override bool OnNewCollision(ICollisionInput args, int pUID)
+        public override bool OnNewCollision(ICollisionInput args)
         {
-            bool rtnValue = base.OnNewCollision(args, pUID);
+            bool rtnValue = base.OnNewCollision(args);
             if (_collidedWith == "Hostile")
             {
             }

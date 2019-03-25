@@ -26,10 +26,12 @@ namespace COMP2351_Game_Engine
 
         public void OnNewCollision(object sender, ICollisionInput args)
         {
-            Console.WriteLine(_uName + " collided");
-            
-            this._killSelf = _mind.OnNewCollision(args,_uid);
+            if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
+            {
+                Console.WriteLine(_uName + " collided");
 
+                this._killSelf = _mind.OnNewCollision(args);
+            }
         }
 
         public override void SetCollider()
