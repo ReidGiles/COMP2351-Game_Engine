@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace COMP2351_Game_Engine
 {
-    interface ICollisionListener
+    interface ICollisionInput
     {
-        void OnNewCollision(object sender, ICollisionInput args);
+        String[] GetCollided();
+        int[] GetUID();
     }
 }

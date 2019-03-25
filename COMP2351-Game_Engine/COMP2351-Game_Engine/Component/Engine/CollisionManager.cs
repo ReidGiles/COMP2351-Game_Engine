@@ -10,7 +10,7 @@ namespace COMP2351_Game_Engine
     class CollisionManager : IUpdatable, ICollisionManager
     {
         // create a variable to store all the subscribers to the event
-        public event EventHandler<String[]> NewCollisionHandler;
+        public event EventHandler<ICollisionInput> NewCollisionHandler;
         bool collision;
         ISceneGraph _sceneGraph;
         public CollisionManager(ISceneGraph pSceneGraph)
@@ -21,16 +21,18 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Publisher method, contacts all listeners
         /// </summary>
-        protected virtual void OnNewCollision(String[] pCollided)
+        protected virtual void OnNewCollision(String[] pCollided, int[] pUID)
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
-            NewCollisionHandler(this, pCollided);
+            ICollisionInput args = new CollisionHandler(pCollided, pUID);
+            NewCollisionHandler(this, args);
+            
         }
 
         /// <summary>
         /// Subscription method, used to store reference to listeners
         /// </summary>
-        public void AddListener(EventHandler<String[]> handler)
+        public void AddListener(EventHandler<ICollisionInput> handler)
         {
             // ADD event handler
             NewCollisionHandler += handler;
@@ -81,7 +83,8 @@ namespace COMP2351_Game_Engine
                                         // get the collider tag
                                         collision = true;
                                         String[] collided = { k.GetTag(), l.GetTag() };
-                                        OnNewCollision(collided);
+                                        int[] uID = { _sceneGraph.GetEntity()[i].GetUID(), _sceneGraph.GetEntity()[j].GetUID() };
+                                        OnNewCollision(collided, uID);
 
                                         /*
                                         //post the collision tag ,xPos ,yPos ,width ,height

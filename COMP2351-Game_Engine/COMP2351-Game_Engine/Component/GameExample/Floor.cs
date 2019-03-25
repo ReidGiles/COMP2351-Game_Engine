@@ -22,7 +22,7 @@ namespace COMP2351_Game_Engine
             _mind = _aiComponentManager.RequestMind<FloorMind>();
         }
 
-        public void OnNewCollision(object sender, String[] collided)
+        public void OnNewCollision(object sender, ICollisionInput args)
         {
 
         }

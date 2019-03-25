@@ -111,7 +111,7 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             f++;
-                            sceneManager.Remove(f);
+                            entityManager.Terminate(f);
                         }
                         disableSpawn = true;
                         break;

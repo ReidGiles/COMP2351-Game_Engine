@@ -38,9 +38,9 @@ namespace COMP2351_Game_Engine
             return (_speed * _facingDirectionX) * _velocity.X;
         }
 
-        public override bool OnNewCollision(String[] collided)
+        public override bool OnNewCollision(ICollisionInput args, int pUID)
         {
-            bool rtnValue = base.OnNewCollision(collided);
+            bool rtnValue = base.OnNewCollision(args, pUID);
             if (_collidedWith == "Hostile")
             {
             }

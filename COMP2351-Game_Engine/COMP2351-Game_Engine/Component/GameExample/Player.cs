@@ -24,11 +24,11 @@ namespace COMP2351_Game_Engine
 
         }
 
-        public void OnNewCollision(object sender, String[] collided)
+        public void OnNewCollision(object sender, ICollisionInput args)
         {
-            //Console.WriteLine("Player collided");
+            Console.WriteLine(_uName + " collided");
             
-            this._killSelf = _mind.OnNewCollision(collided);
+            this._killSelf = _mind.OnNewCollision(args,_uid);
 
         }
 

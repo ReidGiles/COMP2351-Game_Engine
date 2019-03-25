@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\Engine\AIComponentManager.cs" />
+    <Compile Include="Component\Engine\CollisionHandler.cs" />
     <Compile Include="Component\Engine\CollisionManager.cs" />
     <Compile Include="Component\Engine\Demo\EngineDemo.cs" />
     <Compile Include="Component\Engine\Entity.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Component\GameExample\Hostile.cs" />
     <Compile Include="Component\GameExample\HostileMind.cs" />
     <Compile Include="Interface\Engine\ICollider.cs" />
+    <Compile Include="Interface\Engine\ICollisionInput.cs" />
     <Compile Include="Interface\Engine\ICollisionListener.cs" />
     <Compile Include="Interface\Engine\ICollisionManager.cs" />
     <Compile Include="Interface\Engine\ICreateCollider.cs" />

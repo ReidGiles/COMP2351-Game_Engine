@@ -80,9 +80,9 @@ namespace COMP2351_Game_Engine
             return 0;
         }
 
-        public override bool OnNewCollision(String[] collided)
+        public override bool OnNewCollision(ICollisionInput args,int pUID)
         {
-            bool rtnValue = base.OnNewCollision(collided);
+            bool rtnValue = base.OnNewCollision(args, pUID);
 
             if (_collidedWith == "Floor" && _collidedThis == "Player")
             {

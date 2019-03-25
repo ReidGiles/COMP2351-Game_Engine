@@ -106,7 +106,7 @@ namespace COMP2351_Game_Engine
             }
             if (_removeEntity != null)
             {
-                _sceneGraph.Remove(_removeEntity.GetUID());
+                Terminate(_removeEntity.GetUID());
                 _entityList.Remove(_removeEntity);
                 _removeEntity = null;
             }

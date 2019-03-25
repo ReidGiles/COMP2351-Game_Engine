@@ -18,10 +18,10 @@ namespace COMP2351_Game_Engine
             _mind = _aiComponentManager.RequestMind<HostileMind>();
         }
 
-        public void OnNewCollision(object sender, String[] collided)
+        public void OnNewCollision(object sender, ICollisionInput args)
         {
             //Console.WriteLine("Hostile collided");
-            _mind.OnNewCollision(collided);
+            _mind.OnNewCollision(args,_uid);
         }
 
         public override void SetCollider()
