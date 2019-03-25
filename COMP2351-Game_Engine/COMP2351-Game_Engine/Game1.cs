@@ -83,7 +83,7 @@ namespace COMP2351_Game_Engine
             inputManager.AddListener(((IKeyboardListener)engineDemo).OnNewKeyboardInput);
             inputManager.AddListener(((IMouseListener)engineDemo).OnNewMouseInput);
             // set headerLoaction
-            headerLocation = new Vector2 (80,0);
+            headerLocation = new Vector2 (10,0);
             // initialise
             base.Initialize();
         }

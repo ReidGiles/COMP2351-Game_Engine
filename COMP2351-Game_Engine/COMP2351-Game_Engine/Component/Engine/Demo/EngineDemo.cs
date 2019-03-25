@@ -67,7 +67,7 @@ namespace COMP2351_Game_Engine
                             // Request player entity from entity manager
                             IEntity entity = entityManager.RequestInstance<Player>("Player", textures[0]);
                             // Scene manager places entity on the scene
-                            sceneManager.Spawn(entity, 0, 0);
+                            sceneManager.Spawn(entity, 0, 300);
                         }
                         disableSpawn = true;
                         break;

@@ -59,6 +59,7 @@
     <Compile Include="Interface\Engine\ICollisionManager.cs" />
     <Compile Include="Interface\Engine\ICreateCollider.cs" />
     <Compile Include="Interface\Engine\IDrawable.cs" />
+    <Compile Include="Interface\Engine\IGetEntity.cs" />
     <Compile Include="Interface\Engine\IKeyboardInput.cs" />
     <Compile Include="Interface\Engine\IKeyboardListener.cs" />
     <Compile Include="Component\Engine\InputManager.cs" />
@@ -95,7 +96,7 @@
   <ItemGroup>
     <Content Include="Content\Box.png" />
     <Content Include="Content\Floor.png" />
-    <Content Include="Content\Header.png" />
+    <Content Include="Content\Header.PNG" />
     <Content Include="Content\paddle.png" />
     <Content Include="Content\square.png" />
     <Content Include="Icon.ico" />
