@@ -11,16 +11,25 @@ namespace COMP2351_Game_Engine
     {
         // create a variable to store all the subscribers to the event
         public event EventHandler<ICollisionInput> NewCollisionHandler;
-        bool collision;
+
+        // refernce to the sceneGraph
         ISceneGraph _sceneGraph;
+
+        /// <summary>
+        /// contructor for the Collision Manager
+        /// </summary>
+        /// <param name="pSceneGraph"></param>
         public CollisionManager(ISceneGraph pSceneGraph)
         {
+            // initialise _sceneGraph
             _sceneGraph = pSceneGraph;
         }
 
         /// <summary>
         /// Publisher method, contacts all listeners
         /// </summary>
+        /// <param name="pCollided"></param>
+        /// <param name="pUID"></param>
         protected virtual void OnNewCollision(String[] pCollided, int[] pUID)
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
@@ -32,6 +41,7 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Subscription method, used to store reference to listeners
         /// </summary>
+        /// <param name="handler"></param>
         public void AddListener(EventHandler<ICollisionInput> handler)
         {
             // ADD event handler
@@ -39,23 +49,21 @@ namespace COMP2351_Game_Engine
         }
 
         /// <summary>
-        /// Checks for collision, result is stored in a boolean
+        /// Checks for collision
         /// </summary>
-        public bool CheckCollision()
+        private void CheckCollision()
         {
-            collision = false;
-
             for(int i = 0; i < _sceneGraph.GetEntity().Count -1; i++)
             {
                 for (int j=i+1; j < _sceneGraph.GetEntity().Count; j++)
                 {
-                    //check entity has a collision listener
+                    // check entity has a collision listener
                     if (_sceneGraph.GetEntity()[i] is ICollisionListener && _sceneGraph.GetEntity()[j] is ICollisionListener)
                     {
-                        //check the entity has a collider set up
+                        // check the entity has a collider set up
                         if (_sceneGraph.GetEntity()[i].CheckCollider() && _sceneGraph.GetEntity()[j].CheckCollider())
                         {
-                            //get a reference to the entities colliders for I and J
+                            // get a reference to the entities colliders for I and J
                             
                             List<ICreateCollider> colliderI = _sceneGraph.GetEntity()[i].GetCollider();
                             List<ICreateCollider> colliderJ = _sceneGraph.GetEntity()[j].GetCollider();
@@ -63,27 +71,28 @@ namespace COMP2351_Game_Engine
                             // each collider in I
                             foreach (ICreateCollider k in colliderI)
                             {
-                                //each collider in j
+                                // each collider in j
                                 foreach (ICreateCollider l in colliderJ)
                                 {
-                                    //get the co-odinate points needed to check collision for I and J
+                                    // get the co-odinate points needed to check collision for I and J
                                     float[] CheckColliderI = k.CreateCollider();
                                     float[] CheckColliderJ = l.CreateCollider();
 
-                                    //Distance between x axis values for I and J
+                                    // Distance between x axis values for I and J
                                     float Dx = Math.Abs(CheckColliderI[0] - CheckColliderJ[0]);
 
-                                    //Distance between y axis values for I and J
+                                    // Distance between y axis values for I and J
                                     float Dy = Math.Abs(CheckColliderI[1] - CheckColliderJ[1]);
 
-                                    //Check collision
+                                    // Check collision
                                     if ((Dx < (CheckColliderI[2] + CheckColliderJ[2]) * 0.5) && (Dy < (CheckColliderI[3] + CheckColliderJ[3]) * 0.5))
                                     {
                                         // colliding
                                         // get the collider tag
-                                        collision = true;
                                         String[] collided = { k.GetTag(), l.GetTag() };
+                                        // get the colliding entity ID
                                         int[] uID = { _sceneGraph.GetEntity()[i].GetUID(), _sceneGraph.GetEntity()[j].GetUID() };
+                                        // publish collision
                                         OnNewCollision(collided, uID);
 
                                         /*
@@ -99,8 +108,6 @@ namespace COMP2351_Game_Engine
                     }
                 }
             }
-
-            return collision;
         }
 
         /// <summary>
@@ -109,12 +116,6 @@ namespace COMP2351_Game_Engine
         public void Update()
         {
             CheckCollision();
-
-            /*if (collision == true && NewCollisionHandler != null)
-            {
-                // update listeners
-                OnNewCollision();
-            }*/
         }
     }
 }

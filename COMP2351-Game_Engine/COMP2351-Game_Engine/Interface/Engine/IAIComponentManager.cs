@@ -10,5 +10,6 @@ namespace COMP2351_Game_Engine
     interface IAIComponentManager
     {
         IMind RequestMind<T>() where T : IMind, new();
+        void RemoveMind(IMind pMind);
     }
 }

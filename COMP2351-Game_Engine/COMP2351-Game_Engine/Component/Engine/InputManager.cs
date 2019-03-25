@@ -12,6 +12,9 @@ namespace COMP2351_Game_Engine
         private event EventHandler<IKeyboardInput> NewKeyboardInput;
         private event EventHandler<IMouseInput> NewMouseInput;
 
+        /// <summary>
+        /// Class constructor
+        /// </summary>
         public InputManager()
         {
         }
@@ -29,6 +32,7 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Publisher method, contacts all listeners
         /// </summary>
+        /// <param name="args"></param>
         protected virtual void OnNewMouseInput(IMouseInput args)
         {
             // pass the parameters into the new keybaord input then add to NewKeyboardInput
@@ -38,6 +42,7 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Subscription method, used to store reference to listeners
         /// </summary>
+        /// <param name="handler"></param>
         public void AddListener(EventHandler<IKeyboardInput> handler)
         {
             // ADD event handler
@@ -47,6 +52,7 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Subscription method, used to store reference to listeners
         /// </summary>
+        /// <param name="handler"></param>
         public void AddListener(EventHandler<IMouseInput> handler)
         {
             // ADD event handler

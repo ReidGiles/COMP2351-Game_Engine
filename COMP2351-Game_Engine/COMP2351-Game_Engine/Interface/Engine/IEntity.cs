@@ -20,6 +20,7 @@ namespace COMP2351_Game_Engine
         bool CheckCollider();
         bool KillSelf();
         void SetMind(IMind pMind);
+        IMind GetMind();
         List<ICreateCollider> GetCollider();
 
     }

@@ -28,15 +28,18 @@ namespace COMP2351_Game_Engine
         protected bool hasCollider = false;
         // bool to flag for the entity to be terminated
         protected bool _killSelf = false;
+        
         /// <summary>
         /// Called by scene manager, updates entities on the scene.
         /// </summary>
         public virtual void Update()
         {
         }
+
         /// <summary>
         /// Sets entity texture.
         /// </summary>
+        /// <param name="pTexture"></param>
         public virtual void SetTexture(Texture2D pTexture)
         {
             texture = pTexture;
@@ -45,57 +48,86 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Sets entity location
         /// </summary>
+        /// <param name="pX"></param>
+        /// <param name="pY"></param>
         public virtual void SetLocation(float pX, float pY)
         {
             location.X = pX;
             location.Y = pY;
         }
 
+        /// <summary>
+        /// Method to check the the entity needs to be removed
+        /// </summary>
         public virtual bool KillSelf()
         {
             return _killSelf;
         }
 
+        /// <summary>
+        /// Method to set the collider
+        /// </summary>
         public virtual void SetCollider()
         {
             
         }
+
         /// <summary>
         /// Sets entity AI Component Manager
         /// </summary>
+        /// <param name="pAIComponentManger"></param>
         public virtual void SetAIComponentManager(IAIComponentManager pAIComponentManger)
         {
             _aiComponentManager = pAIComponentManger;
         }
+
         /// <summary>
         /// Sets entity mind
         /// </summary>
+        /// <param name="pMind"></param>
         public virtual void SetMind(IMind pMind)
         {
             _mind = pMind;
         }
+
+        /// <summary>
+        /// Get the _mind
+        /// </summary>
+        /// <returns></returns>
+        public virtual IMind GetMind()
+        {
+            return _mind;
+        }
+
         /// <summary>
         /// Sets the unique identification number and unique name of the entity.
         /// </summary>
+        /// <param name="pUID"></param>
+        /// <param name="pUName"></param>
         public virtual void SetUp(int pUID, String pUName)
         {
             _uid = pUID;
             _uName = pUName;
         }
+
         /// <summary>
         /// Runs on entity creation
         /// </summary>
         public virtual void Initialise()
         {
         }
+
         /// <summary>
         /// Updates entity location.
         /// </summary>
+        /// <param name="dX"></param>
+        /// <param name="dY"></param>
         public virtual void Translate(float dX, float dY)
         {
             location.X += dX;
             location.Y += dY;
         }
+
         /// <summary>
         /// Returns entity unique identification.
         /// </summary>
@@ -103,26 +135,36 @@ namespace COMP2351_Game_Engine
         {
             return _uid;
         }
-        // <summary>
+
+        /// <summary>
         /// Returns entity unique name.
         /// </summary>
         public String GetUname()
         {
             return _uName;
         }
+
         /// <summary>
         /// Draws entity on the scene.
         /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, location, Color.AntiqueWhite);
         }
 
+        /// <summary>
+        /// Method to check if the entity has a collider set
+        /// <summary>
         public bool CheckCollider()
         {
             return hasCollider;
         }
 
+        /// <summary>
+        /// Method to retrieve the list of colliders and store in a list if type ICreateCollider
+        /// </summary>
+        /// <returns></returns>
         public List<ICreateCollider> GetCollider()
         {
             List<ICreateCollider> L = _colliders.Cast<ICreateCollider>().ToList();

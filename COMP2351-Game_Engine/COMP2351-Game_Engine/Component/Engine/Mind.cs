@@ -18,7 +18,7 @@ namespace COMP2351_Game_Engine
         protected String _mindID;
         // list of the colliders in the mind
         protected List<ICreateCollider> _colliders;
-        // this entities collider
+        // this entities collider that is colliding
         protected String _collidedThis;
         // enitity that collided with this entities collider
         protected String _collidedWith;
@@ -26,24 +26,30 @@ namespace COMP2351_Game_Engine
         /// <summary>
         /// Updates entity location
         /// </summary>
+        /// <param name="pLocation"></param>
         public void UpdateLocation(Vector2 pLocation)
         {
+            // set _location
             _location = pLocation;
         }
 
         /// <summary>
         /// Updates entity texture
         /// </summary>
+        /// <param name="pTexture"></param>
         public void UpdateTexture(Texture2D pTexture)
         {
+            // set texture
             _texture = pTexture;
         }
 
         /// <summary>
         /// Updates entity texture
         /// </summary>
+        /// <param name="pColliders"></param>
         public void SetCollider(List<ICreateCollider> pColliders)
         {
+            // set _colliders
             _colliders = pColliders;
         }
 
@@ -63,12 +69,20 @@ namespace COMP2351_Game_Engine
             return 0;
         }
 
+        /// <summary>
+        /// called when a collision event occures
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public virtual bool OnNewCollision(ICollisionInput args)
         {
+            // check if the entity has any colliders
             if (_colliders != null)
             {
+                // find which collider in the _colliders is colliding
                 foreach (ICreateCollider i in _colliders)
                 {
+                    // set _colliderThis and _collided with
                     if (i.GetTag() == args.GetCollided()[0])
                     {
                         _collidedThis = args.GetCollided()[0];

@@ -21,7 +21,13 @@ namespace COMP2351_Game_Engine
         //Tag used to identigy type of collider
         private String _colliderTag;
 
-
+        /// <summary>
+        /// class contructor
+        /// </summary>
+        /// <param name="pOrigin"></param>
+        /// <param name="pWidth"></param>
+        /// <param name="pHeight"></param>
+        /// <param name="pColliderTag"></param>
         public RectCollider(Vector2 pOrigin, float pWidth, float pHeight, String pColliderTag)
         {
             //set origin
@@ -37,7 +43,11 @@ namespace COMP2351_Game_Engine
             _colliderTag = pColliderTag;
         }
 
-        //Translate the position of the Collider
+        /// <summary>
+        /// Translate the position of the Collider
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Translate(float dx, float dy)
         {
             //Set x
@@ -47,7 +57,10 @@ namespace COMP2351_Game_Engine
         }
 
 
-        //Create the corners of the collider
+        /// <summary>
+        /// Method to return the collider centre point, width, and height
+        /// </summary>
+        /// <returns></returns>
         public float[] CreateCollider()
         {
             float[] retVal = { _origin.X, _origin.Y, _width, _height };
@@ -55,6 +68,10 @@ namespace COMP2351_Game_Engine
             return retVal;
         }
 
+        /// <summary>
+        /// Method to return the _colliderTag
+        /// </summary>
+        /// <returns></returns>
         public String GetTag()
         {
             return _colliderTag;
