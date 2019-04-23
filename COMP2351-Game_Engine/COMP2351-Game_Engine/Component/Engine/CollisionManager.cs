@@ -13,16 +13,16 @@ namespace COMP2351_Game_Engine
         public event EventHandler<ICollisionInput> NewCollisionHandler;
 
         // refernce to the sceneGraph
-        ISceneGraph _sceneGraph;
+        ISceneManager _sceneManager;
 
         /// <summary>
         /// contructor for the Collision Manager
         /// </summary>
         /// <param name="pSceneGraph"></param>
-        public CollisionManager(ISceneGraph pSceneGraph)
+        public CollisionManager(ISceneManager pSceneGraph)
         {
             // initialise _sceneGraph
-            _sceneGraph = pSceneGraph;
+            _sceneManager = pSceneGraph;
         }
 
         /// <summary>
@@ -53,20 +53,20 @@ namespace COMP2351_Game_Engine
         /// </summary>
         private void CheckCollision()
         {
-            for(int i = 0; i < _sceneGraph.GetEntity().Count -1; i++)
+            for(int i = 0; i < _sceneManager.GetEntity().Count -1; i++)
             {
-                for (int j=i+1; j < _sceneGraph.GetEntity().Count; j++)
+                for (int j=i+1; j < _sceneManager.GetEntity().Count; j++)
                 {
                     // check entity has a collision listener
-                    if (_sceneGraph.GetEntity()[i] is ICollisionListener && _sceneGraph.GetEntity()[j] is ICollisionListener)
+                    if (_sceneManager.GetEntity()[i] is ICollisionListener && _sceneManager.GetEntity()[j] is ICollisionListener)
                     {
                         // check the entity has a collider set up
-                        if (_sceneGraph.GetEntity()[i].CheckCollider() && _sceneGraph.GetEntity()[j].CheckCollider())
+                        if (_sceneManager.GetEntity()[i].CheckCollider() && _sceneManager.GetEntity()[j].CheckCollider())
                         {
                             // get a reference to the entities colliders for I and J
                             
-                            List<ICreateCollider> colliderI = _sceneGraph.GetEntity()[i].GetCollider();
-                            List<ICreateCollider> colliderJ = _sceneGraph.GetEntity()[j].GetCollider();
+                            List<ICreateCollider> colliderI = _sceneManager.GetEntity()[i].GetCollider();
+                            List<ICreateCollider> colliderJ = _sceneManager.GetEntity()[j].GetCollider();
 
                             // each collider in I
                             foreach (ICreateCollider k in colliderI)
@@ -91,7 +91,7 @@ namespace COMP2351_Game_Engine
                                         // get the collider tag
                                         String[] collided = { k.GetTag(), l.GetTag() };
                                         // get the colliding entity ID
-                                        int[] uID = { _sceneGraph.GetEntity()[i].GetUID(), _sceneGraph.GetEntity()[j].GetUID() };
+                                        int[] uID = { _sceneManager.GetEntity()[i].GetUID(), _sceneManager.GetEntity()[j].GetUID() };
                                         // publish collision
                                         OnNewCollision(collided, uID);
 

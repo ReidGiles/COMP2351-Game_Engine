@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace COMP2351_Game_Engine
 {
-    class MouseHandler : IMouseInput
+    class MouseHandler : EventArgs, IMouseInput
     {
         // list to store the mouse posiition
         private int[] mouseVal;

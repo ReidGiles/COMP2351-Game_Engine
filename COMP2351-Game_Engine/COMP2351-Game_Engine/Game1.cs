@@ -65,16 +65,16 @@ namespace COMP2351_Game_Engine
             ScreenWidth = GraphicsDevice.Viewport.Width;
             // initialise a new sceneGraph
             sceneGraph = new SceneGraph();
+            // initialise a new sceneManager
+            sceneManager = new SceneManager(sceneGraph);
             // initialise a new collisionManager
-            collisionManager = new CollisionManager(sceneGraph);
+            collisionManager = new CollisionManager(sceneManager);
             // initialise a new inputManager
             inputManager = new InputManager();
             // initialise a new aiComponontManager
             aiComponentManager = new AIComponentManager(inputManager);
             // initialise a new entityManager
             entityManager = new EntityManager(collisionManager, sceneGraph, aiComponentManager);
-            // initialise a new sceneManager
-            sceneManager = new SceneManager(sceneGraph);
             // initialise a new engineDemo
             engineDemo = new EngineDemo();
             // run engineDemo initialise method
@@ -150,7 +150,7 @@ namespace COMP2351_Game_Engine
             // Begin SpriteBatch
             spriteBatch.Begin();
             // Draw all entities from list
-            foreach (IEntity e in sceneGraph.GetEntity())
+            foreach (IEntity e in sceneManager.GetEntity())
             {
                 e.Draw(spriteBatch);
             }

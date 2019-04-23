@@ -83,6 +83,20 @@ namespace COMP2351_Game_Engine
         }
 
         /// <summary>
+        ///  Returns a reference of the entity list.
+        /// </summary>
+        /// <param name="pUID"></param>
+        /// <returns></returns>
+        public IList<IEntity> GetEntity()
+        {
+            return _sceneGraph.GetEntity();
+        }
+
+        private void Draw()
+        {
+        }
+
+        /// <summary>
         /// Updated all entities inside the scene graph.
         /// </summary>
         public void Update()

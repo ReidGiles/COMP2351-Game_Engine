@@ -21,7 +21,6 @@ namespace COMP2351_Game_Engine
         {
             // Set initial entity mind:
             _mind = _aiComponentManager.RequestMind<PlayerMind>();
-
         }
 
         public void OnNewCollision(object sender, ICollisionInput args)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace COMP2351_Game_Engine
 {
-    class CollisionHandler : ICollisionInput
+    class CollisionHandler : EventArgs, ICollisionInput
     {
         // String containing the collider tags of entities that collided
         private String[] _collided;
