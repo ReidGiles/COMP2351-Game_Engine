@@ -14,6 +14,7 @@ namespace COMP2351_Game_Engine
         void Remove(int pUID);
         void Remove(String pUName);
         IEntity GetEntity(int pUID);
+        IEntity GetEntity(string pUName);
         IList<IEntity> GetEntity();
     }
 }

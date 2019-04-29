@@ -37,6 +37,8 @@ namespace COMP2351_Game_Engine
         private EngineDemo engineDemo;
         // reference to the headerLoaction
         private Vector2 headerLocation;
+        // camera position to follow the player
+        private Vector3 cameraPos;
 
         public Game1()
         {
@@ -63,6 +65,8 @@ namespace COMP2351_Game_Engine
             ScreenHeight = GraphicsDevice.Viewport.Height;
             // set ScreenWidth
             ScreenWidth = GraphicsDevice.Viewport.Width;
+            // set cameraPos
+            cameraPos = new Vector3(ScreenWidth / 2, 0, 0);
             // initialise a new sceneGraph
             sceneGraph = new SceneGraph();
             // initialise a new sceneManager
@@ -83,7 +87,7 @@ namespace COMP2351_Game_Engine
             inputManager.AddListener(((IKeyboardListener)engineDemo).OnNewKeyboardInput);
             inputManager.AddListener(((IMouseListener)engineDemo).OnNewMouseInput);
             // set headerLoaction
-            headerLocation = new Vector2 (10,0);
+            headerLocation = new Vector2(-ScreenWidth / 2, 0);
             // initialise
             base.Initialize();
         }
@@ -147,8 +151,27 @@ namespace COMP2351_Game_Engine
             // Set graphics background colour
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            // Set cameraPos to follow the player on the x axis if there is one
+            if (sceneManager.GetEntity("Player") != null)
+            {
+                IEntity e = sceneManager.GetEntity("Player");
+                cameraPos.X = e.GetLocation().X * -1 + ScreenWidth / 2;
+                // if the player is higher than half the ScreenWidth then follow them on the y axis as well
+                if (e.GetLocation().Y < ScreenHeight / 2)
+                {
+                    cameraPos.Y = e.GetLocation().Y * -1 + ScreenHeight / 2;
+                }
+                else
+                {
+                    cameraPos.Y = 0;
+                }
+            }
+
+
             // Begin SpriteBatch
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Matrix.CreateTranslation(cameraPos));
+            // syntax for the XNA 2d camera to follow the player is from https://www.reddit.com/r/monogame/comments/6lxd69/how_do_i_make_camera_follow_the_player/
+
             // Draw all entities from list
             foreach (IEntity e in sceneManager.GetEntity())
             {

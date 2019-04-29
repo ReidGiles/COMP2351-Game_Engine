@@ -14,22 +14,24 @@ namespace COMP2351_Game_Engine
         IKeyboardInput _args;
         private float _gravity;
         private float _speed;
+        private float _jump;
         private Vector2 _velocity;
         private float _facingDirectionX;
-        private float _facingDirectionY;
         private bool _floorCollide;
+        private bool _movingFloor;
 
         public PlayerMind()
         {
             _args = new KeyboardHandler();
             _gravity = 5;
             _speed = 12;
+            _jump = 0;
             _velocity.X = 1;
-            _velocity.Y = 1;
+            _velocity.Y = -1;
             _facingDirectionX = 1;
-            _facingDirectionY = 1;
             _mindID = "Player";
             _floorCollide = false;
+            _movingFloor = false;
         }
 
         /// <summary>
@@ -42,42 +44,69 @@ namespace COMP2351_Game_Engine
 
         public override float TranslateX()
         {
-            // Player input controlling movement, only active on key down
-            foreach (Keys k in _args.GetInputKey())
+            if (_movingFloor)
             {
-                if (k == Keys.Right)
+                // Player input controlling movement, only active on key down
+                foreach (Keys k in _args.GetInputKey())
                 {
-                    _facingDirectionX = 1;
-                    return (_speed * _facingDirectionX) * _velocity.X;
+                    if (k == Keys.Right)
+                    {
+                        _facingDirectionX = 1;
+                        return (_speed * _facingDirectionX) * _velocity.X;
+                    }
+                    if (k == Keys.Left)
+                    {
+                        _facingDirectionX = -1;
+                        return (_speed * _facingDirectionX) * _velocity.X;
+                    }
                 }
-                if (k == Keys.Left)
-                {
-                    _facingDirectionX = -1;
-                    return (_speed * _facingDirectionX) * _velocity.X;
-                }
+                return 0;
             }
-            return 0;
+            else
+            {
+                // Player input controlling movement, only active on key down
+                foreach (Keys k in _args.GetInputKey())
+                {
+                    if (k == Keys.Right)
+                    {
+                        _facingDirectionX = 1;
+                        return (_speed * _facingDirectionX) * _velocity.X;
+                    }
+                    if (k == Keys.Left)
+                    {
+                        _facingDirectionX = -1;
+                        return (_speed * _facingDirectionX) * _velocity.X;
+                    }
+                }
+                return 0;
+            }
         }
 
         public override float TranslateY()
         {
-            // Player input controlling movement, only active on key down
-            foreach (Keys k in _args.GetInputKey())
+            if (_jump == 0)
             {
-                if (k == Keys.Up)
+                // Player input controlling movement, only active on key down
+                foreach (Keys k in _args.GetInputKey())
                 {
-                    _facingDirectionY = -1;
-                    return (_speed * _facingDirectionY) * _velocity.Y;
+                    if (k == Keys.Up || k == Keys.Space)
+                    {
+                        _jump = 25;
+                    }
                 }
             }
 
             // Gravity, always active
             if (_location.Y <= 900 - _texture.Height && _floorCollide == false)
             {
-                return _gravity;
+                _gravity = 10;
+            }
+            else
+            {
+                _gravity = 0;
             }
 
-            return 0;
+            return (_jump - _gravity) * _velocity.Y;
         }
 
         public override bool OnNewCollision(ICollisionInput args)
@@ -87,6 +116,13 @@ namespace COMP2351_Game_Engine
             if (_collidedWith == "Floor" && _collidedThis == "Player")
             {
                 _floorCollide = true;
+
+            }
+
+            if (_collidedWith == "MovingFloor" && _collidedThis == "Player")
+            {
+                _floorCollide = true;
+                _movingFloor = true;
             }
 
 
@@ -101,19 +137,23 @@ namespace COMP2351_Game_Engine
             return rtnValue;
         }
 
-        public override void Update() 
+        public override void Update()
         {
-            if (_collidedWith == null && !_floorCollide)
+            if (_collidedWith == null && _floorCollide)
             {
-                _gravity = 5;
-                
-            }
-            else
-            {
-                _gravity = 0;
                 _floorCollide = false;
+                _movingFloor = false;
             }
-            // Add switch that prevents Translate methods from running
+
+            if (_jump > 0)
+            {
+                _jump -= 0.4f;
+            }
+            else if (_jump < 0)
+            {
+                _jump = 0;
+            }
+
         }
     }
 }

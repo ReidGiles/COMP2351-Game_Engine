@@ -22,6 +22,10 @@ namespace COMP2351_Game_Engine
         protected String _collidedThis;
         // enitity that collided with this entities collider
         protected String _collidedWith;
+        // this entities collider that is collidings UID
+        protected int _collidedThisUID;
+        // enitity that collided with this entities collider UID
+        protected int _collidedWithUID;
 
         /// <summary>
         /// Updates entity location
@@ -87,11 +91,15 @@ namespace COMP2351_Game_Engine
                     {
                         _collidedThis = args.GetCollided()[0];
                         _collidedWith = args.GetCollided()[1];
+                        _collidedThisUID = args.GetUID()[0];
+                        _collidedWithUID = args.GetUID()[1];
                     }
                     else
                     {
                         _collidedThis = args.GetCollided()[1];
                         _collidedWith = args.GetCollided()[0];
+                        _collidedThisUID = args.GetUID()[1];
+                        _collidedWithUID = args.GetUID()[0];
                     }
                 }
             } 

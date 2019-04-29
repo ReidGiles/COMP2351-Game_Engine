@@ -12,6 +12,7 @@ namespace COMP2351_Game_Engine
     {
         void SetTexture(Texture2D pTexture);
         void SetLocation(float pX, float pY);
+        Vector2 GetLocation();
         void SetAIComponentManager(IAIComponentManager pAIComponentManger);
         void SetUp(int pUID, String pUName);
         int GetUID();

@@ -83,6 +83,25 @@ namespace COMP2351_Game_Engine
         }
 
         /// <summary>
+        ///  Returns a reference of an entity.
+        /// </summary>
+        /// <param name="pUName"></param>
+        /// <returns></returns>
+        public IEntity GetEntity(string pUName)
+        {
+            // Find the entity in the _scenGraph that where UID = pUID
+            foreach (IEntity e in _sceneGraph.GetEntity())
+            {
+                if (e.GetUname() == pUName)
+                {
+                    // return the entity
+                    return e;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
         ///  Returns a reference of the entity list.
         /// </summary>
         /// <param name="pUID"></param>

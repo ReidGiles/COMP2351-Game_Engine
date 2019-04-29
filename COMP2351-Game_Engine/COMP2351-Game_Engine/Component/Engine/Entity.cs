@@ -57,6 +57,14 @@ namespace COMP2351_Game_Engine
         }
 
         /// <summary>
+        /// Returns entity unique name.
+        /// </summary>
+        public Vector2 GetLocation()
+        {
+            return location;
+        }
+
+        /// <summary>
         /// Method to check the the entity needs to be removed
         /// </summary>
         public virtual bool KillSelf()
