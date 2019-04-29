@@ -65,7 +65,7 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             // Request player entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Player>("Player", textures[0]);
+                            IEntity entity = entityManager.RequestInstance<Player>("Player", textures[1]);
                             // Scene manager places entity on the scene
                             sceneManager.Spawn(entity, 0, 300);
                         }
@@ -75,7 +75,7 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             // Request Hostile entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[1]);
+                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[0]);
                             // Scene manager places entity on the scene
                             sceneManager.Spawn(entity, 200, 600);
                         }
@@ -85,9 +85,9 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             // Request Floor entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Floor>("Floor", textures[2]);
+                            IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[2]);
                             // Scene manager places entity on the scene
-                            sceneManager.Spawn(entity, 800, 600);
+                            sceneManager.Spawn(entity, 800, 650);
                         }
                         disableSpawn = true;
                         break;
@@ -159,7 +159,7 @@ namespace COMP2351_Game_Engine
                 // set mouse vale to the position of the mouse at the event time
                 mouseVal = new int[] { args.GetMouseVal()[0], args.GetMouseVal()[1] };
                 // Request entity from entity manager
-                IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[1]);
+                IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[0]);
                 // Scene manager places entity on the scene
                 sceneManager.Spawn(entity, mouseVal[0], mouseVal[1]);
             }

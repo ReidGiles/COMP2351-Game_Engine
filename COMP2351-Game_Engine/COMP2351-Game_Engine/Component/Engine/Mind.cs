@@ -94,7 +94,7 @@ namespace COMP2351_Game_Engine
                         _collidedThisUID = args.GetUID()[0];
                         _collidedWithUID = args.GetUID()[1];
                     }
-                    else
+                    else if(i.GetTag() == args.GetCollided()[1])
                     {
                         _collidedThis = args.GetCollided()[1];
                         _collidedWith = args.GetCollided()[0];

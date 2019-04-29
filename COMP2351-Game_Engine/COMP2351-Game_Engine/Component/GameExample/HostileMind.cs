@@ -13,21 +13,21 @@ namespace COMP2351_Game_Engine
         private float _speed;
         private Vector2 _velocity;
         private float _facingDirectionX;
-        private float _facingDirectionY;
+        private bool _floorCollide;
         public HostileMind()
         {
             _gravity = 10;
             _speed = 5;
             _velocity.X = 1;
-            _velocity.Y = 0;
+            _velocity.Y = 1;
             _facingDirectionX = 1;
-            _facingDirectionY = 1;
             _mindID = "Hostile";
+            _floorCollide = false;
         }
 
         public override float TranslateX()
         {
-            if (_location.Y <= Game1.ScreenHeight - _texture.Height)
+            if (_location.Y <= Game1.ScreenHeight - _texture.Height && !_floorCollide)
             {
                 return 0;
             }
@@ -41,8 +41,21 @@ namespace COMP2351_Game_Engine
         public override bool OnNewCollision(ICollisionInput args)
         {
             bool rtnValue = base.OnNewCollision(args);
-            if (_collidedWith == "Hostile")
+            if (_collidedWith == "Boundary" && _collidedThis == "HostileB")
             {
+                _facingDirectionX *= -1;
+            }
+            if (_collidedWith == "HostileB" && _collidedThis == "HostileB")
+            {
+                _facingDirectionX *= -1;
+            }
+            if (_collidedWith == "Floor" && _collidedThis == "HostileB")
+            {
+                _floorCollide = true;
+            }
+            if (_collidedWith == "PlayerB" && _collidedThis == "HostileT")
+            {
+                rtnValue = true;
             }
             return rtnValue;
         }
@@ -50,11 +63,16 @@ namespace COMP2351_Game_Engine
         public override float TranslateY()
         {
             // Gravity, always active
-            if (_location.Y <= Game1.ScreenHeight - _texture.Height)
+            if (_location.Y <= 900 - _texture.Height && _floorCollide == false)
             {
-                return _gravity;
+                _gravity = 10;
             }
-            return 0;
+            else
+            {
+                _gravity = 0;
+            }
+
+            return _gravity * _velocity.Y;
         }
     }
 }

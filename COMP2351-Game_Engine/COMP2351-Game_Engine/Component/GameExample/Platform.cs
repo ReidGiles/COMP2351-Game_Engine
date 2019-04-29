@@ -1,51 +1,60 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace COMP2351_Game_Engine
 {
-    class Hostile : RelicHunterEntity, ICollisionListener
+    class Platform : RelicHunterEntity, ICollisionListener
     {
-        public Hostile()
+        public Platform()
         {
+
         }
+
+        /// <summary>
+        /// Initialisation logic
+        /// </summary>
         public override void Initialise()
         {
             // Set initial entity mind:
-            _mind = _aiComponentManager.RequestMind<HostileMind>();
+            _mind = _aiComponentManager.RequestMind<PlatformMind>();
         }
 
         public void OnNewCollision(object sender, ICollisionInput args)
         {
-            if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
-            {
-                //Console.WriteLine(_uName + " collided");
 
-                this._killSelf = _mind.OnNewCollision(args);
-            }
         }
 
         public override void SetCollider()
         {
             // Create a list of colliders
             _colliders = new List<ICollider>();
-            // create an origin point for the collider
+            // SET first collider to Floor
             Vector2 ColliderOrigin;
-
-            // Set Collider for the Top of the Player
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
-            // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "HostileT"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "Floor"));
 
-            // Set Collider for the Bottom of the Player
+
+            // SET Left collider to keep an hostile entities on the platform when moving
+            ColliderOrigin.X = location.X - 10;
+            ColliderOrigin.Y = location.Y - 10;
+            _colliders.Add(new RectCollider(ColliderOrigin, 20, 20, "Boundary"));
+
+            // SET right collider to keep an hostile entities on the platform when moving
+
+            ColliderOrigin.X = location.X + texture.Width + 10;
+            ColliderOrigin.Y = location.Y - 10;
+            _colliders.Add(new RectCollider(ColliderOrigin, 20, 20, "Boundary"));
+
+            // SET bottom collider to act as a ceiling to stop player jumping through
+
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.75f * texture.Height;
-            // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "HostileB"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "Ceiling"));
 
             // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());

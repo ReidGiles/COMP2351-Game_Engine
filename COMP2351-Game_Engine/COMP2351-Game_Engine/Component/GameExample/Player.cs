@@ -27,7 +27,7 @@ namespace COMP2351_Game_Engine
         {
             if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
             {
-                Console.WriteLine(_uName + " collided");
+                //Console.WriteLine(_uName + " collided");
 
                 this._killSelf = _mind.OnNewCollision(args);
             }
@@ -35,12 +35,27 @@ namespace COMP2351_Game_Engine
 
         public override void SetCollider()
         {
-            Vector2 ColliderOrigin;
-            ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
+            // Create a list of colliders
             _colliders = new List<ICollider>();
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Player"));
+            // create an origin point for the collider
+            Vector2 ColliderOrigin;
+
+            // Set Collider for the Top of the Player
+            ColliderOrigin.X = location.X + 0.5f * texture.Width;
+            ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
+            // Add collider to list
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "PlayerT"));
+            
+            // Set Collider for the Bottom of the Player
+            ColliderOrigin.X = location.X + 0.5f * texture.Width;
+            ColliderOrigin.Y = location.Y + 0.75f * texture.Height;
+            // Add collider to list
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "PlayerB"));
+
+            // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());
+
+            // SET has collider bool to true
             hasCollider = true;
         }
 

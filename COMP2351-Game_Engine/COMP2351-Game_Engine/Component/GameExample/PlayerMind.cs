@@ -19,6 +19,7 @@ namespace COMP2351_Game_Engine
         private float _facingDirectionX;
         private bool _floorCollide;
         private bool _movingFloor;
+        private bool _inAir;
 
         public PlayerMind()
         {
@@ -32,6 +33,7 @@ namespace COMP2351_Game_Engine
             _mindID = "Player";
             _floorCollide = false;
             _movingFloor = false;
+            _inAir = false;
         }
 
         /// <summary>
@@ -49,12 +51,12 @@ namespace COMP2351_Game_Engine
                 // Player input controlling movement, only active on key down
                 foreach (Keys k in _args.GetInputKey())
                 {
-                    if (k == Keys.Right)
+                    if (k == Keys.Right || k == Keys.D)
                     {
                         _facingDirectionX = 1;
                         return (_speed * _facingDirectionX) * _velocity.X;
                     }
-                    if (k == Keys.Left)
+                    if (k == Keys.Left || k == Keys.A)
                     {
                         _facingDirectionX = -1;
                         return (_speed * _facingDirectionX) * _velocity.X;
@@ -67,12 +69,12 @@ namespace COMP2351_Game_Engine
                 // Player input controlling movement, only active on key down
                 foreach (Keys k in _args.GetInputKey())
                 {
-                    if (k == Keys.Right)
+                    if (k == Keys.Right || k == Keys.D)
                     {
                         _facingDirectionX = 1;
                         return (_speed * _facingDirectionX) * _velocity.X;
                     }
-                    if (k == Keys.Left)
+                    if (k == Keys.Left || k == Keys.A)
                     {
                         _facingDirectionX = -1;
                         return (_speed * _facingDirectionX) * _velocity.X;
@@ -84,14 +86,15 @@ namespace COMP2351_Game_Engine
 
         public override float TranslateY()
         {
-            if (_jump == 0)
+            if (!_inAir)
             {
                 // Player input controlling movement, only active on key down
                 foreach (Keys k in _args.GetInputKey())
                 {
-                    if (k == Keys.Up || k == Keys.Space)
+                    if (k == Keys.Up || k == Keys.Space || k == Keys.W)
                     {
                         _jump = 25;
+                        _inAir = true;
                     }
                 }
             }
@@ -103,6 +106,7 @@ namespace COMP2351_Game_Engine
             }
             else
             {
+                _inAir = false;
                 _gravity = 0;
             }
 
@@ -113,22 +117,34 @@ namespace COMP2351_Game_Engine
         {
             bool rtnValue = base.OnNewCollision(args);
 
-            if (_collidedWith == "Floor" && _collidedThis == "Player")
+            if (_collidedWith == "Floor" && _collidedThis == "PlayerB")
             {
                 _floorCollide = true;
+                _inAir = false;
 
             }
 
-            if (_collidedWith == "MovingFloor" && _collidedThis == "Player")
+            if (_collidedWith == "MovingFloor" && _collidedThis == "PlayerB")
             {
                 _floorCollide = true;
                 _movingFloor = true;
+                _inAir = false;
             }
 
 
-            if (_collidedWith == "Hostile" && _collidedThis == "Player")
+            if (_collidedWith == "HostileB" && _collidedThis == "PlayerT")
             {
                 rtnValue = true;
+            }
+
+            if (_collidedWith == "HostileB" && _collidedThis == "PlayerB")
+            {
+                rtnValue = true;
+            }
+
+            if (_collidedWith == "Ceiling" && _collidedThis == "PlayerT")
+            {
+                _jump = 0;
             }
 
             _collidedWith = null;
