@@ -34,7 +34,7 @@ namespace COMP2351_Game_Engine
         // List of Textures
         private Texture2D[] textures;
         // reference to the engineDemo class
-        private EngineDemo engineDemo;
+        private GameDemo gameDemo;
         // reference to the headerLoaction
         private Vector2 headerLocation;
         // camera position to follow the player
@@ -80,12 +80,12 @@ namespace COMP2351_Game_Engine
             // initialise a new entityManager
             entityManager = new EntityManager(collisionManager, sceneGraph, aiComponentManager);
             // initialise a new engineDemo
-            engineDemo = new EngineDemo();
+            gameDemo = new GameDemo();
             // run engineDemo initialise method
-            engineDemo.Initialise(entityManager, sceneManager, collisionManager, aiComponentManager, inputManager, sceneGraph);
+            gameDemo.Initialise(entityManager, sceneManager, collisionManager, aiComponentManager, inputManager, sceneGraph);
             // add input listeners to the engineDemo
-            inputManager.AddListener(((IKeyboardListener)engineDemo).OnNewKeyboardInput);
-            inputManager.AddListener(((IMouseListener)engineDemo).OnNewMouseInput);
+            inputManager.AddListener(((IKeyboardListener)gameDemo).OnNewKeyboardInput);
+            inputManager.AddListener(((IMouseListener)gameDemo).OnNewMouseInput);
             // set headerLoaction
             headerLocation = new Vector2(-ScreenWidth / 2, 0);
             // initialise
@@ -102,11 +102,14 @@ namespace COMP2351_Game_Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            
+
             // set textures
-            textures = new Texture2D[] { Content.Load<Texture2D>("square"), Content.Load<Texture2D>("paddle"), Content.Load<Texture2D>("Floor"), Content.Load<Texture2D>("Header") };
+            textures = new Texture2D[] {Content.Load<Texture2D>("Header"), Content.Load<Texture2D>("Player"), Content.Load<Texture2D>("Hostile"), Content.Load<Texture2D>("Platform"), Content.Load<Texture2D>("Saw"), Content.Load<Texture2D>("CoinGold"), Content.Load<Texture2D>("Relic"), Content.Load<Texture2D>("Floor") };
+
             // load textures into engineDemo
-            engineDemo.LoadTextures(textures);
+            gameDemo.LoadTextures(textures);
+            // load gameDemo Content
+            gameDemo.LoadContent();
         }
 
         /// <summary>
@@ -137,7 +140,7 @@ namespace COMP2351_Game_Engine
             ((IUpdatable)entityManager).Update();
 
             // update teh engineDemo
-            engineDemo.Update();
+            gameDemo.Update();
 
             base.Update(gameTime);
         }
@@ -178,7 +181,7 @@ namespace COMP2351_Game_Engine
                 e.Draw(spriteBatch);
             }
             // Draw the header
-            spriteBatch.Draw(textures[3], headerLocation, Color.AntiqueWhite);
+            spriteBatch.Draw(textures[0], headerLocation, Color.AntiqueWhite);
             // end Spritebatch
             spriteBatch.End();
 

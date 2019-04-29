@@ -15,25 +15,29 @@ namespace COMP2351_Game_Engine
         private float _gravity;
         private float _speed;
         private float _jump;
+        private float _counterForce;
         private Vector2 _velocity;
         private float _facingDirectionX;
         private bool _floorCollide;
         private bool _movingFloor;
         private bool _inAir;
+        private bool _onFloor;
 
         public PlayerMind()
         {
             _args = new KeyboardHandler();
-            _gravity = 5;
+            _gravity = 10;
             _speed = 12;
             _jump = 0;
+            _counterForce = 0;
             _velocity.X = 1;
             _velocity.Y = -1;
             _facingDirectionX = 1;
             _mindID = "Player";
             _floorCollide = false;
             _movingFloor = false;
-            _inAir = false;
+            _inAir = true;
+            _onFloor = false;
         }
 
         /// <summary>
@@ -95,12 +99,13 @@ namespace COMP2351_Game_Engine
                     {
                         _jump = 25;
                         _inAir = true;
+                        _onFloor = false;
                     }
                 }
             }
 
-            // Gravity, always active
-            if (_location.Y <= 900 - _texture.Height && _floorCollide == false)
+            // Gravity, always active when in the air
+            if (!_floorCollide && _inAir)
             {
                 _gravity = 10;
             }
@@ -110,7 +115,30 @@ namespace COMP2351_Game_Engine
                 _gravity = 0;
             }
 
-            return (_jump - _gravity) * _velocity.Y;
+            if (!_onFloor && _floorCollide)
+            {
+                _gravity = 0;
+                _counterForce = 1;
+            }
+
+            if (!_onFloor && !_floorCollide && !_inAir)
+            {
+                _onFloor = true;
+                _counterForce = -1;
+            }
+
+            if (_onFloor && _floorCollide)
+            {
+                _counterForce = 0;
+            }
+
+            if (_onFloor && !_floorCollide && _counterForce == 0)
+            {
+                _inAir = true;
+                _onFloor = false;
+            }
+
+            return (_jump - _gravity + _counterForce) * _velocity.Y;
         }
 
         public override bool OnNewCollision(ICollisionInput args)
@@ -155,7 +183,7 @@ namespace COMP2351_Game_Engine
 
         public override void Update()
         {
-            if (_collidedWith == null && _floorCollide)
+            if (_floorCollide && _collidedWith == null)
             {
                 _floorCollide = false;
                 _movingFloor = false;

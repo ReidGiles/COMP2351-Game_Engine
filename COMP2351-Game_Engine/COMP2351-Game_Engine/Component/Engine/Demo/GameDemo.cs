@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace COMP2351_Game_Engine
 {
-    class EngineDemo : IKeyboardListener, IMouseListener
+    class GameDemo : IKeyboardListener, IMouseListener
     {
         // reference to the entity manager
         private IEntityManager entityManager;
@@ -33,7 +33,7 @@ namespace COMP2351_Game_Engine
         int f = 0;
 
         // constructor for the class
-        public EngineDemo()
+        public GameDemo()
         {
         }
         
@@ -52,6 +52,19 @@ namespace COMP2351_Game_Engine
         public void LoadTextures(Texture2D[] pTextures)
         {
             textures = pTextures;
+        }
+
+        // method to load the content for the gameDemo
+        public void LoadContent()
+        {
+            // // Request floor entity from entity manager
+            for (int i = 0; i < 8; i++)
+            {
+                IEntity entity = entityManager.RequestInstance<Floor>("Floor", textures[7]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, i*1000 - 800, 900 - textures[7].Height);
+            }
+            
         }
 
         // keyboard event to listen for keyboard inputs
@@ -75,7 +88,7 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             // Request Hostile entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[0]);
+                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[2]);
                             // Scene manager places entity on the scene
                             sceneManager.Spawn(entity, 200, 600);
                         }
@@ -85,7 +98,7 @@ namespace COMP2351_Game_Engine
                         if (!disableSpawn)
                         {
                             // Request Floor entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[2]);
+                            IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[3]);
                             // Scene manager places entity on the scene
                             sceneManager.Spawn(entity, 800, 650);
                         }
