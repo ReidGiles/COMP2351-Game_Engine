@@ -31,6 +31,8 @@ namespace COMP2351_Game_Engine
         bool disableSpawn = false;
         // int used to count key presses for manual removal of enitities
         int f = 0;
+        // Vector2 list for spawning platforms
+        private List<Vector2> _platformSpawm;
 
         // constructor for the class
         public GameDemo()
@@ -46,6 +48,10 @@ namespace COMP2351_Game_Engine
             sceneManager = pSceneManager;
             inputManager = pInputManager;
             aiComponentManager = pAiComponentManager;
+            _platformSpawm = new List<Vector2>();
+            // Add to spawn queue
+            _platformSpawm.Add(new Vector2(200, 650) );
+            _platformSpawm.Add(new Vector2(600, 450));
         }
 
         // method to set the value of textures
@@ -63,6 +69,14 @@ namespace COMP2351_Game_Engine
                 IEntity entity = entityManager.RequestInstance<Floor>("Floor", textures[7]);
                 // Scene manager places entity on the scene
                 sceneManager.Spawn(entity, i*1000 - 800, 900 - textures[7].Height);
+            }
+
+            foreach (Vector2 v in _platformSpawm)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[3]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
             }
             
         }
