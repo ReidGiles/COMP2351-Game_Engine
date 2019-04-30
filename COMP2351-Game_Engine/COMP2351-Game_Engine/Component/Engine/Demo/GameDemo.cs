@@ -50,8 +50,33 @@ namespace COMP2351_Game_Engine
             aiComponentManager = pAiComponentManager;
             _platformSpawm = new List<Vector2>();
             // Add to spawn queue
-            _platformSpawm.Add(new Vector2(200, 650) );
-            _platformSpawm.Add(new Vector2(600, 450));
+            _platformSpawm.Add(new Vector2(1350, 550) );
+            _platformSpawm.Add(new Vector2(1400, 550));
+            _platformSpawm.Add(new Vector2(1450, 550));
+
+            _platformSpawm.Add(new Vector2(1150, 300));
+            _platformSpawm.Add(new Vector2(1200, 300));
+            _platformSpawm.Add(new Vector2(1250, 300));
+
+            _platformSpawm.Add(new Vector2(950, 50));
+            _platformSpawm.Add(new Vector2(1000, 50));
+            _platformSpawm.Add(new Vector2(1050, 50));
+
+            _platformSpawm.Add(new Vector2(650, -200));
+            _platformSpawm.Add(new Vector2(700, -200));
+            _platformSpawm.Add(new Vector2(750, -200));
+            _platformSpawm.Add(new Vector2(800, -200));
+
+            _platformSpawm.Add(new Vector2(950, -350));
+            _platformSpawm.Add(new Vector2(1000, -350));
+            _platformSpawm.Add(new Vector2(1050, -350));
+            _platformSpawm.Add(new Vector2(1100, -350));
+            _platformSpawm.Add(new Vector2(1150, -350));
+            _platformSpawm.Add(new Vector2(1200, -350));
+            _platformSpawm.Add(new Vector2(1250, -350));
+            _platformSpawm.Add(new Vector2(1300, -350));
+            _platformSpawm.Add(new Vector2(1350, -350));
+            _platformSpawm.Add(new Vector2(1400, -350));
         }
 
         // method to set the value of textures
@@ -78,7 +103,12 @@ namespace COMP2351_Game_Engine
                 // Scene manager places entity on the scene
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
-            
+
+            // Request Hostile entity from entity manager
+            IEntity hostile = entityManager.RequestInstance<Hostile>("Hostile1", textures[2]);
+            // Scene manager places entity on the scene
+            sceneManager.Spawn(hostile, 1100, -450);
+
         }
 
         // keyboard event to listen for keyboard inputs
