@@ -58,6 +58,12 @@ namespace COMP2351_Game_Engine
             // Add collider to list
             _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "PlayerB"));
 
+            // Set Collider for the Middle of the Player
+            ColliderOrigin.X = location.X + 0.5f * texture.Width;
+            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
+            // Add collider to list
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height - 30, "PlayerM"));
+
             // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());
 

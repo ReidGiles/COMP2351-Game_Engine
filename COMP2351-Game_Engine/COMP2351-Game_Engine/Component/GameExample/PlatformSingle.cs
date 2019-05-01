@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace COMP2351_Game_Engine
 {
-    class PlatformEndL : RelicHunterEntity, ICollisionListener
+    class PlatformSingle : RelicHunterEntity, ICollisionListener
     {
-        public PlatformEndL()
+        public PlatformSingle()
         {
 
         }
@@ -46,12 +46,16 @@ namespace COMP2351_Game_Engine
             ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
             _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "Floor"));
 
-            
+
             // SET Left collider to keep an hostile entities on the platform when moving
             ColliderOrigin.X = location.X + 1;
             ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
             _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "LBoundary"));
 
+            // SET Left collider to keep an hostile entities on the platform when moving
+            ColliderOrigin.X = location.X + texture.Width - 1;
+            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
+            _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "RBoundary"));
 
             // SET bottom collider to act as a ceiling to stop player jumping through
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
@@ -77,3 +81,4 @@ namespace COMP2351_Game_Engine
         }
     }
 }
+
