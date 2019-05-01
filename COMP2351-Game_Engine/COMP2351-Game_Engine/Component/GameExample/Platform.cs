@@ -40,7 +40,10 @@ namespace COMP2351_Game_Engine
             ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
             // Add collider to list
             _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Overall"));
-            
+
+            // SET Left collider to keep an hostile entities on the platform when moving
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Boundary"));
+
             // // Set Collider for the floor
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.25f * texture.Height;

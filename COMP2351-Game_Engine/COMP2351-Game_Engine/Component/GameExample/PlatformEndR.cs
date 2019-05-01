@@ -41,22 +41,24 @@ namespace COMP2351_Game_Engine
             // Add collider to list
             _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Overall"));
 
+            // SET Left collider to keep an hostile entities on the platform when moving
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Boundary"));
+
+            // Set Collider for the Boundary for patrolling Hostiles collision Box
+            ColliderOrigin.X = location.X + texture.Width - 1;
+            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
+            // SET Left collider to keep an hostile entities on the platform when moving
+            _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "HBoundary"));
+
             // // Set Collider for the floor
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "Floor"));
-
-
-            // SET Left collider to keep an hostile entities on the platform when moving
-            ColliderOrigin.X = location.X + texture.Width - 1;
-            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
-            _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "Boundary"));
-
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "Floor"));
 
             // SET bottom collider to act as a ceiling to stop player jumping through
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.75f * texture.Height;
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "Ceiling"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "Ceiling"));
 
             // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());

@@ -104,7 +104,7 @@ namespace COMP2351_Game_Engine
             // TODO: use this.Content to load your game content here
 
             // set textures
-            textures = new Texture2D[] {Content.Load<Texture2D>("Header"), Content.Load<Texture2D>("Player"), Content.Load<Texture2D>("Hostile"), Content.Load<Texture2D>("Platform"), Content.Load<Texture2D>("Saw"), Content.Load<Texture2D>("CoinGold"), Content.Load<Texture2D>("Relic"), Content.Load<Texture2D>("Floor") };
+            textures = new Texture2D[] {Content.Load<Texture2D>("Header"), Content.Load<Texture2D>("Player"), Content.Load<Texture2D>("Hostile"), Content.Load<Texture2D>("Platform"), Content.Load<Texture2D>("Saw"), Content.Load<Texture2D>("CoinGold"), Content.Load<Texture2D>("Relic"), Content.Load<Texture2D>("Floor"), Content.Load<Texture2D>("Wall") };
 
             // load textures into engineDemo
             gameDemo.LoadTextures(textures);
