@@ -50,7 +50,7 @@ namespace COMP2351_Game_Engine
             // SET Left collider to keep an hostile entities on the platform when moving
             ColliderOrigin.X = location.X + 1;
             ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
-            _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "LBoundary"));
+            _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "Boundary"));
 
 
             // SET bottom collider to act as a ceiling to stop player jumping through

@@ -167,12 +167,12 @@ namespace COMP2351_Game_Engine
                 _jump = 0;
             }
 
-            if (_collidedWith == "LBoundary" && _collidedThis == "PlayerM" && _facingDirectionX == 1)
+            if (_collidedWith == "Boundary" && _collidedThis == "PlayerM" && _facingDirectionX == 1)
             {
                 _rightCollide = true;
             }
 
-            if (_collidedWith == "RBoundary" && _collidedThis == "PlayerM" && _facingDirectionX == -1)
+            if (_collidedWith == "Boundary" && _collidedThis == "PlayerM" && _facingDirectionX == -1)
             {
                 _leftCollide = true;
             }
