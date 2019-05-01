@@ -41,6 +41,10 @@ namespace COMP2351_Game_Engine
         private List<Vector2> _platformWallSpawn;
         // Vector2 list for spawning hostiles
         private List<Vector2> _hostileSpawn;
+        // Vector2 list for spawning saws
+        private List<Vector2> _sawSpawn;
+        // Vector2 list for spawning gold
+        private List<Vector2> _goldSpawn;
 
         // constructor for the class
         public GameDemo()
@@ -61,6 +65,8 @@ namespace COMP2351_Game_Engine
             _platformEndRSpawn = new List<Vector2>();
             _platformWallSpawn = new List<Vector2>();
             _hostileSpawn = new List<Vector2>();
+            _sawSpawn = new List<Vector2>();
+            _goldSpawn = new List<Vector2>();
             LoadLevel();
         }
 
@@ -121,6 +127,25 @@ namespace COMP2351_Game_Engine
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
 
+            foreach (Vector2 v in _sawSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<Saw>("Saw", textures[4]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
+
+            foreach (Vector2 v in _goldSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<Gold>("Gold", textures[5]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
+
+            IEntity relic = entityManager.RequestInstance<Relic>("Relic", textures[6]);
+            sceneManager.Spawn(relic, 3050, -850);
+
         }
 
         private void LoadLevel()
@@ -158,20 +183,92 @@ namespace COMP2351_Game_Engine
             platformYIncrement = 150;
 
             Populate(3000, -800, 4, platformXIncrement, platformYIncrement, _platformSpawn);
-            
+
+            // Distance between platforms
+            platformXIncrement = 200;
+            platformYIncrement = 250;
+
+            Populate(1700, -150, 3, platformXIncrement, platformYIncrement, _platformSpawn);
+
             // Distance between platforms
             platformXIncrement = 0;
             platformYIncrement = -250;
             // Populate the level with single platforms
             Populate(2700, 450, 8, platformXIncrement, platformYIncrement, _platformWallSpawn);
-            Populate(4000, 450, 8, platformXIncrement, platformYIncrement, _platformWallSpawn);
+            Populate(4000, 550, 8, platformXIncrement, platformYIncrement, _platformWallSpawn);
 
             // Distance between Hostiles
             platformXIncrement = 250;
             platformYIncrement = 0;
             // Populate the level with hostiles
             Populate(1100, -400, 2, platformXIncrement, platformYIncrement, _hostileSpawn);
-            
+
+            // Distance between Hostiles
+            platformXIncrement = 100;
+            platformYIncrement = -100;
+            // Populate the level with hostiles
+            Populate(2950, 600, 9, platformXIncrement, platformYIncrement, _hostileSpawn);
+
+            // Distance between Hostiles
+            platformXIncrement = 200;
+            platformYIncrement = -300;
+            // Populate the level with hostiles
+            Populate(3650, -400, 9, platformXIncrement, platformYIncrement, _hostileSpawn);
+
+            // Distance between saws
+            platformXIncrement = 200;
+            platformYIncrement = 0;
+            // Populate the level with saws
+            Populate(1050, -850, 8, platformXIncrement, platformYIncrement, _sawSpawn);
+
+            // Distance between saws
+            platformXIncrement = 300;
+            platformYIncrement = 0;
+            // Populate the level with saws
+            Populate(250, 750, 4, platformXIncrement, platformYIncrement, _sawSpawn);
+
+            // Distance between saws
+            platformXIncrement = 200;
+            platformYIncrement = 250;
+            // Populate the level with saws
+            Populate(1670, -200, 3, platformXIncrement, platformYIncrement, _sawSpawn);
+            Populate(1830, -200, 3, platformXIncrement, platformYIncrement, _sawSpawn);
+
+            platformXIncrement = 0;
+            platformYIncrement = -50;
+            Populate(1600, 750, 22, platformXIncrement, platformYIncrement, _sawSpawn);
+
+            // Distance between gold
+            platformXIncrement = 300;
+            platformYIncrement = 0;
+            // Populate the level with gold
+            Populate(265, 550, 4, platformXIncrement, platformYIncrement, _goldSpawn);
+
+            // Distance between gold
+            platformXIncrement = 0;
+            platformYIncrement = 0;
+            // Populate the level with gold
+            Populate(1550, 250, 1, platformXIncrement, platformYIncrement, _goldSpawn);
+            Populate(550, -400, 1, platformXIncrement, platformYIncrement, _goldSpawn);
+
+            // Distance between gold
+            platformXIncrement = 300;
+            platformYIncrement = 0;
+            // Populate the level with gold
+            Populate(1150, -600, 2, platformXIncrement, platformYIncrement, _goldSpawn);
+
+            // Distance between gold
+            platformXIncrement = 200;
+            platformYIncrement = 250;
+            // Populate the level with gold
+            Populate(1760, -200, 3, platformXIncrement, platformYIncrement, _goldSpawn);
+
+            // Distance between gold
+            platformXIncrement = 0;
+            platformYIncrement = -50;
+            // Populate the level with gold
+            Populate(2550, -900, 3, platformXIncrement, platformYIncrement, _goldSpawn);
+            Populate(2600, -900, 3, platformXIncrement, platformYIncrement, _goldSpawn);
         }
 
         private void Populate(int pXpos, int pYpos, int pLimit, int pIncrement, int yIncrement, List<Vector2> pList)
