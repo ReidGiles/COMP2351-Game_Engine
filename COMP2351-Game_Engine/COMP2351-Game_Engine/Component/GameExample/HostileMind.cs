@@ -11,37 +11,35 @@ namespace COMP2351_Game_Engine
     {
         private float _gravity;
         private float _speed;
+        private float _counterForce;
         private Vector2 _velocity;
         private float _facingDirectionX;
         private bool _floorCollide;
+        private bool _inAir;
+        private bool _onFloor;
         public HostileMind()
         {
             _gravity = 10;
             _speed = 5;
+            _counterForce = 0;
             _velocity.X = 1;
             _velocity.Y = 1;
             _facingDirectionX = 1;
             _mindID = "Hostile";
             _floorCollide = false;
+            _inAir = true;
+            _onFloor = false;
         }
 
         public override float TranslateX()
         {
-            if (_location.Y <= Game1.ScreenHeight - _texture.Height && !_floorCollide)
-            {
-                return 0;
-            }
-            if (_location.X >= Game1.ScreenWidth || _location.X <= 0)
-            {
-                _facingDirectionX *= -1;
-            }
             return (_speed * _facingDirectionX) * _velocity.X;
         }
 
         public override bool OnNewCollision(ICollisionInput args)
         {
             bool rtnValue = base.OnNewCollision(args);
-            if (_collidedWith == "Boundary" && _collidedThis == "HostileB")
+            if (_collidedWith == "LBoundary" && _collidedThis == "HostileB" || _collidedWith == "RBoundary" && _collidedThis == "HostileB" || _collidedWith == "LBoundary" && _collidedThis == "HostileT" || _collidedWith == "RBoundary" && _collidedThis == "HostileT")
             {
                 _facingDirectionX *= -1;
             }
@@ -63,13 +61,37 @@ namespace COMP2351_Game_Engine
         public override float TranslateY()
         {
             // Gravity, always active
-            if (_location.Y <= 900 - _texture.Height && _floorCollide == false)
+            if (!_floorCollide && _inAir)
             {
                 _gravity = 10;
             }
             else
             {
+                _inAir = false;
                 _gravity = 0;
+            }
+
+            if (!_onFloor && _floorCollide)
+            {
+                _gravity = 0;
+                _counterForce = 1;
+            }
+
+            if (!_onFloor && !_floorCollide && !_inAir)
+            {
+                _onFloor = true;
+                _counterForce = -1;
+            }
+
+            if (_onFloor && _floorCollide)
+            {
+                _counterForce = 0;
+            }
+
+            if (_onFloor && !_floorCollide && _counterForce == 0)
+            {
+                _inAir = true;
+                _onFloor = false;
             }
 
             return _gravity * _velocity.Y;

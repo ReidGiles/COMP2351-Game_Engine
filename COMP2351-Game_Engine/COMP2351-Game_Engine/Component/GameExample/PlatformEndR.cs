@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework;
 
 namespace COMP2351_Game_Engine
 {
-    class Floor : RelicHunterEntity, ICollisionListener
+    class PlatformEndR : RelicHunterEntity, ICollisionListener
     {
-        public Floor()
+        public PlatformEndR()
         {
+
         }
 
         /// <summary>
@@ -19,7 +20,7 @@ namespace COMP2351_Game_Engine
         public override void Initialise()
         {
             // Set initial entity mind:
-            _mind = _aiComponentManager.RequestMind<FloorMind>();
+            _mind = _aiComponentManager.RequestMind<PlatformMind>();
         }
 
         public void OnNewCollision(object sender, ICollisionInput args)
@@ -40,11 +41,22 @@ namespace COMP2351_Game_Engine
             // Add collider to list
             _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Overall"));
 
-            // Set Collider for the floor
+            // // Set Collider for the floor
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
+            ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "Floor"));
+
+
+            // SET Left collider to keep an hostile entities on the platform when moving
+            ColliderOrigin.X = location.X + texture.Width - 1;
             ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
-            // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "Floor"));
+            _colliders.Add(new RectCollider(ColliderOrigin, 2, texture.Height, "RBoundary"));
+
+
+            // SET bottom collider to act as a ceiling to stop player jumping through
+            ColliderOrigin.X = location.X + 0.5f * texture.Width;
+            ColliderOrigin.Y = location.Y + 0.75f * texture.Height;
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "Ceiling"));
 
             // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());
@@ -62,27 +74,6 @@ namespace COMP2351_Game_Engine
             {
                 SetCollider();
             }
-            if (_mind != null)
-            {
-                //tell the mind the location of the player
-                _mind.UpdateLocation(location);
-                //tell the mind the value fo texture
-                _mind.UpdateTexture(texture);
-                //updates the position of the player
-                float DX = _mind.TranslateX();
-                float DY = _mind.TranslateY();
-                Translate(DX, DY);
-                // updates the position of the colliders to follow the player
-                foreach (ICollider e in _colliders)
-                {
-                    e.Translate(DX, DY);
-                }
-            }
-            //else Console.WriteLine("Error: Mind is null");
-            /*Console.WriteLine("Top"+((ICreateCollider)_collider).CreateCollider()[0]);
-            Console.WriteLine("Bottom" + ((ICreateCollider)_collider).CreateCollider()[1]);
-            Console.WriteLine("Left" + ((ICreateCollider)_collider).CreateCollider()[2]);
-            Console.WriteLine("Right" + ((ICreateCollider)_collider).CreateCollider()[3]);*/
         }
     }
 }

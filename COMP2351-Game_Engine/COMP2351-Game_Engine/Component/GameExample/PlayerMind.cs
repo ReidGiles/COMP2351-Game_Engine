@@ -19,7 +19,6 @@ namespace COMP2351_Game_Engine
         private Vector2 _velocity;
         private float _facingDirectionX;
         private bool _floorCollide;
-        private bool _movingFloor;
         private bool _inAir;
         private bool _onFloor;
 
@@ -35,7 +34,6 @@ namespace COMP2351_Game_Engine
             _facingDirectionX = 1;
             _mindID = "Player";
             _floorCollide = false;
-            _movingFloor = false;
             _inAir = true;
             _onFloor = false;
         }
@@ -50,42 +48,22 @@ namespace COMP2351_Game_Engine
 
         public override float TranslateX()
         {
-            if (_movingFloor)
+            
+            // Player input controlling movement, only active on key down
+            foreach (Keys k in _args.GetInputKey())
             {
-                // Player input controlling movement, only active on key down
-                foreach (Keys k in _args.GetInputKey())
+                if (k == Keys.Right || k == Keys.D)
                 {
-                    if (k == Keys.Right || k == Keys.D)
-                    {
-                        _facingDirectionX = 1;
-                        return (_speed * _facingDirectionX) * _velocity.X;
-                    }
-                    if (k == Keys.Left || k == Keys.A)
-                    {
-                        _facingDirectionX = -1;
-                        return (_speed * _facingDirectionX) * _velocity.X;
-                    }
+                    _facingDirectionX = 1;
+                    return (_speed * _facingDirectionX) * _velocity.X;
                 }
-                return 0;
-            }
-            else
-            {
-                // Player input controlling movement, only active on key down
-                foreach (Keys k in _args.GetInputKey())
+                if (k == Keys.Left || k == Keys.A)
                 {
-                    if (k == Keys.Right || k == Keys.D)
-                    {
-                        _facingDirectionX = 1;
-                        return (_speed * _facingDirectionX) * _velocity.X;
-                    }
-                    if (k == Keys.Left || k == Keys.A)
-                    {
-                        _facingDirectionX = -1;
-                        return (_speed * _facingDirectionX) * _velocity.X;
-                    }
+                    _facingDirectionX = -1;
+                    return (_speed * _facingDirectionX) * _velocity.X;
                 }
-                return 0;
             }
+            return 0;
         }
 
         public override float TranslateY()
@@ -155,7 +133,6 @@ namespace COMP2351_Game_Engine
             if (_collidedWith == "MovingFloor" && _collidedThis == "PlayerB")
             {
                 _floorCollide = true;
-                _movingFloor = true;
                 _inAir = false;
             }
 
@@ -186,7 +163,6 @@ namespace COMP2351_Game_Engine
             if (_floorCollide && _collidedWith == null)
             {
                 _floorCollide = false;
-                _movingFloor = false;
             }
 
             if (_jump > 0)
