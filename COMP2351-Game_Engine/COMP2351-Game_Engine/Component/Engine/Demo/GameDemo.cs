@@ -37,6 +37,10 @@ namespace COMP2351_Game_Engine
         private List<Vector2> _platformEndLSpawn;
         // Vector2 list for spawning platformsEndR
         private List<Vector2> _platformEndRSpawn;
+        // Vector2 list for spawning platformSingle
+        private List<Vector2> _platformSingleSpawn;
+        // Vector2 list for spawning hostiles
+        private List<Vector2> _hostileSpawn;
 
         // constructor for the class
         public GameDemo()
@@ -55,6 +59,8 @@ namespace COMP2351_Game_Engine
             _platformSpawn = new List<Vector2>();
             _platformEndLSpawn = new List<Vector2>();
             _platformEndRSpawn = new List<Vector2>();
+            _platformSingleSpawn = new List<Vector2>();
+            _hostileSpawn = new List<Vector2>();
             LoadLevel();
         }
 
@@ -99,51 +105,107 @@ namespace COMP2351_Game_Engine
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
 
-            // Request Hostile entity from entity manager
-            IEntity hostile = entityManager.RequestInstance<Hostile>("Hostile1", textures[2]);
-            // Scene manager places entity on the scene
-            sceneManager.Spawn(hostile, 1100, -400);
+            foreach (Vector2 v in _platformSingleSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<PlatformSingle>("PlatformSingle", textures[3]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
+
+            foreach (Vector2 v in _hostileSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<Hostile>("Hostile", textures[2]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
 
         }
 
         private void LoadLevel()
         {
             // Distance between platforms
-            int platformIncrement = 50;
+            int platformXIncrement = 50;
+            int platformYIncrement = 50;
 
             // Populate the level with the Start point for Platforms
-            Populate(1350, 550, 1, platformIncrement, _platformEndLSpawn);
-            Populate(1150, 300, 1, platformIncrement, _platformEndLSpawn);
-            Populate(950, 50, 1, platformIncrement, _platformEndLSpawn);
-            Populate(650, -200, 1, platformIncrement, _platformEndLSpawn);
-            Populate(950, -350, 1, platformIncrement, _platformEndLSpawn);
-            Populate(700, -600, 1, platformIncrement, _platformEndLSpawn);
-            Populate(900, -850, 1, platformIncrement, _platformEndLSpawn);
-            Populate(1650, -150, 1, platformIncrement, _platformEndLSpawn);
+            Populate(1350, 550, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(1150, 300, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(950, 50, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(650, -200, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(950, -350, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(700, -600, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(900, -850, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(1650, -150, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(1850, 100, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(2050, 350, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(2900, 650, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3000, 550, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3100, 450, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3200, 350, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3300, 250, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3400, 150, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3500, 50, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3600, -50, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3700, -150, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3800, -250, 1, platformXIncrement, 0, _platformEndLSpawn);
+            Populate(3900, -350, 1, platformXIncrement, 0, _platformEndLSpawn);
 
             // Populate the level with the middle fo the Platforms
-            Populate(1400, 550, 1, platformIncrement, _platformSpawn);
-            Populate(1200, 300, 1, platformIncrement, _platformSpawn);
-            Populate(1000, 50, 1, platformIncrement, _platformSpawn);
-            Populate(700, -200, 1, platformIncrement, _platformSpawn);
-            Populate(1000, -350, 11, platformIncrement, _platformSpawn);
-            Populate(750, -600, 1, platformIncrement, _platformSpawn);
-            Populate(950, -850, 40, platformIncrement, _platformSpawn);
-            Populate(1700, -150, 2, platformIncrement, _platformSpawn);
+            Populate(1400, 550, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(1200, 300, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(1000, 50, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(700, -200, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(1000, -350, 11, platformXIncrement, 0, _platformSpawn);
+            Populate(750, -600, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(950, -850, 40, platformXIncrement, 0, _platformSpawn);
+            Populate(1700, -150, 2, platformXIncrement, 0, _platformSpawn);
+            Populate(1900, 100, 2, platformXIncrement, 0, _platformSpawn);
+            Populate(2100, 350, 2, platformXIncrement, 0, _platformSpawn);
+            Populate(2950, 650, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3050, 550, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3150, 450, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3250, 350, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3350, 250, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3450, 150, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3550, 50, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3650, -50, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3750, -150, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3850, -250, 1, platformXIncrement, 0, _platformSpawn);
+            Populate(3950, -350, 1, platformXIncrement, 0, _platformSpawn);
 
             // Populate the level with End point for the Platforms
-            Populate(1450, 550, 1, platformIncrement, _platformEndRSpawn);
-            Populate(1250, 300, 1, platformIncrement, _platformEndRSpawn);
-            Populate(1050, 50, 1, platformIncrement, _platformEndRSpawn);
-            Populate(750, -200, 1, platformIncrement, _platformEndRSpawn);
-            Populate(1550, -350, 1, platformIncrement, _platformEndRSpawn);
-            Populate(800, -600, 1, platformIncrement, _platformEndRSpawn);
-            Populate(2950, -850, 1, platformIncrement, _platformEndRSpawn);
-            Populate(1800, -150, 1, platformIncrement, _platformEndRSpawn);
+            Populate(1450, 550, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(1250, 300, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(1050, 50, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(750, -200, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(1550, -350, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(800, -600, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(2950, -850, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(1800, -150, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(2000, 100, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(2200, 350, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3000, 650, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3100, 550, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3200, 450, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3300, 350, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3400, 250, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3500, 150, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3600, 50, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3700, -50, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3800, -150, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(3900, -250, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(4000, -350, 1, platformXIncrement, 0, _platformEndRSpawn);
 
+            // Populate the level with single platforms
+            //Populate(2700, 650, 15, 0, platformYIncrement, _platformSingleSpawn);
+
+            // Populate the level with hostiles
+            Populate(1100, -400, 1, 0, 0, _hostileSpawn);
         }
 
-        private void Populate(int pXpos, int pYpos, int pLimit, int pIncrement, List<Vector2> pList)
+        private void Populate(int pXpos, int pYpos, int pLimit, int pIncrement, int yIncrement, List<Vector2> pList)
         {
             int XPosition = pXpos;
             int YPosition = pYpos;
@@ -151,6 +213,7 @@ namespace COMP2351_Game_Engine
             {
                 pList.Add(new Vector2(XPosition, YPosition));
                 XPosition += pIncrement;
+                YPosition -= yIncrement;
             }
         }
 
