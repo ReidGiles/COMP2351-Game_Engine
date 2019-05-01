@@ -55,6 +55,7 @@
     <Compile Include="Component\GameExample\GoldMind.cs" />
     <Compile Include="Component\GameExample\Hostile.cs" />
     <Compile Include="Component\GameExample\HostileMind.cs" />
+    <Compile Include="Component\GameExample\PlatformSingle.cs" />
     <Compile Include="Component\GameExample\PlatformEndR.cs" />
     <Compile Include="Component\GameExample\PlatformEndL.cs" />
     <Compile Include="Component\GameExample\Platform.cs" />

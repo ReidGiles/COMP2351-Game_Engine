@@ -17,12 +17,12 @@ namespace COMP2351_Game_Engine
         private float _jump;
         private float _counterForce;
         private Vector2 _velocity;
-        private float _facingDirectionX;
         private bool _floorCollide;
         private bool _inAir;
         private bool _onFloor;
         private bool _rightCollide;
         private bool _leftCollide;
+        private int _score;
 
         public PlayerMind()
         {
@@ -40,6 +40,7 @@ namespace COMP2351_Game_Engine
             _onFloor = false;
             _rightCollide = false;
             _leftCollide = false;
+            _score = 0;
         }
 
         /// <summary>
@@ -152,14 +153,17 @@ namespace COMP2351_Game_Engine
                 _floorCollide = true;
             }
 
-            if (_collidedWith == "HostileB" && _collidedThis == "PlayerT")
+            if (_collidedWith == "HostileB" && _collidedThis == "PlayerT" || _collidedWith == "HostileB" && _collidedThis == "PlayerB" || _collidedWith == "Saw" && _collidedThis == "PlayerT" || _collidedWith == "Saw" && _collidedThis == "PlayerB")
             {
                 rtnValue = true;
-            }
-
-            if (_collidedWith == "HostileB" && _collidedThis == "PlayerB")
-            {
-                rtnValue = true;
+                if (_score > 0)
+                {
+                    _score -= 200;
+                }
+                if (_score < 0)
+                {
+                    _score = 0;
+                }
             }
 
             if (_collidedWith == "Ceiling" && _collidedThis == "PlayerT")
@@ -177,6 +181,18 @@ namespace COMP2351_Game_Engine
                 _leftCollide = true;
             }
 
+            if (_collidedWith == "CoinGold" && _collidedThis == "PlayerB" || _collidedWith == "CoinGold" && _collidedThis == "PlayerT")
+            {
+                _score += 100;
+                Console.WriteLine("Player Score: " + _score);
+            }
+
+            if (_collidedWith == "RelicSaw" && _collidedThis == "PlayerB" || _collidedWith == "RelicSaw" && _collidedThis == "PlayerT")
+            {
+                _score += 500;
+                Console.WriteLine("Player Score: " + _score);
+                Console.WriteLine("Bone Saw Relic Aquired");
+            }
 
             _collidedWith = null;
             _collidedThis = null;

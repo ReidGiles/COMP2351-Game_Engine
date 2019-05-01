@@ -31,14 +31,16 @@ namespace COMP2351_Game_Engine
         bool disableSpawn = false;
         // int used to count key presses for manual removal of enitities
         int f = 0;
-        // Vector2 list for spawning platforms
+        // Vector2 list for spawning middle platforms
         private List<Vector2> _platformSpawn;
-        // Vector2 list for spawning platforms
+        // Vector2 list for spawning Single platforms
+        private List<Vector2> _platformSSpawn;
+        // Vector2 list for spawning end platforms left side
         private List<Vector2> _platformEndLSpawn;
-        // Vector2 list for spawning platforms
+        // Vector2 list for spawning end platforms right side
         private List<Vector2> _platformEndRSpawn;
-        // Vector2 list for spawning platformsEndL
-        private List<Vector2> _platformWallSpawn;
+        // Vector2 list for spawning walls
+        private List<Vector2> _wallSpawn;
         // Vector2 list for spawning hostiles
         private List<Vector2> _hostileSpawn;
         // Vector2 list for spawning saws
@@ -61,9 +63,10 @@ namespace COMP2351_Game_Engine
             inputManager = pInputManager;
             aiComponentManager = pAiComponentManager;
             _platformSpawn = new List<Vector2>();
+            _platformSSpawn = new List<Vector2>();
             _platformEndLSpawn = new List<Vector2>();
             _platformEndRSpawn = new List<Vector2>();
-            _platformWallSpawn = new List<Vector2>();
+            _wallSpawn = new List<Vector2>();
             _hostileSpawn = new List<Vector2>();
             _sawSpawn = new List<Vector2>();
             _goldSpawn = new List<Vector2>();
@@ -95,6 +98,14 @@ namespace COMP2351_Game_Engine
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
 
+            foreach (Vector2 v in _platformSSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<PlatformSingle>("Platform", textures[3]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
+
             foreach (Vector2 v in _platformEndLSpawn)
             {
                 // Request Floor entity from entity manager
@@ -111,7 +122,7 @@ namespace COMP2351_Game_Engine
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
 
-            foreach (Vector2 v in _platformWallSpawn)
+            foreach (Vector2 v in _wallSpawn)
             {
                 // Request Floor entity from entity manager
                 IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[8]);
@@ -146,6 +157,11 @@ namespace COMP2351_Game_Engine
             IEntity relic = entityManager.RequestInstance<Relic>("Relic", textures[6]);
             sceneManager.Spawn(relic, 3050, -850);
 
+            // Request player entity from entity manager
+            IEntity player = entityManager.RequestInstance<Player>("Player", textures[1]);
+            // Scene manager places entity on the scene
+            sceneManager.Spawn(player, 0, 300);
+
         }
 
         private void LoadLevel()
@@ -155,15 +171,15 @@ namespace COMP2351_Game_Engine
             int platformYIncrement = 0;
 
             // Populate the level with the Start point for Platforms
-            Populate(650, -200, 1, platformXIncrement, platformYIncrement, _platformSpawn);
-            Populate(700, -600, 1, platformXIncrement, platformYIncrement, _platformSpawn);
+            Populate(650, -200, 1, platformXIncrement, platformYIncrement, _platformSSpawn);
+            Populate(700, -600, 1, platformXIncrement, platformYIncrement, _platformSSpawn);
             Populate(900, -850, 1, platformXIncrement, platformYIncrement, _platformEndLSpawn);
             Populate(1100, -850, 7, platformXIncrement, platformYIncrement, _platformSpawn);
             Populate(2500, -850, 1, platformXIncrement, platformYIncrement, _platformEndRSpawn);
-            Populate(950, -350, 1, platformXIncrement, platformYIncrement, _platformSpawn);
-            Populate(950, 50, 1, platformXIncrement, platformYIncrement, _platformSpawn);
-            Populate(1150, 300, 1, platformXIncrement, platformYIncrement, _platformSpawn);
-            Populate(1350, 550, 1, platformXIncrement, platformYIncrement, _platformSpawn);
+            Populate(550, -350, 1, platformXIncrement, platformYIncrement, _platformSSpawn);
+            Populate(950, 50, 1, platformXIncrement, platformYIncrement, _platformSSpawn);
+            Populate(1150, 300, 1, platformXIncrement, platformYIncrement, _platformSSpawn);
+            Populate(1350, 550, 1, platformXIncrement, platformYIncrement, _platformSSpawn);
             
 
             // Distance between platforms
@@ -176,26 +192,26 @@ namespace COMP2351_Game_Engine
             platformXIncrement = 100;
             platformYIncrement = -100;
 
-            Populate(2900, 650, 9, platformXIncrement, platformYIncrement, _platformSpawn);
+            Populate(2900, 650, 9, platformXIncrement, platformYIncrement, _platformSSpawn);
 
             // Distance between platforms
             platformXIncrement = 200;
             platformYIncrement = 150;
 
-            Populate(3000, -800, 4, platformXIncrement, platformYIncrement, _platformSpawn);
+            Populate(3000, -800, 4, platformXIncrement, platformYIncrement, _platformSSpawn);
 
             // Distance between platforms
             platformXIncrement = 200;
             platformYIncrement = 250;
 
-            Populate(1700, -150, 3, platformXIncrement, platformYIncrement, _platformSpawn);
+            Populate(1700, -150, 3, platformXIncrement, platformYIncrement, _platformSSpawn);
 
             // Distance between platforms
             platformXIncrement = 0;
             platformYIncrement = -250;
             // Populate the level with single platforms
-            Populate(2700, 450, 8, platformXIncrement, platformYIncrement, _platformWallSpawn);
-            Populate(4000, 550, 8, platformXIncrement, platformYIncrement, _platformWallSpawn);
+            Populate(2700, 450, 8, platformXIncrement, platformYIncrement, _wallSpawn);
+            Populate(4000, 550, 8, platformXIncrement, platformYIncrement, _wallSpawn);
 
             // Distance between Hostiles
             platformXIncrement = 250;
@@ -284,119 +300,22 @@ namespace COMP2351_Game_Engine
         // keyboard event to listen for keyboard inputs
         public void OnNewKeyboardInput(object sender, IKeyboardInput args)
         {
-            foreach (Keys k in args.GetInputKey())
-            {
-                switch(k)
-                {
-                    case Keys.D1:
-                        if (!disableSpawn)
-                        {
-                            // Request player entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Player>("Player", textures[1]);
-                            // Scene manager places entity on the scene
-                            sceneManager.Spawn(entity, 0, 300);
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.D2:
-                        if (!disableSpawn)
-                        {
-                            // Request Hostile entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[2]);
-                            // Scene manager places entity on the scene
-                            sceneManager.Spawn(entity, 200, 600);
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.D3:
-                        if (!disableSpawn)
-                        {
-                            // Request Floor entity from entity manager
-                            IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[3]);
-                            // Scene manager places entity on the scene
-                            sceneManager.Spawn(entity, 800, 650);
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.D5:
-                        if (!disableSpawn)
-                        {
-                            // remove entity from the display with the name Hostile1 
-                            sceneManager.Remove("Hostile1");
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.D6:
-                        if (!disableSpawn)
-                        {
-                            // remove entity from the display with the name Player 
-                            sceneManager.Remove("Player");
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.Z:
-                        // reset the disable spawn bool
-                        disableSpawn = false;
-                        break;
-                    case Keys.D9:
-                        if (!disableSpawn)
-                        {
-                            // request an existing instance of a entity by its uName
-                            IEntity entity = entityManager.RequestInstance("Player");
-                            if (entity != null)
-                            {
-                                // place the entity on the scene
-                                sceneManager.Spawn(entity, 500, 500);
-                            }
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.F:
-                        if (!disableSpawn)
-                        {
-                            // increment the int f
-                            f++;
-                            // remove teh entity with the uID = to f
-                            entityManager.Terminate(f);
-                        }
-                        disableSpawn = true;
-                        break;
-                    case Keys.Q:
-                        if (!disableSpawn)
-                        {
-                            // request an existing instance of a entity by its uName
-                            IEntity entity = entityManager.RequestInstance("Player");
-                            if (entity != null)
-                            {
-                                // swap out the min in the entity to a HostileMind
-                                entity.SetMind(aiComponentManager.RequestMind<HostileMind>());
-                            }
-                        }
-                        disableSpawn = true;
-                        break;
-                }
-            }
+            
         }
 
         // Mouse event to listen for Mouse inputs
         public void OnNewMouseInput(object sender, IMouseInput args)
         {
-            if (!disableSpawn)
-            {
-                // set mouse vale to the position of the mouse at the event time
-                mouseVal = new int[] { args.GetMouseVal()[0], args.GetMouseVal()[1] };
-                // Request entity from entity manager
-                IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[0]);
-                // Scene manager places entity on the scene
-                sceneManager.Spawn(entity, mouseVal[0], mouseVal[1]);
-            }
-            disableSpawn = true;
+            
         }
 
         // update the class 
         public void Update()
         {
-
+            if (sceneManager.GetEntity("Player") == null)
+            {
+                sceneManager.Spawn(entityManager.RequestInstance("Player"), 0, 300);
+            }
         }
     }
 }

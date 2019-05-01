@@ -13,7 +13,6 @@ namespace COMP2351_Game_Engine
         private float _speed;
         private float _counterForce;
         private Vector2 _velocity;
-        private float _facingDirectionX;
         private bool _floorCollide;
         private bool _inAir;
         private bool _onFloor;
@@ -39,14 +38,12 @@ namespace COMP2351_Game_Engine
         public override bool OnNewCollision(ICollisionInput args)
         {
             bool rtnValue = base.OnNewCollision(args);
-            if (_collidedWith == "HBoundary" && _collidedThis == "HostileB" && _facingDirectionX == -1 ||  _collidedWith == "HBoundary" && _collidedThis == "HostileT" && _facingDirectionX == -1)
+
+            if (_collidedWith == "HBoundary" && _collidedThis == "HostileB" ||  _collidedWith == "HBoundary" && _collidedThis == "HostileT")
             {
-                _facingDirectionX = 1;
+                _facingDirectionX *= -1;
             }
-            if (_collidedWith == "HBoundary" && _collidedThis == "HostileB" && _facingDirectionX == 1 || _collidedWith == "HBoundary" && _collidedThis == "HostileT" && _facingDirectionX == 1)
-            {
-                _facingDirectionX = -1;
-            }
+
 
             if (_collidedWith == "HostileB" && _collidedThis == "HostileB")
             {
@@ -76,7 +73,7 @@ namespace COMP2351_Game_Engine
                 _gravity = 0;
             }
 
-            if (!_onFloor && _floorCollide)
+            if (!_onFloor && _floorCollide && !_inAir)
             {
                 _gravity = 0;
                 _counterForce = 1;

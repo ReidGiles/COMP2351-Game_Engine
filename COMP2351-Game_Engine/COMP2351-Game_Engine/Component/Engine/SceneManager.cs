@@ -11,6 +11,8 @@ namespace COMP2351_Game_Engine
     {
         // reference to the sceneGraph
         ISceneGraph _sceneGraph;
+        // entity to be removed from the scene
+        private IEntity _removeEntity;
 
         /// <summary>
         /// Class constructor
@@ -52,6 +54,7 @@ namespace COMP2351_Game_Engine
         public void Remove(int pUID)
         {
             _sceneGraph.Remove(pUID);
+            _removeEntity = null;
         }
 
         /// <summary>
@@ -61,6 +64,7 @@ namespace COMP2351_Game_Engine
         public void Remove(String pUName)
         {
             _sceneGraph.Remove(pUName);
+            _removeEntity = null;
         }
 
         /// <summary>
@@ -124,6 +128,18 @@ namespace COMP2351_Game_Engine
             foreach (IEntity e in _sceneGraph.GetEntity())
             {
                 ( (IUpdatable)e).Update();
+
+                if (e.KillSelf())
+                {
+                    // if an entities killself = true then set _removeEntity to that entity
+                    _removeEntity = e;
+                }
+            }
+            // if _removeEntity has an entity
+            if (_removeEntity != null)
+            {
+                // Terminate the entity
+                Remove(_removeEntity.GetUID());
             }
         }
     }

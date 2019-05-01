@@ -166,6 +166,7 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public void Update()
         {
+            /*
             // check each entity in the entity list to see if it needs to be removed
             foreach (IEntity e in _entityList)
             {
@@ -181,7 +182,7 @@ namespace COMP2351_Game_Engine
             {
                 // Terminate the entity
                 Terminate(_removeEntity.GetUID());
-            }
+            }*/
         }
     }
 }

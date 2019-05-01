@@ -14,6 +14,12 @@ namespace COMP2351_Game_Engine
         protected Texture2D texture;
         // Entity location:
         protected Vector2 location;
+        // Entity texture rotation
+        protected float rotation;
+        // Entity Origin point for a texture
+        protected Vector2 origin;
+        // Entity Texture effect used to flip texture
+        protected SpriteEffects textureEffect;
         // Entity unique identification number:
         protected int _uid;
         // Entity unique name:
@@ -43,6 +49,21 @@ namespace COMP2351_Game_Engine
         public virtual void SetTexture(Texture2D pTexture)
         {
             texture = pTexture;
+            textureEffect = SpriteEffects.None;
+            rotation = 0;
+            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+        }
+
+        protected void InvertTexture(float pfacingDirection)
+        {
+            if (pfacingDirection == 1)
+            {
+                textureEffect = SpriteEffects.None;
+            }
+            else
+            {
+                textureEffect = SpriteEffects.FlipHorizontally;
+            }
         }
 
         /// <summary>
@@ -54,6 +75,10 @@ namespace COMP2351_Game_Engine
         {
             location.X = pX;
             location.Y = pY;
+            if (hasCollider)
+            {
+                SetCollider();
+            }
         }
 
         /// <summary>
@@ -69,7 +94,9 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public virtual bool KillSelf()
         {
-            return _killSelf;
+            bool rtnVal = _killSelf;
+            _killSelf = false;
+            return rtnVal;
         }
 
         /// <summary>
@@ -158,7 +185,7 @@ namespace COMP2351_Game_Engine
         /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, location, Color.AntiqueWhite);
+            spriteBatch.Draw(texture, location+origin, null, Color.AntiqueWhite, rotation, origin,1, textureEffect, 0);
         }
 
         /// <summary>

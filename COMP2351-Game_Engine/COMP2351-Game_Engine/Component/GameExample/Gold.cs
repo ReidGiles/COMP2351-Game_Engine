@@ -15,7 +15,7 @@ namespace COMP2351_Game_Engine
         public override void Initialise()
         {
             // Set initial entity mind:
-            _mind = _aiComponentManager.RequestMind<SawMind>();
+            _mind = _aiComponentManager.RequestMind<GoldMind>();
         }
 
         public void OnNewCollision(object sender, ICollisionInput args)
@@ -44,15 +44,9 @@ namespace COMP2351_Game_Engine
 
             // Set Collider for the Top of the Player
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
+            ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
             // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "GoldT"));
-
-            // Set Collider for the Bottom of the Player
-            ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y + 0.75f * texture.Height;
-            // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height / 2, "GoldB"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height, "CoinGold"));
 
             // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());

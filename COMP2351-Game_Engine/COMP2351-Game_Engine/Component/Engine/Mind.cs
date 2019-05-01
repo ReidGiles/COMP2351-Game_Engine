@@ -12,6 +12,8 @@ namespace COMP2351_Game_Engine
     {
         // Entity texture:
         protected Texture2D _texture;
+        // Entity texture FacingDirection
+        protected float _facingDirectionX;
         // Entity location:
         protected Vector2 _location;
         // reference to the mind ID
@@ -41,10 +43,12 @@ namespace COMP2351_Game_Engine
         /// Updates entity texture
         /// </summary>
         /// <param name="pTexture"></param>
-        public void UpdateTexture(Texture2D pTexture)
+        public float UpdateTexture(Texture2D pTexture)
         {
             // set texture
             _texture = pTexture;
+
+            return _facingDirectionX;
         }
 
         /// <summary>
