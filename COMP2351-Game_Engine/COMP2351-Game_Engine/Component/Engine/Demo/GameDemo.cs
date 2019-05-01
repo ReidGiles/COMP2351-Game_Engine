@@ -32,7 +32,11 @@ namespace COMP2351_Game_Engine
         // int used to count key presses for manual removal of enitities
         int f = 0;
         // Vector2 list for spawning platforms
-        private List<Vector2> _platformSpawm;
+        private List<Vector2> _platformSpawn;
+        // Vector2 list for spawning platformsEndL
+        private List<Vector2> _platformEndLSpawn;
+        // Vector2 list for spawning platformsEndR
+        private List<Vector2> _platformEndRSpawn;
 
         // constructor for the class
         public GameDemo()
@@ -48,7 +52,9 @@ namespace COMP2351_Game_Engine
             sceneManager = pSceneManager;
             inputManager = pInputManager;
             aiComponentManager = pAiComponentManager;
-            _platformSpawm = new List<Vector2>();
+            _platformSpawn = new List<Vector2>();
+            _platformEndLSpawn = new List<Vector2>();
+            _platformEndRSpawn = new List<Vector2>();
             LoadLevel();
         }
 
@@ -69,7 +75,15 @@ namespace COMP2351_Game_Engine
                 sceneManager.Spawn(entity, i*1000 - 800, 900 - textures[7].Height);
             }
 
-            foreach (Vector2 v in _platformSpawm)
+            foreach (Vector2 v in _platformEndLSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<PlatformEndL>("PlatformEndL", textures[3]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
+
+            foreach (Vector2 v in _platformSpawn)
             {
                 // Request Floor entity from entity manager
                 IEntity entity = entityManager.RequestInstance<Platform>("Platform", textures[3]);
@@ -77,10 +91,18 @@ namespace COMP2351_Game_Engine
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
 
+            foreach (Vector2 v in _platformEndRSpawn)
+            {
+                // Request Floor entity from entity manager
+                IEntity entity = entityManager.RequestInstance<PlatformEndR>("PlatformEndR", textures[3]);
+                // Scene manager places entity on the scene
+                sceneManager.Spawn(entity, v.X, v.Y);
+            }
+
             // Request Hostile entity from entity manager
             IEntity hostile = entityManager.RequestInstance<Hostile>("Hostile1", textures[2]);
             // Scene manager places entity on the scene
-            sceneManager.Spawn(hostile, 1100, -450);
+            sceneManager.Spawn(hostile, 1100, -400);
 
         }
 
@@ -89,25 +111,46 @@ namespace COMP2351_Game_Engine
             // Distance between platforms
             int platformIncrement = 50;
 
-            // Populate the level
-            Populate(1350, 550, 3, platformIncrement);
-            Populate(1150, 300, 3, platformIncrement);
-            Populate(950, 50, 3, platformIncrement);
-            Populate(650, -200, 4, platformIncrement);
-            Populate(950, -350, 13, platformIncrement);
-            Populate(700, -600, 3, platformIncrement);
-            Populate(900, -850, 41, platformIncrement);
-            Populate(1650, -150, 4, platformIncrement);
+            // Populate the level with the Start point for Platforms
+            Populate(1350, 550, 1, platformIncrement, _platformEndLSpawn);
+            Populate(1150, 300, 1, platformIncrement, _platformEndLSpawn);
+            Populate(950, 50, 1, platformIncrement, _platformEndLSpawn);
+            Populate(650, -200, 1, platformIncrement, _platformEndLSpawn);
+            Populate(950, -350, 1, platformIncrement, _platformEndLSpawn);
+            Populate(700, -600, 1, platformIncrement, _platformEndLSpawn);
+            Populate(900, -850, 1, platformIncrement, _platformEndLSpawn);
+            Populate(1650, -150, 1, platformIncrement, _platformEndLSpawn);
+
+            // Populate the level with the middle fo the Platforms
+            Populate(1400, 550, 1, platformIncrement, _platformSpawn);
+            Populate(1200, 300, 1, platformIncrement, _platformSpawn);
+            Populate(1000, 50, 1, platformIncrement, _platformSpawn);
+            Populate(700, -200, 1, platformIncrement, _platformSpawn);
+            Populate(1000, -350, 11, platformIncrement, _platformSpawn);
+            Populate(750, -600, 1, platformIncrement, _platformSpawn);
+            Populate(950, -850, 40, platformIncrement, _platformSpawn);
+            Populate(1700, -150, 2, platformIncrement, _platformSpawn);
+
+            // Populate the level with End point for the Platforms
+            Populate(1450, 550, 1, platformIncrement, _platformEndRSpawn);
+            Populate(1250, 300, 1, platformIncrement, _platformEndRSpawn);
+            Populate(1050, 50, 1, platformIncrement, _platformEndRSpawn);
+            Populate(750, -200, 1, platformIncrement, _platformEndRSpawn);
+            Populate(1550, -350, 1, platformIncrement, _platformEndRSpawn);
+            Populate(800, -600, 1, platformIncrement, _platformEndRSpawn);
+            Populate(2950, -850, 1, platformIncrement, _platformEndRSpawn);
+            Populate(1800, -150, 1, platformIncrement, _platformEndRSpawn);
+
         }
 
-        private void Populate(int pXpos, int pYpos, int pLimit, int pIncrement)
+        private void Populate(int pXpos, int pYpos, int pLimit, int pIncrement, List<Vector2> pList)
         {
-            int platformXPosition = pXpos;
-            int platformYPosition = pYpos;
+            int XPosition = pXpos;
+            int YPosition = pYpos;
             for (int i = 0; i < pLimit; i++)
             {
-                _platformSpawm.Add(new Vector2(platformXPosition, platformYPosition));
-                platformXPosition += pIncrement;
+                pList.Add(new Vector2(XPosition, YPosition));
+                XPosition += pIncrement;
             }
         }
 
