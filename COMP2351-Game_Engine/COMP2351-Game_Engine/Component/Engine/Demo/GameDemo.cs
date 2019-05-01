@@ -116,7 +116,7 @@ namespace COMP2351_Game_Engine
             foreach (Vector2 v in _hostileSpawn)
             {
                 // Request Floor entity from entity manager
-                IEntity entity = entityManager.RequestInstance<Hostile>("Hostile", textures[2]);
+                IEntity entity = entityManager.RequestInstance<Hostile>("Hostile1", textures[2]);
                 // Scene manager places entity on the scene
                 sceneManager.Spawn(entity, v.X, v.Y);
             }
@@ -196,10 +196,10 @@ namespace COMP2351_Game_Engine
             Populate(3700, -50, 1, platformXIncrement, 0, _platformEndRSpawn);
             Populate(3800, -150, 1, platformXIncrement, 0, _platformEndRSpawn);
             Populate(3900, -250, 1, platformXIncrement, 0, _platformEndRSpawn);
-            Populate(4000, -350, 1, platformXIncrement, 0, _platformEndRSpawn);
+            Populate(4000, -350, 10, platformXIncrement, 0, _platformEndRSpawn);
 
             // Populate the level with single platforms
-            //Populate(2700, 650, 15, 0, platformYIncrement, _platformSingleSpawn);
+            Populate(2700, 650, 10, 0, platformYIncrement, _platformSingleSpawn);
 
             // Populate the level with hostiles
             Populate(1100, -400, 1, 0, 0, _hostileSpawn);
