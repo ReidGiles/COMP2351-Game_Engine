@@ -27,9 +27,10 @@ namespace COMP2351_Game_Engine
         {
             if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
             {
-                //Console.WriteLine(_uName + " collided");
-
-                this._killSelf = _mind.OnNewCollision(args);
+                if (!_killSelf)
+                {
+                    this._killSelf = _mind.OnNewCollision(args);
+                }
             }
         }
 

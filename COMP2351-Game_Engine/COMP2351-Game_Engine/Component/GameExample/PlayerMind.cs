@@ -21,6 +21,8 @@ namespace COMP2351_Game_Engine
         private bool _floorCollide;
         private bool _inAir;
         private bool _onFloor;
+        private bool _rightCollide;
+        private bool _leftCollide;
 
         public PlayerMind()
         {
@@ -36,6 +38,8 @@ namespace COMP2351_Game_Engine
             _floorCollide = false;
             _inAir = true;
             _onFloor = false;
+            _rightCollide = false;
+            _leftCollide = false;
         }
 
         /// <summary>
@@ -54,11 +58,21 @@ namespace COMP2351_Game_Engine
             {
                 if (k == Keys.Right || k == Keys.D)
                 {
+                    if (_rightCollide)
+                    {
+                        return 0;
+                    }
+
                     _facingDirectionX = 1;
                     return (_speed * _facingDirectionX) * _velocity.X;
                 }
                 if (k == Keys.Left || k == Keys.A)
                 {
+                    if (_leftCollide)
+                    {
+                        return 0;
+                    }
+
                     _facingDirectionX = -1;
                     return (_speed * _facingDirectionX) * _velocity.X;
                 }
@@ -89,11 +103,15 @@ namespace COMP2351_Game_Engine
             }
             else
             {
-                _inAir = false;
-                _gravity = 0;
+                if (!_leftCollide && !_rightCollide)
+                {
+                    _inAir = false;
+                    _gravity = 0;
+                    _jump = 0;
+                }
             }
 
-            if (!_onFloor && _floorCollide)
+            if (!_onFloor && _floorCollide && !_inAir)
             {
                 _gravity = 0;
                 _counterForce = 1;
@@ -116,6 +134,12 @@ namespace COMP2351_Game_Engine
                 _onFloor = false;
             }
 
+            if (_leftCollide || _rightCollide)
+            {
+                _rightCollide = false;
+                _leftCollide = false;
+            }
+
             return (_jump - _gravity + _counterForce) * _velocity.Y;
         }
 
@@ -126,16 +150,7 @@ namespace COMP2351_Game_Engine
             if (_collidedWith == "Floor" && _collidedThis == "PlayerB")
             {
                 _floorCollide = true;
-                _inAir = false;
-
             }
-
-            if (_collidedWith == "MovingFloor" && _collidedThis == "PlayerB")
-            {
-                _floorCollide = true;
-                _inAir = false;
-            }
-
 
             if (_collidedWith == "HostileB" && _collidedThis == "PlayerT")
             {
@@ -151,6 +166,17 @@ namespace COMP2351_Game_Engine
             {
                 _jump = 0;
             }
+
+            if (_collidedWith == "LBoundary" && _collidedThis == "PlayerM" && _facingDirectionX == 1)
+            {
+                _rightCollide = true;
+            }
+
+            if (_collidedWith == "RBoundary" && _collidedThis == "PlayerM" && _facingDirectionX == -1)
+            {
+                _leftCollide = true;
+            }
+
 
             _collidedWith = null;
             _collidedThis = null;
