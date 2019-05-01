@@ -20,9 +20,12 @@ namespace COMP2351_Game_Engine
 
         public void OnNewCollision(object sender, ICollisionInput args)
         {
-            if (!_killSelf)
+            if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
             {
-                this._killSelf = _mind.OnNewCollision(args);
+                if (!_killSelf)
+                {
+                    this._killSelf = _mind.OnNewCollision(args);
+                }
             }
         }
 

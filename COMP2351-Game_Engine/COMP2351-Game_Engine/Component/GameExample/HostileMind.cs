@@ -39,10 +39,15 @@ namespace COMP2351_Game_Engine
         public override bool OnNewCollision(ICollisionInput args)
         {
             bool rtnValue = base.OnNewCollision(args);
-            if (_collidedWith == "LBoundary" && _collidedThis == "HostileB" || _collidedWith == "RBoundary" && _collidedThis == "HostileB" || _collidedWith == "LBoundary" && _collidedThis == "HostileT" || _collidedWith == "RBoundary" && _collidedThis == "HostileT")
+            if (_collidedWith == "LBoundary" && _collidedThis == "HostileB" ||  _collidedWith == "LBoundary" && _collidedThis == "HostileT")
             {
-                _facingDirectionX *= -1;
+                _facingDirectionX = 1;
             }
+            if (_collidedWith == "RBoundary" && _collidedThis == "HostileB" || _collidedWith == "RBoundary" && _collidedThis == "HostileT")
+            {
+                _facingDirectionX = -1;
+            }
+
             if (_collidedWith == "HostileB" && _collidedThis == "HostileB")
             {
                 _facingDirectionX *= -1;

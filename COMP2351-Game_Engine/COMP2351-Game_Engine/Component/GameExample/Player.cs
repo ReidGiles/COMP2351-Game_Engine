@@ -49,21 +49,21 @@ namespace COMP2351_Game_Engine
 
             // Set Collider for the Top of the Player
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y + 0.25f * texture.Height;
+            ColliderOrigin.Y = location.Y + 0.125f * texture.Height;
             // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "PlayerT"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/4, "PlayerT"));
             
             // Set Collider for the Bottom of the Player
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
-            ColliderOrigin.Y = location.Y + 0.75f * texture.Height;
+            ColliderOrigin.Y = location.Y + texture.Height-5;
             // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height/2, "PlayerB"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, 10, "PlayerB"));
 
             // Set Collider for the Middle of the Player
             ColliderOrigin.X = location.X + 0.5f * texture.Width;
             ColliderOrigin.Y = location.Y + 0.5f * texture.Height;
             // Add collider to list
-            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height - 30, "PlayerM"));
+            _colliders.Add(new RectCollider(ColliderOrigin, texture.Width, texture.Height - 20, "PlayerM"));
 
             // Add the collider list to the mind
             _mind.SetCollider(_colliders.Cast<ICreateCollider>().ToList());

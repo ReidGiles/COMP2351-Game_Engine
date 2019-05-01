@@ -60,7 +60,7 @@ namespace COMP2351_Game_Engine
                 {
                     if (_rightCollide)
                     {
-                        return 0;
+                        return (_speed * _facingDirectionX*-1) * _velocity.X;
                     }
 
                     _facingDirectionX = 1;
@@ -70,7 +70,7 @@ namespace COMP2351_Game_Engine
                 {
                     if (_leftCollide)
                     {
-                        return 0;
+                        return (_speed * _facingDirectionX * -1) * _velocity.X;
                     }
 
                     _facingDirectionX = -1;
