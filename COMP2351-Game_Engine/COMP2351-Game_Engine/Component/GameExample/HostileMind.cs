@@ -13,8 +13,6 @@ namespace COMP2351_Game_Engine
         private float _gravity;
         // the movement speed of the entity
         private float _speed;
-        // used to push the ntity out of the floor when colliding
-        private float _counterForce;
         // the velocity of the entity
         private Vector2 _velocity;
         // floor collision flag
@@ -30,8 +28,6 @@ namespace COMP2351_Game_Engine
             _gravity = 10;
             // set speed
             _speed = 5;
-            // set counterforce
-            _counterForce = 0;
             //Set velocity 
             _velocity.X = 1;
             _velocity.Y = -1;
@@ -104,32 +100,9 @@ namespace COMP2351_Game_Engine
                 _gravity = 0;
             }
 
-            // if onFloor status is false but the entity is colliding with the floor and not in the air
-            if (!_onFloor && _floorCollide && !_inAir)
-            {
-                // ensure gravity is still 0
-                _gravity = 0;
-                // set counterforce to push the entity ot of the floor
-                _counterForce = 1;
-            }
-
-            // if the entity has just been pushed out of the floor and is now not colliding with it
-            if (!_onFloor && !_floorCollide && !_inAir)
-            {
-                // set onFloor status to true and set counter force to push the entity back into collision with the floor
-                _onFloor = true;
-                _counterForce = -1;
-            }
-
-            // if the onFloor Status is true and the entity is colliding with the floor
-            if (_onFloor && _floorCollide)
-            {
-                // set counterforce to 0 to leave the entity colliding with the floor
-                _counterForce = 0;
-            }
 
             // if the onFloor status is true and the entity is not colliding with the floorCollide and also isnt being pushed out/into the floor
-            if (_onFloor && !_floorCollide && _counterForce == 0)
+            if (_onFloor && !_floorCollide)
             {
                 // then the entity is in the air
                 _inAir = true;
@@ -137,7 +110,7 @@ namespace COMP2351_Game_Engine
             }
 
             // apply gravity to the entity
-            return (_counterForce - _gravity) * _velocity.Y;
+            return -_gravity * _velocity.Y;
         }
     }
 }
