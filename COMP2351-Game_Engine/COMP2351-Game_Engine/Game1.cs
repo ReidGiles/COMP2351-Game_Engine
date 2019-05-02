@@ -152,11 +152,7 @@ namespace COMP2351_Game_Engine
         protected override void Draw(GameTime gameTime)
         {
             // Set graphics background colour
-<<<<<<< HEAD
-            GraphicsDevice.Clear(Color.AntiqueWhite);
-=======
             GraphicsDevice.Clear(Color.Purple);
->>>>>>> d2eb258e358b9e1de01347d633106020869bf354
 
             // Set cameraPos to follow the player on the x axis if there is one
             if (sceneManager.GetEntity("Player") != null)

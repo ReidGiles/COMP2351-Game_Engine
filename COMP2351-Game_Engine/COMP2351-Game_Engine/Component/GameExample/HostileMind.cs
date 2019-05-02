@@ -28,13 +28,9 @@ namespace COMP2351_Game_Engine
         {
             // set gravity
             _gravity = 10;
-<<<<<<< HEAD
             // set speed
             _speed = 5;
             // set counterforce
-=======
-            _speed = 2;
->>>>>>> d2eb258e358b9e1de01347d633106020869bf354
             _counterForce = 0;
             //Set velocity 
             _velocity.X = 1;

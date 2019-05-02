@@ -197,11 +197,7 @@ namespace COMP2351_Game_Engine
             // Run super
             bool rtnValue = base.OnNewCollision(args);
 
-<<<<<<< HEAD
             // on collision with Floor change floorCollide flag to true
-=======
-            // If player bottom is colliding with floor
->>>>>>> d2eb258e358b9e1de01347d633106020869bf354
             if (_collidedWith == "Floor" && _collidedThis == "PlayerB")
             {
                 _floorCollide = true;
