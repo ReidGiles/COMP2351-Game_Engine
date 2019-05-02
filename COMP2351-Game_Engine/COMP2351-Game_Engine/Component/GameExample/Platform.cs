@@ -66,6 +66,7 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public override void Update()
         {
+            // if there are no colliders then set them using SetCollider method
             if (!hasCollider)
             {
                 SetCollider();

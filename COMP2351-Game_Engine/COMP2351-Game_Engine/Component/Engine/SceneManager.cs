@@ -138,7 +138,7 @@ namespace COMP2351_Game_Engine
             // if _removeEntity has an entity
             if (_removeEntity != null)
             {
-                // Terminate the entity
+                // Remove the entity from the scene
                 Remove(_removeEntity.GetUID());
             }
         }

@@ -21,13 +21,7 @@ namespace COMP2351_Game_Engine
 
         public void OnNewCollision(object sender, ICollisionInput args)
         {
-            if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
-            {
-                if (!_killSelf)
-                {
-                    this._killSelf = _mind.OnNewCollision(args);
-                }
-            }
+
         }
 
         public override void SetCollider()
@@ -61,10 +55,12 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public override void Update()
         {
+            // if there are no colliders then set them using SetCollider method
             if (!hasCollider)
             {
                 SetCollider();
             }
+            // rotate the texture every update
             rotation += 0.05f;
         }
     }

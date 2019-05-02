@@ -25,11 +25,13 @@ namespace COMP2351_Game_Engine
 
         public void OnNewCollision(object sender, ICollisionInput args)
         {
+            // Check if this entity is the one colliding
             if (_uid == args.GetUID()[0] || _uid == args.GetUID()[1])
             {
+                // If entity is not flagged for the removal from the scene using _killSelf
                 if (!_killSelf)
                 {
-                    // remove from scenegraph if true
+                    //set _killSelf to the result of the collision method in the mind
                     this._killSelf = _mind.OnNewCollision(args);
                 }
             }
@@ -78,6 +80,7 @@ namespace COMP2351_Game_Engine
         /// </summary>
         public override void Update()
         {
+            // if there are no colliders then set them using SetCollider method
             if (!hasCollider)
             {
                 SetCollider();

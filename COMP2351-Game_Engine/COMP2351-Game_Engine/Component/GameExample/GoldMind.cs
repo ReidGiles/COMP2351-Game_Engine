@@ -10,6 +10,7 @@ namespace COMP2351_Game_Engine
     {
         public GoldMind()
         {
+            //initialise the mind ID
             _mindID = "Gold";
         }
 
@@ -17,10 +18,18 @@ namespace COMP2351_Game_Engine
         {
             bool rtnValue = base.OnNewCollision(args);
 
+            // if the player and CoinGold collide
             if (_collidedWith == "PlayerB" && _collidedThis == "CoinGold" || _collidedWith == "PlayerT" && _collidedThis == "CoinGold")
             {
+                // remove the CoinGold from the secene
                 rtnValue = true;
             }
+
+            // Reset Collided with and this to null
+            _collidedWith = null;
+            _collidedThis = null;
+
+            // return rtnValue
             return rtnValue;
         }
     }

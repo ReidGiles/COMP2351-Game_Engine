@@ -10,6 +10,7 @@ namespace COMP2351_Game_Engine
     {
         public SawMind()
         {
+            //initialise the mind ID
             _mindID = "Saw";
         }
     }
