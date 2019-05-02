@@ -27,7 +27,7 @@ namespace COMP2351_Game_Engine
             // set gravity
             _gravity = 10;
             // set speed
-            _speed = 5;
+            _speed = 3;
             //Set velocity 
             _velocity.X = 1;
             _velocity.Y = -1;

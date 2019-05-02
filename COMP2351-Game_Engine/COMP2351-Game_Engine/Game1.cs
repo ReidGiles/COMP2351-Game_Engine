@@ -181,7 +181,7 @@ namespace COMP2351_Game_Engine
                 e.Draw(spriteBatch);
             }
             // Draw the header
-            spriteBatch.Draw(textures[0], headerLocation, Color.AntiqueWhite);
+            //spriteBatch.Draw(textures[0], headerLocation, Color.AntiqueWhite);
             // end Spritebatch
             spriteBatch.End();
 
