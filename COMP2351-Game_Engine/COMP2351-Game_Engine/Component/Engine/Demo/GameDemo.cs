@@ -25,12 +25,6 @@ namespace COMP2351_Game_Engine
         private ISceneGraph sceneGraph;
         // reference to the textures used
         private Texture2D[] textures;
-        // reference to the muse position on the display
-        private int[] mouseVal;
-        // bool used to reset spawn buttons
-        bool disableSpawn = false;
-        // int used to count key presses for manual removal of enitities
-        int f = 0;
         // Vector2 list for spawning middle platforms
         private List<Vector2> _platformSpawn;
         // Vector2 list for spawning Single platforms
@@ -70,6 +64,7 @@ namespace COMP2351_Game_Engine
             _hostileSpawn = new List<Vector2>();
             _sawSpawn = new List<Vector2>();
             _goldSpawn = new List<Vector2>();
+            // Populate spawn arrays
             LoadLevel();
         }
 
@@ -183,10 +178,10 @@ namespace COMP2351_Game_Engine
             
 
             // Distance between platforms
-            platformXIncrement = 150;
-            Populate(950, -350, 1, platformXIncrement, platformYIncrement, _platformEndLSpawn);
+            platformXIncrement = 135;
+            Populate(965, -350, 1, platformXIncrement, platformYIncrement, _platformEndLSpawn);
             Populate(1100, -350, 3, platformXIncrement, platformYIncrement, _platformSpawn);
-            Populate(1500, -350, 1, platformXIncrement, platformYIncrement, _platformEndRSpawn);
+            Populate(1505, -350, 1, platformXIncrement, platformYIncrement, _platformEndRSpawn);
 
             // Distance between platforms
             platformXIncrement = 100;
@@ -226,10 +221,10 @@ namespace COMP2351_Game_Engine
             Populate(2950, 600, 9, platformXIncrement, platformYIncrement, _hostileSpawn);
 
             // Distance between Hostiles
-            platformXIncrement = 200;
+            /*platformXIncrement = 200;
             platformYIncrement = -300;
             // Populate the level with hostiles
-            Populate(3650, -400, 9, platformXIncrement, platformYIncrement, _hostileSpawn);
+            Populate(3650, -400, 9, platformXIncrement, platformYIncrement, _hostileSpawn);*/
 
             // Distance between saws
             platformXIncrement = 200;
@@ -287,10 +282,12 @@ namespace COMP2351_Game_Engine
             Populate(2600, -900, 3, platformXIncrement, platformYIncrement, _goldSpawn);
         }
 
+        // Populate an Vector2 array with custom data
         private void Populate(int pXpos, int pYpos, int pLimit, int pIncrement, int yIncrement, List<Vector2> pList)
         {
             int XPosition = pXpos;
             int YPosition = pYpos;
+            // Add data to Vector2 array using paramaters
             for (int i = 0; i < pLimit; i++)
             {
                 pList.Add(new Vector2(XPosition + i * pIncrement, YPosition + i * yIncrement));
@@ -312,6 +309,7 @@ namespace COMP2351_Game_Engine
         // update the class 
         public void Update()
         {
+            // Respawn player on death
             if (sceneManager.GetEntity("Player") == null)
             {
                 sceneManager.Spawn(entityManager.RequestInstance("Player"), 0, 300);

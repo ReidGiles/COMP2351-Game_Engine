@@ -51,9 +51,9 @@ namespace COMP2351_Game_Engine
             _args = args;
         }
 
+        // TranslateX override for player specific movement
         public override float TranslateX()
         {
-            
             // Player input controlling movement, only active on key down
             foreach (Keys k in _args.GetInputKey())
             {
@@ -81,6 +81,7 @@ namespace COMP2351_Game_Engine
             return 0;
         }
 
+        // TranslateY override for player specific movement
         public override float TranslateY()
         {
             if (!_inAir)
@@ -144,10 +145,13 @@ namespace COMP2351_Game_Engine
             return (_jump - _gravity + _counterForce) * _velocity.Y;
         }
 
+        // Handles new collisions args passed by entity
         public override bool OnNewCollision(ICollisionInput args)
         {
+            // Run super
             bool rtnValue = base.OnNewCollision(args);
 
+            // If player bottom is colliding with floor
             if (_collidedWith == "Floor" && _collidedThis == "PlayerB")
             {
                 _floorCollide = true;
